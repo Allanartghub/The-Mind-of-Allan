@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allan Ng'ang'a | FinTech Professional</title>
+  <link href="http.com/dms/image/v2/D4D03AQHHrGwThLCy_Q/profile-displayphoto-shrink_400_400/B4DZcjBYR9GYAg-/0/1748639254459?e=1753920000&v=beta&t=D6BrcLdVYs0yhyWQdFfJlOdoOMkt2SQsXZ7xqqkXl38">
+  <style>
+    :root {
+      --teal: #008080;
+      --light-teal: #66b2b2;
+      --dark: #1a1a1a;
+      --light: #f9f9f9;
+      --Beige: #C89B7B;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Open Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+    }
+
+    .intro {
+      display: flex;
+      justify-content: space-between; /* Space between contact and image */
+      align-items: center; /* Align items vertically */
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .intro-text {
+      margin-bottom: 2rem; /* Add space below intro text */
+      text-align: center; /* Center-align intro text */
+      flex: 1;
+    }
+
+    .intro-text h1 {
+      font-family: var(--font-heading);
+      color: var(--teal);
+      font-size: 2rem; /* Increased font size for name */
+      margin-bottom: 0.5rem; /* Adjust spacing */
+    }
+
+    .intro-text p {
+      font-size: 1.2rem; /* Increased font size for title */
+      color: #444;
+    }
+
+    .contact {
+      margin-top: 1rem;
+      text-align: left; /* Align contact details to the left */
+    }
+
+    .contact p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+
+    .contact a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    .photo-container {
+      width: 200px; /* Existing size */
+      height: 200px; /* Existing size */
+      overflow: hidden;
+      margin: 0 auto; /* Center the container */
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about {
+      text-align: center;
+      padding: 2rem 3rem 1rem;
+    }
+
+    .about h2 {
+      font-family: var(--font-heading);
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .about p:last-of-type {
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    .skills {
+      padding: 2rem 3rem 1rem;
+    }
+
+    .skills h2 {
+      font-family: var(--font-heading);
+      color: var(--teal);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .skill {
+      background-color: var(--light-teal);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .skill:hover {
+      background-color: var(--Beige);
+      transform: scale(1.05) rotate(1deg);
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-2px); }
+      50% { transform: translateX(2px); }
+      75% { transform: translateX(-2px); }
+      100% { transform: translateX(0); }
+    }
+
+    .projects {
+      padding: 2.5rem 3.5rem; /* Increased padding */
+    }
+
+    .projects h2 {
+      font-family: var(--font-heading);
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .project {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project h3 {
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .project img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .project a {
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .download-cv {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .download-cv a {
+      background-color: var(--teal);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-cv a:hover {
+      background-color: var(--Beige);
+    }
+
+    .signout {
+      padding: 2rem 3rem;
+      font-style: italic;
+      text-align: center;
+      color: #444;
+    }
+
+    footer {
+      background-color: var(--teal);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .carousel.active .project {
+  filter: blur(4px);
+  pointer-events: none;
+  transition: filter 0.3s ease-in-out;
+}
+
+.project.focused {
+  transform: scale(1.2);
+  z-index: 10;
+  filter: none;
+  pointer-events: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="intro">
+      <div class="contact">
+        <p>📧 <a href="mailto:allananganga@gmail.com">allananganga@gmail.com</a></p>
+        <p>🔗 <a href="https://linkedin.com/in/allananganga" target="_blank">linkedin.com/in/allananganga</a></p>
+        <p>🌐 <a href="https://github.com/allananganga" target="_blank">github.com/allananganga</a></p>
+      </div>
+      <div class="intro-text">
+        <h1>Allan Ng'ang'a</h1>
+        <p>FinTech Professional</p>
+      </div>
+      <div class="photo-container">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHHrGwThLCy_Q/profile-displayphoto-shrink_400_400/B4DZcjBYR9GYAg-/0/1748639254459?e=1753920000&v=beta&t=D6BrcLdVYs0yhyWQdFfJlOdoOMkt2SQsXZ7xqqkXl38" alt="Allan's Photo">
+      </div>
+    </div>
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>Hey, I'm Ng'ang'a. A vibe coder, Product thinker, fintech strategist, and unapologetic believer in the power of tech that it should do more than work. It should matter. I don't just follow trends, I follow needs and create impact. Whether it's vibe coding or AI integration to build products and solutions that make a lasting impact, people can feel.</p>
+    <p>I’ve worn a few hats, from program coordinator to digital innovator, and one thing I’ve learned is that Good products answer questions while great ones reframe the conversation. Currently shaping the future through AI, data, design, and a whole lot of coffee ☕, sparking impactful conversations that push financial inclusion, African innovation, and emerging tech with soul.</p>
+    <p><em>Because innovation is just a word until you give it purpose.</em></p>
+  </section>
+
+  <section class="skills">
+    <h2>Key Skills</h2>
+    <div class="skills-list">
+      <div class="skill">Product Strategy</div>
+      <div class="skill">User Research</div>
+      <div class="skill">Agile Development</div>
+      <div class="skill">Data Analysis</div>
+      <div class="skill">Market Analysis</div>
+      <div class="skill">Product Roadmap</div>
+      <div class="skill">Cross-functional Leadership</div>
+      <div class="skill">User Experience (UX)</div>
+      <div class="skill">Product Marketing</div>
+      <div class="skill">Stakeholder Management</div>
+      <div class="skill">Project Management</div>
+      <div class="skill">Product Management</div>
+      <div class="skill">AI Integration</div>
+      <div class="skill">Grant Management</div>
+      <div class="skill">Customer Discovery</div>
+      <div class="skill">Prototyping</div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    <div class="carousel">
+      <div class="project">
+        <img src="assets/img/mindspring.jpg" alt="MindSpring Preview">
+        <h3>MindSpring</h3>
+        <p>AI-powered platform for mental wellness support and early intervention.</p>
+        <a href="mindSpring.html">Visit Project</a>
+      </div>
+      <div class="project">
+        <img src="assets/img/carbonease.jpg" alt="CarbonEase Preview">
+        <h3>CarbonEase</h3>
+        <p>Carbon market access for smallholder farmers using blockchain for traceability.</p>
+        <a href="https://allanartghub.github.io/CarbonEase/" target="_blank" rel="noopener">Visit Project</a>
+      </div>
+      <div class="project">
+        <img src="assets/img/easypension.jpg" alt="EasyPension Preview">
+        <h3>EasyPension</h3>
+        <p>Accessible pension solution designed for gig and informal sector workers.</p>
+        <a href="easypension.html">Visit Project</a>
+      </div>
+      <div class="project">
+        <img src="assets/img/kopagrow.jpg" alt="KopaGrow Preview">
+        <h3>KopaGrow</h3>
+        <p>Micro-lending platform providing loans to smallholder farmers.</p>
+        <a href="kopagrow.html">Visit Project</a>
+      </div>
+      <div class="project">
+        <img src="assets/img/aiproject.jpg" alt="AI Project Preview">
+        <h3>AI Project</h3>
+        <p>Innovative exploration at the intersection of AI and inclusive finance.</p>
+        <a href="projects/ai-project.html">Visit Project</a>
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="download-cv">
+    <a href="assets/docs/Allan_Nganga_CV.pdf" download>📄 Download My CV</a>
+  </section>
+
+  <div class="signout">
+    <p>“Let’s create the kind of future people remember.”</p>
+  </div>
+
+  <footer>
+    <p>📧 allananganga@gmail.com | 🔗 LinkedIn: @Allananganga | 🌐 GitHub: @Allananganga</p>
+  </footer>
+</body>
+</html>
