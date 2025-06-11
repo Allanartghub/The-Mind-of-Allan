@@ -257,6 +257,93 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+    @media (max-width: 900px) {
+      header, .about, .skills, .projects, .download-cv, .signout {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .projects {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        padding: 1.2rem 0.5rem;
+      }
+      .intro {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: stretch;
+      }
+      .intro-text {
+        margin-bottom: 1.2rem;
+        text-align: center;
+      }
+      .photo-container {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+      }
+      .about, .skills, .projects, .download-cv, .signout {
+        padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+      }
+      .skills-list {
+        gap: 0.5rem;
+      }
+      .project {
+        width: 90vw;
+        min-width: 220px;
+        max-width: 98vw;
+        padding: 0.7rem;
+      }
+      .project img {
+        height: 90px;
+      }
+      .carousel {
+        gap: 0.5rem;
+      }
+      .download-cv {
+        padding: 1.2rem 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro-text h1 {
+        font-size: 1.3rem;
+      }
+      .intro-text p {
+        font-size: 1rem;
+      }
+      .about h2, .skills h2, .projects h2 {
+        font-size: 1.1rem;
+      }
+      .project h3 {
+        font-size: 1rem;
+      }
+      .project {
+        width: 96vw;
+        min-width: 170px;
+        padding: 0.5rem;
+      }
+      .photo-container {
+        width: 80px;
+        height: 80px;
+      }
+      .skills-list {
+        gap: 0.3rem;
+      }
+      .skill {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.7rem;
+      }
+      .download-cv a {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
