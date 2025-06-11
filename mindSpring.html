@@ -65,6 +65,7 @@
             color: #008080;
             margin-bottom: 0.7rem;
             letter-spacing: 1px;
+            text-align: center;
         }
         .desc {
             font-size: 1.15rem;
@@ -104,6 +105,69 @@
         }
         .home-link svg {
             vertical-align: middle;
+        }
+        @media (max-width: 900px) {
+            .project-header {
+                padding: 1.2rem 1rem;
+                min-height: 120px;
+            }
+            .project-header-title {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .project-header {
+                flex-direction: column;
+                padding: 1.2rem 0.5rem;
+                min-height: 90px;
+            }
+            .project-header-title {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            .home-link {
+                top: 10px;
+                right: 10px;
+                font-size: 0.98rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .container {
+                padding: 0 0.5rem;
+            }
+            .headline {
+                font-size: 1.2rem;
+            }
+            .desc {
+                font-size: 1rem;
+                max-width: 98vw;
+            }
+            .soon-badge {
+                font-size: 0.98rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .project-header-title {
+                font-size: 0.95rem;
+                padding: 0.2rem 0.5rem;
+            }
+            .home-link {
+                font-size: 0.88rem;
+                padding: 0.3rem 0.6rem;
+                top: 6px;
+                right: 6px;
+            }
+            .headline {
+                font-size: 1rem;
+            }
+            .desc {
+                font-size: 0.95rem;
+                padding: 0 0.2rem;
+            }
+            .soon-badge {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.7rem;
+            }
         }
     </style>
 </head>
