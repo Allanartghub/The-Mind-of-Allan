@@ -173,7 +173,7 @@
 </head>
 <body>
     <div class="project-header">
-        <div class="project-header-title">MindSpring</div>
+        <div class="project-header-title">AI-Driven Credit Scoring Using Alternative Data</div>
         <a href="index.html" class="home-link" title="Go to Home">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                 <path d="M3 10.5L11 4L19 10.5" stroke="#008080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -194,7 +194,7 @@
                 <rect x="38" y="28" width="14" height="8" rx="2" fill="#bdbdbd"/>
             </svg>
         </div>
-        <div class="headline">MindSpring is Under Construction</div>
+        <div class="headline">This Dissertation Project is Under Construction</div>
         <div class="desc">
             We're working hard to bring you something exciting.<br>
             More information will be shared soon. Stay tuned!
