@@ -1,212 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>AI-Driven Credit Scoring | Case Study (Coming Soon)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root{
-      --teal:#008080;
-      --light-teal:#66b2b2;
-      --dark:#1a1a1a;
-      --light:#f9f9f9;
-      --beige:#C89B7B;
-      --font-heading:'Playfair Display', serif;
-      --font-body:'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%}
-    body{
-      background:var(--light);
-      color:#222;
-      font-family:var(--font-body);
-      display:flex;
-      flex-direction:column;
-      min-height:100vh;
-    }
-
-    /* Header / Hero */
-    .project-header{
-      display:flex;
-      align-items:center;
-      min-height:220px;
-      padding:2rem 3rem;
-      color:#fff;
-      background:
-        linear-gradient(rgba(0,128,128,0.72), rgba(0,128,128,0.55)),
-        url('../assets/img/aiproject.jpg') center/cover no-repeat;
-      border-radius:0 0 24px 24px;
-      box-shadow:0 4px 24px rgba(0,0,0,0.08);
-      position:relative;
-      margin-bottom:2rem;
-    }
-    .project-title{
-      font-family:var(--font-heading);
-      font-size:2rem;
-      font-weight:700;
-      letter-spacing:.3px;
-      text-shadow:0 2px 8px rgba(0,0,0,0.18);
-      max-width:980px;
-      line-height:1.25;
-    }
-    .home-link{
-      position:absolute; top:18px; right:32px;
-      display:flex; align-items:center; gap:.4rem;
-      background:#fff; color:var(--teal);
-      padding:.5rem 1.1rem; border-radius:8px;
-      font-weight:700; text-decoration:none; font-size:1.02rem;
-      box-shadow:0 2px 8px rgba(0,128,128,0.08);
-      transition:transform .15s ease;
-    }
-    .home-link:hover{ transform:translateY(-1px) }
-    .home-link svg{vertical-align:middle}
-
-    /* Content */
-    .container{
-      flex:1;
-      width:min(1100px, 92vw);
-      margin:0 auto 3rem;
-    }
-    .pill{
-      display:inline-block;
-      background:#fff; color:var(--teal);
-      border:1px solid rgba(0,128,128,.18);
-      padding:.35rem .8rem; border-radius:999px;
-      font-weight:600; font-size:.95rem;
-      margin-bottom:1rem;
-    }
-    .lead{
-      font-size:1.15rem; color:#333; line-height:1.75;
-      margin:.6rem 0 1.2rem; max-width:72ch;
-    }
-
-    /* CTA buttons */
-    .cta-row{
-      display:flex; gap:.8rem; flex-wrap:wrap; margin:1rem 0 2rem;
-    }
-    .btn{
-      display:inline-flex; align-items:center; gap:.5rem;
-      text-decoration:none;
-      padding:.7rem 1.1rem; border-radius:10px;
-      font-weight:700; border:1px solid transparent;
-      transition:transform .12s ease, box-shadow .12s ease, background .2s;
-    }
-    .btn:active{ transform:translateY(1px) }
-
-    .btn-view{ background:#fff; color:var(--teal); border-color:rgba(0,128,128,.25) }
-    .btn-view:hover{ box-shadow:0 4px 14px rgba(0,128,128,.12) }
-
-    .btn-download{ background:var(--teal); color:#fff }
-    .btn-download:hover{ box-shadow:0 4px 14px rgba(0,128,128,.25) }
-
-    /* Under-construction card */
-    .card{
-      background:#fff; border:1px solid #eee; border-radius:16px;
-      padding:1.2rem 1.2rem 1.4rem;
-      box-shadow:0 2px 24px rgba(0,0,0,.05);
-      margin: 0 0 1rem 0;
-    }
-    .row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .row .card{ height:100% }
-
-    .soon{
-      display:inline-block; margin-top:.3rem;
-      background:#ffe082; color:#b26a00;
-      font-weight:700; padding:.45rem 1rem; border-radius:18px;
-      font-size:1rem; letter-spacing:.3px;
-      box-shadow:0 2px 8px rgba(0,0,0,.06);
-    }
-
-    /* Tiny inline icon */
-    .ico{ display:inline-block; width:18px; height:18px; }
-
-    /* Responsive */
-    @media (max-width:900px){
-      .project-header{ padding:1.2rem 1rem; min-height:140px }
-      .project-title{ font-size:1.4rem }
-      .row{ grid-template-columns:1fr }
-    }
-    @media (max-width:700px){
-      .home-link{ top:10px; right:10px; font-size:.96rem; padding:.45rem .8rem }
-      .project-title{ font-size:1.15rem; text-align:center }
-    }
-    @media (max-width:480px){
-      .home-link{ font-size:.88rem; padding:.35rem .6rem }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>AI-Driven Credit Scoring Using Alternative Data | Under Construction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --teal: #008080;
+            --light-teal: #66b2b2;
+            --dark: #1a1a1a;
+            --light: #f9f9f9;
+            --Beige: #C89B7B;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+        body {
+            background: #f9f9f9;
+            color: #222;
+            font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-header {
+            display: flex;
+            align-items: center;
+            min-height: 220px;
+            background: linear-gradient(rgba(0,128,128,0.7), rgba(0,128,128,0.5)), url('assets/img/kopagrow.jpg') center/cover no-repeat;
+            color: #fff;
+            padding: 2rem 3rem;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .project-header-title {
+            font-family: var(--font-heading), 'Segoe UI', serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        .construction-icon {
+            margin-bottom: 1.5rem;
+            animation: bounce 1.6s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-18px);}
+        }
+        .headline {
+            font-size: 2.1rem;
+            font-weight: bold;
+            color: #008080;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .desc {
+            font-size: 1.15rem;
+            color: #444;
+            margin-bottom: 2.2rem;
+            text-align: center;
+            max-width: 420px;
+        }
+        .soon-badge {
+            background: #ffe082;
+            color: #b26a00;
+            font-weight: bold;
+            padding: 0.5rem 1.3rem;
+            border-radius: 18px;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-top: 1.2rem;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        .home-link {
+            position: absolute;
+            top: 18px;
+            right: 32px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--light);
+            color: var(--teal);
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,128,128,0.08);
+            font-size: 1.08rem;
+            transition: background 0.2s;
+        }
+        .home-link svg {
+            vertical-align: middle;
+        }
+        @media (max-width: 900px) {
+            .project-header {
+                padding: 1.2rem 1rem;
+                min-height: 120px;
+            }
+            .project-header-title {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .project-header {
+                flex-direction: column;
+                padding: 1.2rem 0.5rem;
+                min-height: 90px;
+            }
+            .project-header-title {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            .home-link {
+                top: 10px;
+                right: 10px;
+                font-size: 0.98rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .container {
+                padding: 0 0.5rem;
+            }
+            .headline {
+                font-size: 1.2rem;
+            }
+            .desc {
+                font-size: 1rem;
+                max-width: 98vw;
+            }
+            .soon-badge {
+                font-size: 0.98rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .project-header-title {
+                font-size: 0.95rem;
+                padding: 0.2rem 0.5rem;
+            }
+            .home-link {
+                font-size: 0.88rem;
+                padding: 0.3rem 0.6rem;
+                top: 6px;
+                right: 6px;
+            }
+            .headline {
+                font-size: 1rem;
+            }
+            .desc {
+                font-size: 0.95rem;
+                padding: 0 0.2rem;
+            }
+            .soon-badge {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.7rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Hero -->
-  <header class="project-header">
-    <h1 class="project-title">
-      AI-Driven Credit Scoring Using Alternative Data:
-      Unlocking Financial Access in Emerging Markets
-    </h1>
-    <a href="../index.html" class="home-link" title="Go to Home">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M3 10.5L11 4L19 10.5" stroke="#008080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="6.5" y="12" width="9" height="6" rx="1.5" stroke="#008080" stroke-width="2"/>
-      </svg>
-      Home
-    </a>
-  </header>
-
-  <main class="container">
-    <span class="pill">Dissertation Project • FinTech • ML</span>
-    <p class="lead">
-      This case study is being packaged for the web. It covers end-to-end design of an AI-driven credit scoring approach that
-      leverages alternative data to expand responsible lending in emerging markets—methodology, experiments, evaluation, and implications.
-    </p>
-
-    <!-- View / Download -->
-    <div class="cta-row">
-      <!-- TODO: Replace href with your dissertation PDF path when ready -->
-      <a class="btn btn-view" href="../assets/docs/Dissertation%20AI%20Credit%20Scoring.pdf" target="_blank" rel="noopener">
-        <!-- eye icon -->
-        <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2"/></svg>
-        View PDF
-      </a>
-      <a class="btn btn-download" href="../assets/docs/Dissertation%20AI%20Credit%20Scoring.pdf" download="Allan_Nganga_AIDriven_Credit_Scoring.pdf">
-        <!-- download icon -->
-        <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Download PDF
-      </a>
+    <div class="project-header">
+        <div class="project-header-title">MindSpring</div>
+        <a href="index.html" class="home-link" title="Go to Home">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M3 10.5L11 4L19 10.5" stroke="#008080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="6.5" y="12" width="9" height="6" rx="1.5" stroke="#008080" stroke-width="2"/>
+            </svg>
+            Home
+        </a>
     </div>
-
-    <!-- Content blocks (easy to fill later) -->
-    <section class="row">
-      <article class="card">
-        <h3 style="margin:.2rem 0 .6rem; color:var(--teal); font-family:var(--font-heading)">Abstract</h3>
-        <p style="margin:0; color:#444">
-          Brief overview of problem, data, model(s), and key findings. Keep it to 5–7 sentences for scannability.
-        </p>
-      </article>
-      <article class="card">
-        <h3 style="margin:.2rem 0 .6rem; color:var(--teal); font-family:var(--font-heading)">Highlights</h3>
-        <ul style="margin:.2rem 0 0 1rem; color:#444; line-height:1.7">
-          <li>Alternative data sources (e.g., mobile, utility, behavioral).</li>
-          <li>Model stack (e.g., Logistic baseline, XGBoost, LSTM/TabNet).</li>
-          <li>Performance lift vs. transparent baseline.</li>
-          <li>Fairness checks &amp; monitoring plan.</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="row" style="margin-top:1rem">
-      <article class="card">
-        <h3 style="margin:.2rem 0 .6rem; color:var(--teal); font-family:var(--font-heading)">Methods &amp; Data</h3>
-        <p style="margin:0; color:#444">
-          Dataset description, feature engineering, train/validation strategy, and evaluation metrics.
-        </p>
-      </article>
-      <article class="card">
-        <h3 style="margin:.2rem 0 .6rem; color:var(--teal); font-family:var(--font-heading)">Status</h3>
-        <p style="margin:0; color:#444">
-          Packaging results for the web. Visuals and deeper write-up coming soon.
-          <span class="soon">Case Study Coming Soon 🚧</span>
-        </p>
-      </article>
-    </section>
-  </main>
+    <div class="container">
+        <div class="construction-icon">
+            <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <rect x="18" y="60" width="54" height="12" rx="4" fill="#bdbdbd"/>
+                <rect x="24" y="36" width="42" height="28" rx="6" fill="#ffe082" stroke="#b26a00" stroke-width="2"/>
+                <rect x="36" y="48" width="18" height="16" rx="3" fill="#fffde7" stroke="#b26a00" stroke-width="1"/>
+                <rect x="41" y="54" width="8" height="10" rx="2" fill="#bdbdbd"/>
+                <polygon points="45,18 70,36 20,36" fill="#ffb300" stroke="#b26a00" stroke-width="2"/>
+                <rect x="10" y="72" width="70" height="8" rx="3" fill="#bdbdbd"/>
+                <rect x="38" y="28" width="14" height="8" rx="2" fill="#bdbdbd"/>
+            </svg>
+        </div>
+        <div class="headline">MindSpring is Under Construction</div>
+        <div class="desc">
+            We're working hard to bring you something exciting.<br>
+            More information will be shared soon. Stay tuned!
+        </div>
+        <span class="soon-badge">Coming Soon 🚧</span>
+    </div>
 </body>
 </html>
