@@ -3,290 +3,1676 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MindSprings – AI-Powered Mental Wellness Companion | Case Study</title>
-  <meta name="description" content="Case study: MindSprings (Citi Upstart Challenge, Citi Innovation Labs Dublin) — a mobile-first mental wellness companion designed with empathy and AI to help students track moods, reflect, and connect." />
+  <title>MindSpring | Case Study – Allan Ng'ang'a</title>
+  <meta name="description" content="MindSpring case study: emotionally-safe mental wellness companion designed with hypothesis-led MVP decisions and ethical AI." />
+
+  <!-- Fonts aligned with Index vibe -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Allan's teal/beige theme mapped onto the existing layout */
     :root{
-      --teal: #008080;
-      --light-teal: #66b2b2;
-      --beige: #C89B7B;
-      --dark: #1a1a1a;
-      --light: #f9f9f9;
-      --bg: var(--light);
-      --text: #222;
-      --muted: #555;
-      --brand: var(--teal);
-      --brand-2: var(--beige);
-      --card: #ffffff;
-      --elevated: #f3f6f6;
-      --ok: #0f9d58;
-      --shadow: 0 6px 24px rgba(0,0,0,.06);
-      --radius-lg: 18px;
-      --radius-sm: 12px;
-      --gap: 1.1rem;
+      --teal:#008080;
+      --light-teal:#66b2b2;
+      --beige:#C89B7B;
+      --dark:#1a1a1a;
+      --light:#f9f9f9;
+
+      --card:#ffffff;
+      --muted:#555;
+      --border: rgba(0,0,0,.10);
+      --shadow: 0 10px 28px rgba(0,0,0,.08);
+      --radius: 16px;
+
+      --font-heading:'Playfair Display', serif;
+      --font-body:'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+
       --maxw: 1120px;
+      --gap: 1.1rem;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%}
+    *{box-sizing:border-box; margin:0; padding:0;}
+    html{scroll-behavior:smooth;}
     body{
-      font-family: 'Segoe UI', 'Open Sans', Inter, system-ui, -apple-system, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font-body);
+      background: var(--light);
+      color: var(--dark);
       line-height: 1.65;
+      overflow-x:hidden;
     }
+    a{color: var(--teal); text-decoration: none;}
+    a:hover{opacity:.92; text-decoration: underline;}
 
-    a{color: var(--brand)}
+    /* ---------------------------
+       Background accents (soft)
+    --------------------------- */
+    .bg-blob{
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(64px);
+      opacity: .10;
+      pointer-events:none;
+      z-index: 0;
+      transform: translateZ(0);
+    }
+    .blob-teal{ background: var(--teal); top: -160px; left: -140px; }
+    .blob-beige{ background: var(--beige); top: 30vh; right: -180px; }
+    .blob-teal-2{ background: var(--light-teal); bottom: -220px; left: 10vw; opacity:.08; }
 
+    /* Header */
     header{
-      position: sticky; top:0; z-index: 50;
-      backdrop-filter: blur(4px);
-      background: #ffffffdd;
-      border-bottom: 1px solid rgba(0,0,0,.06);
+      position: sticky; top:0; z-index: 60;
+      background: rgba(249,249,249,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav{max-width: var(--maxw); margin: 0 auto; display:flex; align-items:center; justify-content:space-between; padding: .75rem 1rem;}
-    .nav a.logo{display:flex; align-items:center; gap:.6rem; text-decoration:none; font-weight:700; letter-spacing:.3px; color:var(--text)}
-    .nav .actions{display:flex; align-items:center; gap:.6rem}
-    .btn{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; padding:.6rem .9rem; border-radius: 999px; font-weight:600; border:1px solid rgba(0,128,128,.25); background:#fff; color: var(--brand)}
-    .btn.primary{background: var(--brand); color:#fff; border-color: var(--brand)}
-
-    .hero{max-width: var(--maxw); margin: 0 auto; padding: 3.2rem 1rem 2rem}
-    .crumbs{color:var(--muted); font-size:.95rem; margin-bottom: .6rem}
-    .crumbs a{color:var(--muted); text-decoration:none}
-    .title{font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.8rem, 3.8vw, 3rem); line-height:1.2; margin: .2rem 0 .6rem}
-    .subtitle{color:#333; font-size: 1.05rem; max-width: 70ch}
-
-    .meta{display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--gap); margin-top: 1.5rem}
-    .meta .card{background: #fff; border:1px solid rgba(0,0,0,.06); padding:1rem; border-radius: var(--radius-lg); box-shadow: var(--shadow)}
-    .meta h4{margin:.2rem 0 .3rem; font-size:.82rem; text-transform:uppercase; letter-spacing:.12em; color:#666}
-    .meta p{margin:0}
-
-    .cover{max-width: var(--maxw); margin: 1rem auto 2rem; padding: 0 1rem}
-    .cover .img{
-      aspect-ratio: 16/8; border-radius: var(--radius-lg); overflow:hidden; background:
-        linear-gradient(135deg, rgba(0,128,128,.12), rgba(200,155,123,.10));
-      border:1px solid rgba(0,0,0,.06); box-shadow: var(--shadow);
-      display:grid; place-items:center; color:#666; font-weight:600;
+    .header-wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: .95rem 1.2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      position:relative;
+      z-index: 2;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      color: var(--dark);
+      font-weight:900;
+    }
+    .brand .dot{
+      width:12px; height:12px;
+      border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 6px rgba(0,128,128,.10);
+    }
+    .nav-actions{
+      display:flex;
+      gap:.6rem;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      align-items:center;
     }
 
-    main{max-width: var(--maxw); margin: 0 auto; padding: 1rem;}
-    section{margin: 2.25rem 0;}
-    section h2{font-size: clamp(1.25rem, 2.2vw, 1.8rem); margin: 0 0 .6rem}
-    .twocol{display:grid; grid-template-columns: 1.2fr .8fr; gap: calc(var(--gap) * 1.3)}
-    .card{background: var(--card); border:1px solid rgba(0,0,0,.06); border-radius: var(--radius-lg); padding: 1.2rem; box-shadow: var(--shadow)}
-    .note{font-size:.98rem; color:#666}
+    /* Home icon back button */
+    .icon-btn{
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+    }
+    .icon-btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,128,128,.28);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      text-decoration:none;
+    }
+    .icon-btn svg{ width: 20px; height: 20px; stroke: var(--teal); }
 
-    .grid-3{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap)}
-    .grid-2{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--gap)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding: .55rem .95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,128,128,.28);
+      background:#fff;
+      color: var(--teal);
+      font-weight:900;
+      font-size:.95rem;
+      text-decoration:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+      min-height: 42px; /* mobile tap target */
+    }
+    .btn.primary{
+      background: var(--teal);
+      border-color: var(--teal);
+      color:#fff;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      text-decoration:none;
+    }
 
-    .img-tile{background: var(--elevated); border:1px solid rgba(0,0,0,.06); border-radius: var(--radius-sm); aspect-ratio: 9/16; display:grid; place-items:center; color:#666; font-weight:600}
-    .figure{background: var(--elevated); border:1px solid rgba(0,0,0,.06); border-radius: var(--radius-lg); padding: 1rem}
+    /* Page layout */
+    main.container{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1.5rem 1.2rem 3rem;
+      position:relative;
+      z-index: 1;
+    }
 
-    .kpis{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap)}
-    .kpis .kpi{background: #fff; border:1px solid rgba(0,128,128,.18); border-radius: var(--radius-lg); padding: 1rem}
-    .kpis .value{font-size: clamp(1.3rem, 2.6vw, 1.8rem); font-weight: 800; color: var(--brand)}
-    .kpis .label{color:#444}
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: calc(var(--gap) * 1.25);
+      padding: 1.2rem 0 1rem;
+      align-items: start;
+    }
+    .crumbs{
+      color: var(--muted);
+      font-size:.95rem;
+      margin-bottom: .6rem;
+    }
+    .title{
+      font-family: var(--font-heading);
+      color: var(--teal);
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height:1.12;
+      margin-bottom: .7rem;
+    }
+    .thesis{
+      font-size: 1.05rem;
+      color: #222;
+      max-width: 80ch;
+      margin-bottom: 1.05rem;
+    }
+    .one-liner{
+      border-left: 4px solid var(--beige);
+      padding: .9rem 1rem;
+      background: rgba(200,155,123,.10);
+      border-radius: 12px;
+      color:#222;
+      font-style: italic;
+      margin-bottom: 1.1rem;
+    }
+    .hero-cta{
+      display:flex;
+      gap:.6rem;
+      flex-wrap: wrap;
+      margin-top: .2rem;
+    }
 
-    .cta{
-      background: linear-gradient(180deg, rgba(0,128,128,.06), rgba(200,155,123,.06));
-      border:1px solid rgba(0,0,0,.06);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem; display:flex; align-items:center; justify-content:space-between; gap: 1rem;
+    /* Panel */
+    .panel{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
+      padding: 1.1rem;
+    }
+    .meta-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:.75rem;
+      margin-top: .35rem;
+    }
+    .meta{
+      border: 1px dashed rgba(0,128,128,.25);
+      border-radius: 14px;
+      padding: .85rem .9rem;
+      background: rgba(0,128,128,.04);
+    }
+    .meta h4{
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom:.25rem;
+    }
+    .meta p{font-weight:900; color:#1d1d1d;}
+
+    /* Chips */
+    .chips{display:flex; flex-wrap:wrap; gap:.55rem; margin-top:.6rem;}
+    .chip{
+      background: var(--light-teal);
+      color:#fff;
+      font-weight:950;
+      padding: .38rem .72rem;
+      border-radius: 999px;
+      font-size:.9rem;
+      transition: transform .18s var(--ease), filter .18s var(--ease);
+    }
+    .chip.alt{background: var(--beige);}
+    .chip:hover{transform: translateY(-1px) scale(1.02); filter: brightness(1.02);}
+
+    /* Sticky subnav + progress */
+    .subnav-wrap{
+      position: sticky;
+      top: 76px;
+      z-index: 55;
+      margin: 1rem 0 1.25rem;
+      background: rgba(249,249,249,.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.06);
+      padding: .65rem .9rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .subnav{
+      display:flex;
+      gap:.65rem;
+      overflow:auto;
+      scrollbar-width: none;
+      position: relative;
+      padding-right: 8px;
+    }
+    .subnav::-webkit-scrollbar{display:none;}
+
+    /* Right-edge fade hint (mobile UX cue) */
+    .subnav-fade{
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 44px;
+      pointer-events:none;
+      background: linear-gradient(90deg, rgba(249,249,249,0), rgba(249,249,249,.96));
+      border-radius: 999px;
+      display:none;
     }
 
-    footer{max-width: var(--maxw); margin: 2.5rem auto 3rem; padding: 0 1rem; color: #666}
+    .subnav a{
+      white-space:nowrap;
+      font-weight:900;
+      font-size:.93rem;
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background:#fff;
+      text-decoration:none;
+      color:#222;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
+      min-height: 36px;
+      display:inline-flex;
+      align-items:center;
+    }
+    .subnav a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,128,128,.28);
+      color: var(--teal);
+      text-decoration:none;
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    }
+    .subnav a.active{
+      background: rgba(0,128,128,.10);
+      border-color: rgba(0,128,128,.35);
+      color: var(--teal);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    }
+
+    .progress{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      min-width: 240px;
+      justify-content:flex-end;
+    }
+    .bar{
+      width: 120px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.08);
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .bar > span{
+      display:block;
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--teal), var(--beige));
+      transition: width .25s var(--ease);
+    }
+    .pct{
+      font-weight:950;
+      color:#222;
+      font-size:.92rem;
+      min-width: 110px;
+      text-align:right;
+      line-height:1.1;
+    }
+    .pct small{
+      display:block;
+      font-weight:800;
+      color: var(--muted);
+      font-size:.78rem;
+      margin-top:.15rem;
+    }
+
+    /* Dividers */
+    .divider{
+      height: 1px;
+      border: 0;
+      margin: 1.25rem 0 1.25rem;
+      background: linear-gradient(90deg,
+        rgba(0,128,128,.0),
+        rgba(0,128,128,.22),
+        rgba(200,155,123,.22),
+        rgba(200,155,123,.0)
+      );
+    }
+
+    /* Sections */
+    section{ margin: 1.6rem 0 2.1rem; }
+    .section-title{
+      font-family: var(--font-heading);
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      margin-bottom: .65rem;
+      color:#111;
+    }
+    .hint{
+      color: var(--muted);
+      margin-bottom: .9rem;
+      max-width: 96ch;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: var(--gap);
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.1rem;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    }
+
+    /* Hover effects only on hover-capable devices (mobile tweak) */
+    @media (hover: hover) and (pointer: fine){
+      .card:hover{ transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.12); }
+    }
+
+    ul{padding-left: 1.1rem;}
+    li{margin: .35rem 0;}
+    .callout{
+      border-left: 4px solid var(--teal);
+      padding: .95rem 1rem;
+      background: rgba(0,128,128,.06);
+      border-radius: 12px;
+      color:#222;
+    }
+
+    /* Placeholder tiles (Screens + Artifacts) */
+    .tile{
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,.10);
+      background: linear-gradient(135deg, rgba(0,128,128,.08), rgba(200,155,123,.08));
+      min-height: 240px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding: 1rem;
+      overflow:hidden;
+      position:relative;
+    }
+    .tile .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      font-weight:950;
+      font-size:.85rem;
+      padding:.3rem .55rem;
+      border-radius:999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(6px);
+      width: fit-content;
+    }
+    .tile h3{ margin-top:.6rem; }
+    .tile p{ color:#222; margin-top:.35rem; }
+    .tile small{ color: var(--muted); font-weight:800; }
+
+    .artifacts .tile{ min-height: 180px; }
+
+    /* Persona */
+    .persona{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: var(--gap);
+      align-items:start;
+    }
+    .avatar{
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,.10);
+      background: linear-gradient(135deg, rgba(0,128,128,.10), rgba(200,155,123,.10));
+      min-height: 240px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding: 1rem;
+      font-weight:950;
+      color:#144;
+    }
+    .avatar small{
+      display:block;
+      font-weight:850;
+      color:#2b2b2b;
+      opacity:.9;
+      margin-top:.25rem;
+    }
+
+    /* Persona expand/collapse */
+    .persona-more{
+      display:none;
+      margin-top:.8rem;
+      border-top: 1px solid rgba(0,0,0,.10);
+      padding-top:.8rem;
+      color:#222;
+    }
+    .persona-card .toggle{
+      margin-top: .85rem;
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding: .55rem .85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,128,128,.25);
+      background:#fff;
+      color: var(--teal);
+      font-weight:950;
+      cursor:pointer;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+      min-height: 42px; /* tap target */
+    }
+    .persona-card .toggle:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    }
+    .persona-card .toggle svg{ transition: transform .18s var(--ease); }
+    .persona-card.expanded .toggle svg{ transform: rotate(180deg); }
+    .persona-card.expanded .persona-more{display:block;}
+
+    /* Journey timeline */
+    .timeline{display:grid; gap:.85rem;}
+    .step{
+      display:grid;
+      grid-template-columns: 28px 1fr;
+      gap:.85rem;
+      align-items:start;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+    .step.in{ opacity: 1; transform: translateY(0); }
+    .dot{
+      width: 16px; height: 16px;
+      margin-top: .35rem;
+      border-radius: 999px;
+      background: rgba(0,128,128,.25);
+      box-shadow: 0 0 0 6px rgba(0,128,128,.08);
+      transition: background .45s var(--ease);
+    }
+    .step.in .dot{ background: var(--teal); }
+    .step h4{margin-bottom:.2rem; font-size: 1.05rem;}
+    .step p{color:#222;}
+    .insight{color: var(--muted); font-style: italic;}
+
+    /* Metrics */
+    .kpis{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap);}
+    .kpi{
+      background:#fff;
+      border: 1px solid rgba(0,128,128,.22);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    }
+    @media (hover: hover) and (pointer: fine){
+      .kpi:hover{ transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.12); }
+    }
+    .kpi .value{
+      font-weight: 980;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      color: var(--teal);
+      margin-bottom: .25rem;
+    }
+    .kpi .label{color:#333; font-weight:900;}
+    .kpi .note{color: var(--muted); font-size:.92rem; margin-top:.25rem;}
+
+    /* ---------------------------
+       Scroll-reveal (sections + cards)
+    --------------------------- */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
+
+    .stagger > *{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+    }
+    .stagger.in > *{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 2.2rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align:center;
+    }
+
+    /* ---------------------------
+       Decision Log Drawer
+    --------------------------- */
+    .floating{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+    }
+    .fab{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding: .7rem .95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,128,128,.25);
+      background: #fff;
+      color: var(--teal);
+      font-weight:980;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      cursor:pointer;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+      min-height: 52px;
+    }
+    @media (hover: hover) and (pointer: fine){
+      .fab:hover{ transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.22); }
+    }
+    .fab svg{ width: 18px; height:18px; stroke: var(--teal); }
+
+    .drawer-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .25s var(--ease);
+      z-index: 90;
+    }
+    .drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(440px, 92vw);
+      background: rgba(249,249,249,.96);
+      backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(0,0,0,.10);
+      transform: translateX(105%);
+      transition: transform .28s var(--ease);
+      z-index: 95;
+      display:flex;
+      flex-direction:column;
+    }
+    body.drawer-open .drawer{ transform: translateX(0); }
+    body.drawer-open .drawer-overlay{
+      opacity: 1;
+      pointer-events:auto;
+    }
+
+    .drawer-head{
+      padding: 1.1rem 1.1rem .85rem;
+      border-bottom: 1px solid rgba(0,0,0,.10);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: .8rem;
+    }
+    .drawer-title{
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: #111;
+      line-height: 1.2;
+    }
+    .drawer-sub{ color: var(--muted); margin-top:.25rem; font-size:.95rem; }
+    .close{
+      border: 1px solid rgba(0,0,0,.10);
+      background:#fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    }
+    @media (hover: hover) and (pointer: fine){
+      .close:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.10); }
+    }
+    .close svg{ width: 18px; height:18px; stroke: #111; }
+
+    .drawer-body{
+      padding: 1rem 1.1rem 1.2rem;
+      overflow:auto;
+      display:grid;
+      gap:.85rem;
+    }
+    .decision{
+      background:#fff;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 16px;
+      padding: .95rem .95rem;
+      box-shadow: 0 10px 28px rgba(0,0,0,.08);
+    }
+    .decision h4{ margin-bottom:.25rem; font-size: 1.05rem; color:#111; }
+    .decision p{ color:#222; margin-top:.35rem; }
+    .decision .meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem;
+      margin-top:.65rem;
+    }
+    .pill{
+      font-size:.85rem;
+      font-weight:950;
+      padding:.28rem .55rem;
+      border-radius:999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(0,128,128,.06);
+      color: #0a4f4f;
+    }
+    .pill.beige{
+      background: rgba(200,155,123,.10);
+      color: #6e3f24;
+      border-color: rgba(200,155,123,.20);
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto;}
+      .reveal, .stagger > *, .btn, .card, .chip, .kpi, .subnav a, .step{
+        transition:none !important;
+        transform:none !important;
+      }
+      .drawer, .drawer-overlay, .bar > span{ transition:none !important; }
+    }
 
     /* Responsive */
-    @media (max-width: 960px){
-      .meta{grid-template-columns: 1fr 1fr}
-      .twocol{grid-template-columns: 1fr}
-      .grid-3{grid-template-columns: 1fr 1fr}
-      .kpis{grid-template-columns: 1fr 1fr}
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr; }
+      .subnav-wrap{top: 72px;}
+      .grid-3{grid-template-columns: 1fr 1fr;}
+      .persona{grid-template-columns: 1fr;}
+      .kpis{grid-template-columns: 1fr 1fr;}
+    }
+    @media (max-width: 700px){
+      main.container{ padding: 1.2rem .95rem 3rem; }
+      .header-wrap{ padding: .85rem .95rem; }
+      .subnav-fade{ display:block; }
     }
     @media (max-width: 640px){
-      .grid-3, .grid-2, .meta, .kpis{grid-template-columns: 1fr}
+      .grid-2,.grid-3,.kpis{grid-template-columns: 1fr;}
+      .progress{display:none;}
+      .fab span{display:none;}
+      .fab{padding:.75rem; width: 52px; height: 52px; justify-content:center;}
+      .tile{ min-height: 220px; }
     }
   </style>
 </head>
+
 <body>
-  <!-- Top Nav (mirrors site style; replace links as needed) -->
+  <!-- background accents -->
+  <div class="bg-blob blob-teal" aria-hidden="true"></div>
+  <div class="bg-blob blob-beige" aria-hidden="true"></div>
+  <div class="bg-blob blob-teal-2" aria-hidden="true"></div>
+
+  <!-- Header -->
   <header>
-    <nav class="nav" aria-label="Primary">
-      <a href="/" class="logo" aria-label="Back to Home">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="1.5"/></svg>
+    <div class="header-wrap">
+      <a class="brand" href="index.html" aria-label="Back to Home">
+        <span class="dot" aria-hidden="true"></span>
         <span>Allan Ng'ang'a</span>
       </a>
-      <div class="actions">
-        <a class="btn" href="/#projects">Projects</a>
-        <a class="btn" href="/cv.pdf" target="_blank" rel="noopener">View CV</a>
+
+      <div class="nav-actions">
+        <a class="icon-btn" href="index.html" aria-label="Back to index">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5"></path>
+            <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"></path>
+          </svg>
+        </a>
+
+        <a class="btn" href="index.html#projects">Projects</a>
+        <a class="btn" href="assets/docs/Allan%20Ng%27ang%27a%20CV.pdf" target="_blank" rel="noopener">View CV</a>
         <a class="btn primary" href="mailto:allananganga@gmail.com">Email me</a>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <p class="crumbs"><a href="/">Home</a> · <a href="/#projects">Projects</a> · <span aria-current="page">MindSprings</span></p>
-    <h1 class="title">MindSprings — AI‑Powered Mental Wellness Companion</h1>
-    <p class="subtitle">A team-built mobile app (Citi Upstart Challenge) that helps students understand and manage their emotional wellbeing through emoji mood check‑ins, gentle journaling, an AI companion, and a supportive community space.</p>
+  <main class="container">
 
-    <div class="meta" role="list" aria-label="Project metadata">
-      <div class="card" role="listitem"><h4>Role</h4><p>Product Lead &amp; Innovation Strategist</p></div>
-      <div class="card" role="listitem"><h4>Timeline</h4><p>October 2024 — September 2025</p></div>
-      <div class="card" role="listitem"><h4>Tools</h4><p>Figma, React Native, Supabase, GPT‑4</p></div>
-      <div class="card" role="listitem"><h4>Team</h4><p>Team project — Citi Upstart Challenge (Citi Innovation Labs, Dublin)</p></div>
+    <!-- HERO -->
+    <section class="hero reveal" id="top" data-title="Intro">
+      <div>
+        <p class="crumbs"><a href="index.html">Home</a> · <a href="index.html#projects">Projects</a> · <span aria-current="page">MindSpring</span></p>
+
+        <h1 class="title">MindSpring</h1>
+
+        <p class="thesis">
+          <strong>PM Thesis:</strong> Mental health tools fail not because people don’t care about wellbeing, but because we design them as tasks to complete instead of experiences that feel emotionally safe.
+          MindSpring exists to test whether empathy, low-friction habits, and transparent AI can create support without pressure, diagnosis, or noise.
+        </p>
+
+        <div class="one-liner">
+          We’ve built a generation that is constantly connected, yet increasingly overwhelmed and emotionally isolated, and asking for help still feels heavier than staying silent.
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="#summary">Start the case study</a>
+          <!-- Replace with your actual prototype URL when ready -->
+          <a class="btn" href="#screens">View prototype evidence</a>
+        </div>
+
+        <div class="chips" aria-label="Key signals">
+          <span class="chip">Hypothesis-led</span>
+          <span class="chip alt">Ethical AI</span>
+          <span class="chip">Privacy-first</span>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Project metadata">
+        <h3 style="font-family:var(--font-heading); margin-bottom:.35rem;">Project Snapshot</h3>
+        <p style="color:var(--muted); margin-bottom:.8rem;">
+          A PM-first case study showing discovery, decisions, trade-offs, and iteration.
+        </p>
+
+        <div class="meta-grid stagger">
+          <div class="meta">
+            <h4>Role</h4>
+            <p>Product Lead & Innovation Strategist</p>
+          </div>
+          <div class="meta">
+            <h4>Context</h4>
+            <p>Citi Upstart Challenge · Citi Innovation Labs (Dublin)</p>
+          </div>
+          <div class="meta">
+            <h4>Audience</h4>
+            <p>Students → early-career professionals (continuity by design)</p>
+          </div>
+          <div class="meta">
+            <h4>Team</h4>
+            <p>3 MSc Fintech students (Class of 2025)</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Sticky sub-nav + progress -->
+    <div class="subnav-wrap reveal" aria-label="Case study navigation">
+      <nav class="subnav" id="subnav">
+        <a href="#summary">Summary</a>
+        <a href="#project-context">Project Context</a>
+        <a href="#context">Problem Space</a>
+        <a href="#hypothesis">Hypothesis</a>
+        <a href="#tradeoffs">Trade-offs</a>
+        <a href="#mvp">MVP</a>
+        <a href="#screens">Screens</a>
+        <a href="#artifacts">Artifacts</a>
+        <a href="#persona">Persona</a>
+        <a href="#journey">Journey</a>
+        <a href="#metrics">Metrics</a>
+        <a href="#learnings">Learnings</a>
+        <a href="#next">Next</a>
+        <a href="#reflection">Reflection</a>
+        <span class="subnav-fade" aria-hidden="true"></span>
+      </nav>
+
+      <div class="progress" aria-label="Reading progress">
+        <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+        <div class="pct" id="pct">
+          Intro
+          <small id="pct2">1/14</small>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- Cover visual placeholder -->
-  <div class="cover">
-    <div class="img" aria-label="MindSpring cover visual placeholder">Place app hero mockup or marquee here</div>
-  </div>
+    <hr class="divider" aria-hidden="true">
 
-  <main>
-    <!-- Overview / Problem & Solution -->
-    <section id="overview" class="twocol">
-      <div class="card">
-        <h2>Overview</h2>
-        <p>MindSpring addresses a gap in student wellbeing tools by combining quick mood check‑ins, reflective journaling (text or voice), and an approachable AI chat that encourages healthy habits — all wrapped in a privacy‑first design.</p>
-        <p class="note">This page is a lightweight first pass. We’ll iterate with richer visuals, user flows, and research artifacts.</p>
-      </div>
-      <div class="card">
-        <h2>My Objectives</h2>
-        <ul>
-          <li>Design an MVP that feels emotionally safe and non‑clinical.</li>
-          <li>Prototype key flows for check‑ins, journaling, and AI guidance.</li>
-          <li>Validate desirability and usability with student testers.</li>
-        </ul>
-      </div>
-    </section>
+    <!-- SUMMARY -->
+    <section id="summary" class="reveal" data-title="Summary">
+      <h2 class="section-title">Product Summary</h2>
+      <p class="hint">
+        MindSpring is a mental wellness companion designed to reduce the emotional friction of checking in with yourself,
+        built for students and designed to grow with users into early career life.
+      </p>
 
-    <section id="problem-solution" class="twocol">
-      <div class="card">
-        <h2>The Problem</h2>
-        <p>Students struggle to maintain consistent self‑care practices. Existing apps often feel generic, clinical, or noisy, leading to low engagement and drop‑off.</p>
-      </div>
-      <div class="card">
-        <h2>The Solution</h2>
-        <p>MindSpring offers a gentle, structured routine: quick emoji check‑ins, low‑friction journal/voice entries, an AI companion for reflection, and a community corner for peer support — with transparent data choices.</p>
-      </div>
-    </section>
-
-    <!-- MVP feature grid -->
-    <section id="mvp">
-      <h2>Minimum Viable Product</h2>
-      <div class="grid-3">
+      <div class="grid-2 stagger">
         <div class="card">
-          <h3>Emoji Mood Check‑Ins</h3>
-          <p>Daily taps build a lightweight habit and generate a personal mood timeline.</p>
+          <h3 style="margin-bottom:.4rem;">In One View</h3>
+          <ul>
+            <li><strong>Who:</strong> Students → early-career professionals</li>
+            <li><strong>Problem:</strong> Support tools feel clinical, noisy, or effort-heavy → disengagement</li>
+            <li><strong>Solution:</strong> Gentle check-ins, optional reflection, empathetic AI, privacy-first choices</li>
+            <li><strong>Approach:</strong> Emotional safety before intelligence or scale</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:.4rem;">Why This Exists</h3>
+          <p>
+            We weren’t trying to “solve mental health.” We were testing whether lowering the emotional cost of reflection
+            could create a supportive habit people actually return to.
+          </p>
+          <div class="callout" style="margin-top:.8rem;">
+            At this stage, success was defined by <strong>learning velocity</strong>, not vanity metrics.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- PROJECT CONTEXT -->
+    <section id="project-context" class="reveal" data-title="Project Context">
+      <h2 class="section-title">Project Context</h2>
+      <p class="hint">
+        The conditions around the product shaped the product. This section makes the constraints and real-world delivery context explicit.
+      </p>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Timeline & Milestones</h3>
+          <ul>
+            <li><strong>Started:</strong> November 2024 (Citi Upstart Challenge kickoff)</li>
+            <li><strong>Build + iteration:</strong> Nov 2024 → Sep 2025</li>
+            <li><strong>Final pitch:</strong> Wednesday, <strong>24 September 2025</strong>, Citi Offices, Dublin</li>
+            <li><strong>Selection:</strong> Chosen as <strong>1 of 8 teams</strong> to present to Citi executives, innovators, and incubators</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Team & Structure</h3>
+          <ul>
+            <li><strong>Team size:</strong> 3 students (MSc Fintech Class of 2025)</li>
+            <li><strong>My role:</strong> Product Lead & Innovation Strategist</li>
+            <li><strong>Operating model:</strong> Rapid discovery → MVP decisions → prototype iteration → pitch refinement</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="height: var(--gap)"></div>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Technical Constraints (Real)</h3>
+          <ul>
+            <li>Limited time for engineering-heavy builds → prototype-first delivery</li>
+            <li>Data sensitivity and trust requirements → privacy-first design choices</li>
+            <li>AI safety boundaries → reflective tone, no diagnostic claims, no authoritative advice</li>
+            <li>Tooling/infra constraints → lean stack and staged testing approach</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Stakeholder Management Challenges</h3>
+          <ul>
+            <li>Aligning “innovation excitement” with “responsible wellness boundaries”</li>
+            <li>Defending why we de-scoped high-risk features (e.g., clinical assessments)</li>
+            <li>Balancing storytelling for pitch vs accuracy of claims</li>
+            <li>Working under feedback cycles from mentors, judges, and peer reviewers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- PROBLEM SPACE -->
+    <section id="context" class="reveal" data-title="Problem Space">
+      <h2 class="section-title">Problem Space & User Context</h2>
+      <p class="hint">
+        We started with reality, not features. This was a lived environment: pressure, comparison, and quiet burnout,
+        with support that often feels harder to access than to avoid.
+      </p>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">What We Observed</h3>
+          <ul>
+            <li>People know they’re struggling but don’t know where to put it.</li>
+            <li>Reaching out feels like escalation.</li>
+            <li>Most apps demand effort when users have the least energy.</li>
+            <li>Trust collapses when data use and AI behavior are unclear.</li>
+          </ul>
         </div>
         <div class="card">
-          <h3>Journal & Voice Notes</h3>
-          <p>Private space to reflect with optional prompts; voice for low‑effort capture.</p>
+          <h3 style="margin-bottom:.35rem;">The Core Insight</h3>
+          <p>
+            People don’t avoid self-care because they’re lazy. They avoid it because it asks for more than they can give in the moment.
+          </p>
+          <p class="insight" style="margin-top:.55rem;">
+            The challenge became: <strong>How might we lower the emotional cost of checking in with yourself?</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- HYPOTHESIS -->
+    <section id="hypothesis" class="reveal" data-title="Hypothesis">
+      <h2 class="section-title">Product Hypothesis & Assumptions</h2>
+      <p class="hint">
+        We built to test beliefs, not ship features. These were our highest-risk assumptions.
+      </p>
+
+      <div class="card reveal">
+        <h3 style="margin-bottom:.35rem;">Core Hypothesis</h3>
+        <p>
+          If emotional support feels safe, optional, and low-effort, people are more likely to engage consistently,
+          even when they’re tired, overwhelmed, or unsure what they need.
+        </p>
+      </div>
+
+      <div style="height: var(--gap)"></div>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Assumptions (Ranked)</h3>
+          <ul>
+            <li><strong>High:</strong> Emotional safety drives repeat engagement.</li>
+            <li><strong>High:</strong> Micro-interactions beat long sessions.</li>
+            <li><strong>Med–High:</strong> AI should reflect, not prescribe.</li>
+            <li><strong>Medium:</strong> Trust and transparency increase usage.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Failure Conditions</h3>
+          <ul>
+            <li>Users avoid check-ins after initial curiosity.</li>
+            <li>Journaling feels like obligation, not relief.</li>
+            <li>AI feels intrusive, performative, or “too clever.”</li>
+            <li>Drop-off happens because the product feels like work.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- TRADE-OFFS -->
+    <section id="tradeoffs" class="reveal" data-title="Trade-offs">
+      <h2 class="section-title">Constraints & Trade-offs</h2>
+      <p class="hint">
+        In mental wellness, engagement at any cost is a failure mode. We optimized for trust and responsibility.
+      </p>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">Ethical Constraints</h3>
+          <ul>
+            <li>No diagnostic language or clinical claims.</li>
+            <li>No crisis intervention promises.</li>
+            <li>No authoritative AI advice.</li>
+            <li>Privacy and consent are explicit, not buried.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:.35rem;">What We Deliberately Did Not Build</h3>
+          <ul>
+            <li>Clinical assessments (risk + misinterpretation).</li>
+            <li>Streaks / gamification (pressure and shame).</li>
+            <li>Aggressive nudging (emotional boundary violation).</li>
+            <li>Open community by default (safety and moderation risk).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- MVP -->
+    <section id="mvp" class="reveal" data-title="MVP">
+      <h2 class="section-title">MVP Overview</h2>
+      <p class="hint">
+        The MVP is a lightweight companion focused on awareness, reflection, and pattern recognition,
+        without diagnosis, pressure, or exposure.
+      </p>
+
+      <div class="grid-3 stagger">
+        <div class="card">
+          <h3>Emoji Mood Check-ins</h3>
+          <p>Low-friction acknowledgment. Habit-forming without demanding explanation.</p>
+        </div>
+        <div class="card">
+          <h3>Journal (Text + Voice)</h3>
+          <p>Private reflection. Voice supports low-energy moments when typing is too much.</p>
         </div>
         <div class="card">
           <h3>AI Companion</h3>
-          <p>Supportive chat that mirrors feelings, surfaces patterns, and suggests next steps.</p>
+          <p>Reflects patterns and validates feelings. Designed to mirror, not prescribe.</p>
         </div>
         <div class="card">
           <h3>Wellness Exercises</h3>
-          <p>Short breathing, grounding, and gratitude practices tied to mood state.</p>
+          <p>Short grounding tools that are offered contextually, not forced.</p>
         </div>
         <div class="card">
           <h3>Community Corner</h3>
-          <p>Opt‑in peer space with moderation and anonymized sharing.</p>
+          <p>Opt-in peer space designed with boundaries, moderation, and anonymity in mind.</p>
         </div>
         <div class="card">
           <h3>Consent & Privacy</h3>
-          <p>Clear onboarding, data choices, and content controls build trust.</p>
+          <p>Clear choices that build trust early, control is part of the product.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal" style="margin-top: var(--gap);">
+        This MVP was built to answer one question: <strong>Can support feel light enough to use and serious enough to matter?</strong>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- SCREENS / PROTOTYPE EVIDENCE -->
+    <section id="screens" class="reveal" data-title="Screens">
+      <h2 class="section-title">Screens & Prototype Evidence</h2>
+      <p class="hint">
+        These are placeholders for your final exports. Add 2–3 key screens and one flow image, it’s the fastest way to make this case study feel real.
+      </p>
+
+      <div class="grid-3 stagger">
+        <div class="tile">
+          <div class="badge">Screen 1 · Mood Check-in</div>
+          <div>
+            <h3>Low-friction acknowledgement</h3>
+            <p>Replace this block with an image export (PNG) of the mood check-in UI.</p>
+            <small>Suggested file: <strong>assets/img/mindspring-mood.png</strong></small>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="badge">Screen 2 · AI Companion</div>
+          <div>
+            <h3>Reflective, not prescriptive</h3>
+            <p>Replace with your AI chat screen export showing tone + pattern reflection.</p>
+            <small>Suggested file: <strong>assets/img/mindspring-ai.png</strong></small>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="badge">Screen 3 · Journal</div>
+          <div>
+            <h3>Text + Voice as choice</h3>
+            <p>Replace with your journaling UI export (and optionally voice capture).</p>
+            <small>Suggested file: <strong>assets/img/mindspring-journal.png</strong></small>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: var(--gap)"></div>
+
+      <div class="grid-2 stagger">
+        <div class="tile" style="min-height: 220px;">
+          <div class="badge">Flow Evidence</div>
+          <div>
+            <h3>Core user flow</h3>
+            <p>Drop in a single exported flow diagram: check-in → reflection → AI → outcome.</p>
+            <small>Suggested file: <strong>assets/img/mindspring-flow.png</strong></small>
+          </div>
+        </div>
+
+        <div class="tile" style="min-height: 220px;">
+          <div class="badge">Prototype Link</div>
+          <div>
+            <h3>Interactive prototype</h3>
+            <p>Add your Figma/Prototype URL here when ready.</p>
+            <small>Replace the button target in the hero or add it here.</small>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Screen placeholders -->
-    <section id="screens">
-      <h2>Key Screens</h2>
-      <div class="grid-3">
-        <div class="img-tile" aria-label="Mockup placeholder: Mood check‑in">Mood Check‑In</div>
-        <div class="img-tile" aria-label="Mockup placeholder: AI companion">AI Companion</div>
-        <div class="img-tile" aria-label="Mockup placeholder: Journal entry">Journal Entry</div>
+    <hr class="divider" aria-hidden="true">
+
+    <!-- PROCESS ARTIFACTS -->
+    <section id="artifacts" class="reveal" data-title="Artifacts">
+      <h2 class="section-title">Process Artifacts</h2>
+      <p class="hint">
+        These make your PM thinking undeniable: insight → decision → build. Add exports as you iterate.
+      </p>
+
+      <div class="grid-3 stagger artifacts">
+        <div class="tile">
+          <div class="badge">Artifact · JTBD</div>
+          <div>
+            <h3>Jobs-to-be-done</h3>
+            <p>“When I’m overwhelmed, I need a low-effort way to check in…”</p>
+            <small>Add your JTBD snapshot here.</small>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="badge">Artifact · Assumption Map</div>
+          <div>
+            <h3>Risk-ranked assumptions</h3>
+            <p>Emotional safety, micro-interactions, reflective AI tone.</p>
+            <small>Add your assumption heatmap export.</small>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="badge">Artifact · Prioritization</div>
+          <div>
+            <h3>MVP decisions</h3>
+            <p>Why we shipped check-ins first and de-scoped risky features.</p>
+            <small>Add your prioritization snapshot.</small>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Process snapshot -->
-    <section id="process" class="twocol">
+    <hr class="divider" aria-hidden="true">
+
+    <!-- PERSONA -->
+    <section id="persona" class="reveal" data-title="Persona">
+      <h2 class="section-title">Primary Persona</h2>
+      <p class="hint">We grounded the experience in a real pattern we observed repeatedly, represented here as Emma.</p>
+
+      <div class="emma-flip reveal" id="emmaFlip" role="button" tabindex="0" aria-label="Emma flip card. Click to flip.">
+  <div class="emma-inner">
+    <!-- Front: Happy -->
+    <div class="emma-face emma-front" aria-hidden="true">
+      <img src="assets/img/mindspring-emma-happy.png" alt="Emma feeling grounded in a campus café">
+      <div class="emma-overlay">
+        <div class="emma-name">Emma · 22</div>
+        <div class="emma-sub">Final-year student → early career transition</div>
+        <div class="emma-hint">Tap to flip</div>
+      </div>
+    </div>
+
+    <!-- Back: Stressed -->
+    <div class="emma-face emma-back" aria-hidden="true">
+      <img src="assets/img/mindspring-emma-stressed.png" alt="Emma under pressure in the same café at night">
+      <div class="emma-overlay">
+        <div class="emma-name">Same Emma.</div>
+        <div class="emma-sub">Different day. More weight to carry.</div>
+        <div class="emma-hint">Tap to flip</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <div class="card persona-card reveal">
+          <h3 style="margin-bottom:.35rem;">Emma’s Reality</h3>
+          <ul>
+            <li>High expectations, low emotional bandwidth</li>
+            <li>Hesitates to seek help unless it feels “serious enough”</li>
+            <li>Needs privacy, autonomy, and a non-clinical tone</li>
+          </ul>
+          <p class="insight" style="margin-top:.6rem;">
+            Core tension: Emma doesn’t want to be “fixed.” She wants a place to pause, without having to explain herself.
+          </p>
+
+          <button class="toggle" type="button" id="personaToggle" aria-expanded="false">
+            <span>Read the deeper persona</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="persona-more" id="personaMore">
+            <h4 style="margin-bottom:.35rem;">Goals</h4>
+            <ul>
+              <li>Feel more in control of emotional patterns</li>
+              <li>Find relief without “performing vulnerability”</li>
+              <li>Build a habit that survives busy weeks</li>
+            </ul>
+
+            <h4 style="margin:.75rem 0 .35rem;">Fears</h4>
+            <ul>
+              <li>Being judged or “diagnosed” by a tool</li>
+              <li>Data used in ways she didn’t consent to</li>
+              <li>Shame from streaks or missed days</li>
+            </ul>
+
+            <h4 style="margin:.75rem 0 .35rem;">Moments of Truth</h4>
+            <ul>
+              <li>Can she check in without explaining?</li>
+              <li>Does the AI feel human, not clever?</li>
+              <li>Can she skip days without penalty?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- JOURNEY -->
+    <section id="journey" class="reveal" data-title="Journey">
+      <h2 class="section-title">User Journey</h2>
+      <p class="hint">A simple sequence that respects emotional readiness and makes reflection optional.</p>
+
       <div class="card">
-        <h2>Design Process</h2>
-        <ol>
-          <li><strong>Research:</strong> Interviews and competitive scan; themes: burnout, loneliness, privacy concerns.</li>
-          <li><strong>Define:</strong> JTBD and problem statement aligned to emotional safety.</li>
-          <li><strong>Ideate:</strong> Flows for check‑ins, prompts, and gentle nudge system.</li>
-          <li><strong>Prototype:</strong> Figma interactive prototype → usability testing → iteration.</li>
-          <li><strong>Build:</strong> React Native prototype with Supabase; mock AI for staged testing.</li>
-        </ol>
-      </div>
-      <div class="figure">
-        <h3 style="margin-top:0">User Flow (placeholder)</h3>
-        <p class="note">Swap this block with an exported user flow image or journey map.</p>
-        <div class="img" style="height:220px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(157,214,255,.08), rgba(203,184,255,.04)); color:var(--muted); border:1px solid rgba(255,255,255,.06)">Flow Diagram Placeholder</div>
+        <div class="timeline" id="timeline">
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div>
+              <h4>1) Before Use</h4>
+              <p>Overwhelmed, but not labeling it. Coping quietly. Postponing reflection.</p>
+              <p class="insight">Insight: the hardest step is not journaling, it’s starting.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div>
+              <h4>2) Mood Check-in</h4>
+              <p>An emoji lets Emma acknowledge how she feels without explanation or commitment.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div>
+              <h4>3) Reflection (Optional)</h4>
+              <p>Text or voice. Some days she skips it, and that’s valid by design.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div>
+              <h4>4) AI Companion</h4>
+              <p>Mirrors patterns gently. No advice. No diagnosis. No urgency.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="dot" aria-hidden="true"></div>
+            <div>
+              <h4>5) Outcome</h4>
+              <p>Not instant relief, but feeling seen, and returning. That return is the win.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Outcomes / early signals -->
-    <section id="impact">
-      <h2>Early Signals & Outcomes</h2>
-      <div class="kpis">
-        <div class="kpi"><div class="value">+40%</div><div class="label">Consistency in journaling (pilot)</div></div>
-        <div class="kpi"><div class="value">89%</div><div class="label">Reported feeling “understood” by AI tone</div></div>
-        <div class="kpi"><div class="value"><span aria-hidden="true">★</span> 4.6/5</div><div class="label">Usability score (SUS)</div></div>
-      </div>
-      <p class="note">We’ll replace these placeholders with real pilot metrics or qualitative quotes after the next testing round.</p>
-    </section>
+    <hr class="divider" aria-hidden="true">
 
-    <!-- What I learned / Next -->
-    <section id="learnings" class="grid-2">
-      <div class="card">
-        <h2>What I Learned</h2>
-        <ul>
-          <li>Emotional safety is a design requirement, not an afterthought.</li>
-          <li>Transparent AI behavior and data controls build trust.</li>
-          <li>Short, contextual nudges beat generic reminders.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Next Steps</h2>
-        <ul>
-          <li>Ship TestFlight beta to student cohort.</li>
-          <li>Integrate mood‑aware recommendations and trends.</li>
-          <li>Partner with university wellness teams for pilot.</li>
-        </ul>
+    <!-- METRICS -->
+    <section id="metrics" class="reveal" data-title="Metrics">
+      <h2 class="section-title">Validation & Metrics</h2>
+      <p class="hint">We measured signals that indicate emotional safety and habit formation, not hype.</p>
+
+      <div class="kpis stagger">
+        <div class="kpi">
+          <div class="value">Leading</div>
+          <div class="label">Engagement signals</div>
+          <div class="note">Check-in frequency · repeat sessions · reflection rate</div>
+        </div>
+        <div class="kpi">
+          <div class="value">Lagging</div>
+          <div class="label">Trust & usefulness</div>
+          <div class="note">Self-reported awareness · AI tone trust · perceived support</div>
+        </div>
+        <div class="kpi">
+          <div class="value">Focus</div>
+          <div class="label">Learning velocity</div>
+          <div class="note">Fast iteration loops over vanity growth metrics</div>
+        </div>
       </div>
     </section>
 
-    <!-- Call to action -->
-    <section class="cta">
-      <div>
-        <h2 style="margin:.2rem 0 .4rem">Interested in AI for wellbeing?</h2>
-        <p class="note" style="margin:0">Let’s talk about pilots, research collaborations, or product roles.</p>
+    <hr class="divider" aria-hidden="true">
+
+    <!-- LEARNINGS -->
+    <section id="learnings" class="reveal" data-title="Learnings">
+      <h2 class="section-title">Key Learnings</h2>
+      <p class="hint">What surprised us, what didn’t work, and what it changed in our product thinking.</p>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3>What Surprised Me</h3>
+          <ul>
+            <li>Less functionality led to more trust.</li>
+            <li>Silence (not nudging) was sometimes the best UX choice.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What Didn’t Work as Expected</h3>
+          <ul>
+            <li>Some users skipped journaling, but still benefited from check-ins.</li>
+            <li>Over-prompting reflection increased drop-off.</li>
+          </ul>
+        </div>
       </div>
-      <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-        <a class="btn" href="#" target="_blank" rel="noopener">View Figma Prototype</a>
-        <a class="btn primary" href="mailto:allananganga@gmail.com">Contact Me</a>
+
+      <div class="callout reveal" style="margin-top: var(--gap);">
+        In emotionally sensitive products, <strong>restraint is a feature</strong>, not a compromise.
       </div>
     </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- NEXT -->
+    <section id="next" class="reveal" data-title="Next">
+      <h2 class="section-title">What I’d Do Next</h2>
+      <p class="hint">Strategic iteration: deepen what works, remove what harms, expand responsibly.</p>
+
+      <div class="grid-2 stagger">
+        <div class="card">
+          <h3>Immediate</h3>
+          <ul>
+            <li>Improve pattern recognition (trends over time, not daily scoring).</li>
+            <li>Increase AI explainability and tone control.</li>
+            <li>Expand testing into early-career contexts.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Medium-term</h3>
+          <ul>
+            <li>Adaptive prompts based on behavior (not generic reminders).</li>
+            <li>Safer community frameworks and moderation tooling.</li>
+            <li>Partnership pilots with support services.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- REFLECTION -->
+    <section id="reflection" class="reveal" data-title="Reflection">
+      <h2 class="section-title">Reflection</h2>
+      <p class="hint">What this project brought out in me, as a PM, a builder, and a responsible product thinker.</p>
+
+      <div class="card reveal">
+        <p>
+          MindSpring forced me to operate at the intersection of empathy, ethics, and execution. I led ambiguity without rushing to solutions,
+          made trade-offs that prioritized trust over engagement metrics, and stepped into building (prototyping + technical collaboration)
+          to move faster and communicate better with engineers.
+        </p>
+        <p style="margin-top:.7rem;">
+          Technology scales intent. If we’re careless about intent, we scale harm just as efficiently as value.
+          This is why I choose to shape products sustainably and ethically, especially in sensitive domains.
+        </p>
+
+        <div class="hero-cta" style="margin-top: 1rem;">
+          <a class="btn primary" href="#top">Back to top</a>
+          <a class="btn" href="index.html#projects">More projects</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <small>© <span id="y"></span> Allan Ng'ang'a · MindSpring Case Study</small>
+    </footer>
   </main>
 
-  <footer>
-    <small>© <span id=\"y\"></span> Allan Ng'ang'a · MindSprings Case Study</small>
-  </footer>
+  <!-- Decision Log Floating Button -->
+  <div class="floating" aria-label="Quick actions">
+    <button class="fab" id="openDrawer" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 20h9"></path>
+        <path d="M12 4h9"></path>
+        <path d="M3 6l1 1 2-2"></path>
+        <path d="M3 12l1 1 2-2"></path>
+        <path d="M3 18l1 1 2-2"></path>
+        <path d="M12 12h9"></path>
+        <path d="M12 18h9"></path>
+      </svg>
+      <span>Decision Log</span>
+    </button>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer-overlay" id="overlay" aria-hidden="true"></div>
+
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Decision log">
+    <div class="drawer-head">
+      <div>
+        <div class="drawer-title">Decision Log</div>
+        <div class="drawer-sub">Key calls we made, and what we traded off.</div>
+      </div>
+      <button class="close" id="closeDrawer" type="button" aria-label="Close decision log">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="decision">
+        <h4>We avoided clinical positioning.</h4>
+        <p>We designed for emotional safety and everyday reflection, not diagnosis or treatment claims.</p>
+        <div class="meta-row">
+          <span class="pill">Risk reduced: harm</span>
+          <span class="pill beige">Trade-off: less “authority”</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h4>We prioritized micro-actions over deep sessions.</h4>
+        <p>Emoji check-ins and short reflection lowered cognitive load and improved return likelihood.</p>
+        <div class="meta-row">
+          <span class="pill">Goal: habit formation</span>
+          <span class="pill beige">Trade-off: less depth/session</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h4>AI mirrors; it doesn’t prescribe.</h4>
+        <p>We intentionally limited “advice-giving” to avoid unsafe authority and over-reliance.</p>
+        <div class="meta-row">
+          <span class="pill">Ethical AI</span>
+          <span class="pill beige">Trade-off: fewer “wow” moments</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h4>Optionality is part of the UX.</h4>
+        <p>Skipping journaling is allowed. We avoided streaks to prevent shame spirals.</p>
+        <div class="meta-row">
+          <span class="pill">Boundaries</span>
+          <span class="pill beige">Trade-off: lower forced engagement</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h4>Privacy is explicit, not buried.</h4>
+        <p>Consent and control were treated as product features, not compliance chores.</p>
+        <div class="meta-row">
+          <span class="pill">Trust driver</span>
+          <span class="pill beige">Trade-off: more onboarding steps</span>
+        </div>
+      </div>
+
+      <div class="decision">
+        <h4>Community is opt-in, not default.</h4>
+        <p>We prioritized psychological safety and moderation complexity before scaling social features.</p>
+        <div class="meta-row">
+          <span class="pill">Safety first</span>
+          <span class="pill beige">Trade-off: slower network effects</span>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <script>
+    // footer year
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // -----------------------------
+    // Reading progress + chapter + step count
+    // -----------------------------
+    const bar = document.getElementById('bar');
+    const pct = document.getElementById('pct');
+    const pct2 = document.getElementById('pct2');
+
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const total = sections.length;
+
+    const titleFor = (s) => (s.dataset.title || s.id);
+
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+      const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
+      const percent = Math.round(progress * 100);
+      bar.style.width = percent + '%';
+    }
+
+    // -----------------------------
+    // Scroll reveal + stagger
+    // -----------------------------
+    const revealEls = document.querySelectorAll('.reveal');
+    const staggerEls = document.querySelectorAll('.stagger');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => io.observe(el));
+
+    const ioStagger = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          const kids = Array.from(entry.target.children);
+          kids.forEach((k, idx) => { k.style.transitionDelay = (idx * 80) + 'ms'; });
+          ioStagger.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    staggerEls.forEach(el => ioStagger.observe(el));
+
+    // -----------------------------
+    // Active section highlight in subnav + progress label
+    // -----------------------------
+    const navLinks = Array.from(document.querySelectorAll('#subnav a'));
+
+    const setActive = (id) => {
+      navLinks.forEach(a => {
+        const isActive = a.getAttribute('href') === ('#' + id);
+        a.classList.toggle('active', isActive);
+      });
+
+      const idx = Math.max(1, sections.findIndex(s => s.id === id) + 1);
+
+      if (pct) {
+        pct.firstChild.nodeValue = titleFor(sections[idx - 1]) + " ";
+      }
+      if (pct2) pct2.textContent = `${idx}/${total}`;
+    };
+
+    const ioSections = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if(visible && visible.target && visible.target.id){
+        setActive(visible.target.id);
+      }
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: [0.15, 0.25, 0.4] });
+
+    sections.forEach(s => ioSections.observe(s));
+
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // -----------------------------
+    // Journey timeline step animation
+    // -----------------------------
+    const timeline = document.getElementById('timeline');
+    const steps = timeline ? Array.from(timeline.querySelectorAll('.step')) : [];
+
+    const ioTimeline = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          steps.forEach((s, idx) => setTimeout(() => s.classList.add('in'), idx * 140));
+          ioTimeline.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if(timeline) ioTimeline.observe(timeline);
+
+    // -----------------------------
+    // Persona expand/collapse
+    // -----------------------------
+    const personaToggle = document.getElementById('personaToggle');
+    const personaCard = document.querySelector('.persona-card');
+    if(personaToggle && personaCard){
+      personaToggle.addEventListener('click', () => {
+        const expanded = personaCard.classList.toggle('expanded');
+        personaToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    }
+
+    // -----------------------------
+    // Decision log drawer
+    // -----------------------------
+    const openDrawer = document.getElementById('openDrawer');
+    const closeDrawer = document.getElementById('closeDrawer');
+    const overlay = document.getElementById('overlay');
+
+    function open(){
+      document.body.classList.add('drawer-open');
+      openDrawer.setAttribute('aria-expanded','true');
+      overlay.setAttribute('aria-hidden','false');
+      setTimeout(() => closeDrawer.focus(), 80);
+    }
+
+    function close(){
+      document.body.classList.remove('drawer-open');
+      openDrawer.setAttribute('aria-expanded','false');
+      overlay.setAttribute('aria-hidden','true');
+      openDrawer.focus();
+    }
+
+    if(openDrawer) openDrawer.addEventListener('click', open);
+    if(closeDrawer) closeDrawer.addEventListener('click', close);
+    if(overlay) overlay.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && document.body.classList.contains('drawer-open')) close();
+    });
   </script>
+
 </body>
 </html>
