@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allan Ng'ang'a | FinTech Professional</title>
-  <link href="https://ipfs.io/ipfs/QmWKBMuRboZcVLNEfQvVD6JSGbkXEHvJ5YiNfg8wuBazvs?filename=profile%20photo%20Ghub.jpg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allan Ng'ang'a | Portfolio</title>
+
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="assets/img/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --teal: #008080;
       --light-teal: #66b2b2;
       --dark: #1a1a1a;
       --light: #f9f9f9;
-      --Beige: #C89B7B;
+      --beige: #C89B7B;
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Open Sans', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font-body);
@@ -38,57 +42,66 @@
 
     .intro {
       display: flex;
-      justify-content: space-between; /* Space between contact and image */
-      align-items: center; /* Align items vertically */
+      justify-content: space-between;
+      align-items: center;
       gap: 2rem;
       width: 100%;
     }
 
     .intro-text {
-      margin-bottom: 2rem; /* Add space below intro text */
-      text-align: center; /* Center-align intro text */
+      margin-bottom: 0.5rem;
+      text-align: center;
       flex: 1;
     }
 
     .intro-text h1 {
       font-family: var(--font-heading);
       color: var(--teal);
-      font-size: 2rem; /* Increased font size for name */
-      margin-bottom: 0.5rem; /* Adjust spacing */
+      font-size: 2rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.2px;
     }
 
     .intro-text p {
-      font-size: 1.2rem; /* Increased font size for title */
+      font-size: 1.15rem;
       color: #444;
     }
 
     .contact {
-      margin-top: 1rem;
-      text-align: left; /* Align contact details to the left */
+      margin-top: 0.2rem;
+      text-align: left;
+      min-width: 230px;
     }
 
     .contact p {
-      margin: 0.3rem 0;
+      margin: 0.35rem 0;
       font-size: 0.95rem;
     }
 
     .contact a {
       text-decoration: none;
       color: var(--dark);
-      font-weight: bold;
+      font-weight: 700;
     }
 
+    .contact a:hover { color: var(--teal); }
+
     .photo-container {
-      width: 200px; /* Existing size */
-      height: 200px; /* Existing size */
+      width: 200px;
+      height: 200px;
       overflow: hidden;
-      margin: 0 auto; /* Center the container */
+      margin: 0 auto;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff;
     }
 
     .photo-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .about {
@@ -100,18 +113,39 @@
       font-family: var(--font-heading);
       color: var(--teal);
       margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    .about .about-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
     }
 
     .about p {
-      max-width: 800px;
-      margin: 0 auto;
+      margin: 0.9rem 0;
       font-size: 1rem;
       color: #333;
     }
 
-    .about p:last-of-type {
+    .about .lead {
+      font-size: 1.05rem;
+    }
+
+    .about .emphasis {
+      font-family: var(--font-heading);
       font-style: italic;
-      margin-top: 1rem;
+      color: var(--teal);
+      font-size: 1.08rem;
+      margin-top: 1.1rem;
+      text-align: center;
+    }
+
+    .about .signline {
+      margin-top: 1.2rem;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.2px;
     }
 
     .skills {
@@ -123,6 +157,7 @@
       color: var(--teal);
       margin-bottom: 1rem;
       text-align: center;
+      font-size: 1.6rem;
     }
 
     .skills-list {
@@ -135,34 +170,28 @@
     .skill {
       background-color: var(--light-teal);
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-weight: bold;
-      transition: all 0.3s ease-in-out;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: all 0.25s ease-in-out;
+      border: 1px solid rgba(255,255,255,0.25);
     }
 
     .skill:hover {
-      background-color: var(--Beige);
-      transform: scale(1.05) rotate(1deg);
-      animation: shake 0.4s;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-2px); }
-      50% { transform: translateX(2px); }
-      75% { transform: translateX(-2px); }
-      100% { transform: translateX(0); }
+      background-color: var(--beige);
+      transform: translateY(-2px);
     }
 
     .projects {
-      padding: 2.5rem 3.5rem; /* Increased padding */
+      padding: 2.5rem 3.5rem;
     }
 
     .projects h2 {
       font-family: var(--font-heading);
       color: var(--teal);
       margin-bottom: 1rem;
+      font-size: 1.6rem;
+      text-align: center;
     }
 
     .carousel {
@@ -170,42 +199,81 @@
       overflow-x: auto;
       gap: 1rem;
       scroll-snap-type: x mandatory;
+      padding-bottom: 0.5rem;
+    }
+
+    .carousel::-webkit-scrollbar { height: 10px; }
+    .carousel::-webkit-scrollbar-thumb {
+      background: rgba(0,128,128,0.25);
+      border-radius: 999px;
     }
 
     .project {
       flex: 0 0 auto;
       scroll-snap-align: center;
       background-color: white;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       padding: 1rem;
-      border-radius: 10px;
-      width: 250px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 14px;
+      width: 270px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      position: relative;
     }
 
     .project:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.12);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-logo {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff;
+      padding: 4px;
     }
 
     .project h3 {
       color: var(--teal);
-      margin-bottom: 0.5rem;
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.2;
     }
 
-    .project img {
+    .project .preview {
       width: 100%;
       height: 150px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
+      border-radius: 10px;
+      margin: 0.6rem 0 0.7rem 0;
+      border: 1px solid rgba(0,0,0,0.06);
+      display: block;
+    }
+
+    .project p {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 0.8rem;
     }
 
     .project a {
       color: var(--teal);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-weight: 700;
+      font-size: 0.92rem;
     }
+
+    .project a:hover { text-decoration: underline; }
 
     .download-cv {
       text-align: center;
@@ -215,22 +283,46 @@
     .download-cv a {
       background-color: var(--teal);
       color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
+      padding: 0.75rem 1.2rem;
+      border-radius: 10px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+      font-weight: 800;
+      transition: background-color 0.25s ease, transform 0.25s ease;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.22);
     }
 
     .download-cv a:hover {
-      background-color: var(--Beige);
+      background-color: var(--beige);
+      transform: translateY(-2px);
+    }
+
+    .download-cv .sep {
+      display: inline-block;
+      margin: 0 0.5rem;
+      color: #666;
+      font-weight: 700;
     }
 
     .signout {
-      padding: 2rem 3rem;
-      font-style: italic;
+      padding: 2rem 3rem 2.4rem;
       text-align: center;
       color: #444;
+    }
+
+    .signout .quote {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: #2a2a2a;
+      margin-bottom: 0.35rem;
+    }
+
+    .signout .three-words {
+      margin-top: 0.5rem;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--teal);
     }
 
     footer {
@@ -240,235 +332,219 @@
       padding: 1rem;
       font-size: 0.9rem;
     }
-    .carousel.active .project {
-  filter: blur(4px);
-  pointer-events: none;
-  transition: filter 0.3s ease-in-out;
-}
 
-.project.focused {
-  transform: scale(1.2);
-  z-index: 10;
-  filter: none;
-  pointer-events: auto;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  position: relative;
-  background-color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    footer a { color: #fff; font-weight: 800; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       header, .about, .skills, .projects, .download-cv, .signout {
         padding-left: 1rem;
         padding-right: 1rem;
       }
-      .projects {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
+      .projects { padding-left: 1rem; padding-right: 1rem; }
+      .contact { min-width: unset; }
     }
 
     @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        padding: 1.2rem 0.5rem;
-      }
-      .intro {
-        flex-direction: column;
-        gap: 1.2rem;
-        align-items: stretch;
-      }
-      .intro-text {
-        margin-bottom: 1.2rem;
-        text-align: center;
-      }
-      .photo-container {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto;
-      }
-      .about, .skills, .projects, .download-cv, .signout {
-        padding: 1.2rem 0.5rem 0.5rem 0.5rem;
-      }
-      .skills-list {
-        gap: 0.5rem;
-      }
-      .project {
-        width: 90vw;
-        min-width: 220px;
-        max-width: 98vw;
-        padding: 0.7rem;
-      }
-      .project img {
-        height: 90px;
-      }
-      .carousel {
-        gap: 0.5rem;
-      }
-      .download-cv {
-        padding: 1.2rem 0.5rem;
-      }
+      header { flex-direction: column; padding: 1.2rem 0.5rem; }
+      .intro { flex-direction: column; gap: 1.2rem; align-items: stretch; }
+      .intro-text { text-align: center; }
+      .photo-container { width: 120px; height: 120px; }
+      .about, .skills, .projects, .download-cv, .signout { padding: 1.2rem 0.5rem 0.5rem 0.5rem; }
+      .skills-list { gap: 0.55rem; }
+      .project { width: 90vw; min-width: 220px; max-width: 98vw; padding: 0.9rem; }
+      .project .preview { height: 110px; }
+      .carousel { gap: 0.6rem; }
+      .download-cv { padding: 1.2rem 0.5rem; }
+      .contact { text-align: center; }
     }
 
     @media (max-width: 480px) {
-      .intro-text h1 {
-        font-size: 1.3rem;
-      }
-      .intro-text p {
-        font-size: 1rem;
-      }
-      .about h2, .skills h2, .projects h2 {
-        font-size: 1.1rem;
-      }
-      .project h3 {
-        font-size: 1rem;
-      }
-      .project {
-        width: 96vw;
-        min-width: 170px;
-        padding: 0.5rem;
-      }
-      .photo-container {
-        width: 80px;
-        height: 80px;
-      }
-      .skills-list {
-        gap: 0.3rem;
-      }
-      .skill {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.7rem;
-      }
-      .download-cv a {
-        font-size: 0.95rem;
-        padding: 0.5rem 1rem;
-      }
+      .intro-text h1 { font-size: 1.35rem; }
+      .intro-text p { font-size: 1rem; }
+      .about h2, .skills h2, .projects h2 { font-size: 1.2rem; }
+      .project h3 { font-size: 1rem; }
+      .project { width: 96vw; min-width: 170px; padding: 0.75rem; }
+      .photo-container { width: 86px; height: 86px; }
+      .skill { font-size: 0.92rem; padding: 0.35rem 0.75rem; }
+      .download-cv a { font-size: 0.95rem; padding: 0.6rem 0.95rem; }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="intro">
-      <div class="contact">
+      <div class="contact" aria-label="Contact links">
         <p>📧 <a href="mailto:allananganga@gmail.com">allananganga@gmail.com</a></p>
-        <p>🔗 <a href="https://linkedin.com/in/allananganga" target="_blank">linkedin.com/in/allananganga</a></p>
-        <p>🌐 <a href="https://github.com/allananganga" target="_blank">github.com/allananganga</a></p>
+        <p>🔗 <a href="https://linkedin.com/in/allananganga" target="_blank" rel="noopener">linkedin.com/in/allananganga</a></p>
+        <p>🌐 <a href="https://github.com/allananganga" target="_blank" rel="noopener">github.com/allananganga</a></p>
       </div>
+
       <div class="intro-text">
         <h1>Allan Ng'ang'a</h1>
         <p>Builder of Digital Products & Bold Ideas</p>
-        <p style="font-size:1.08rem;color:var(--teal);margin-top:0.5rem;font-family:var(--font-heading);font-style:italic;">
-          Ideas that build. Products that move. This is where fintech meets vision
+        <p style="font-size:1.05rem;color:var(--teal);margin-top:0.55rem;font-family:var(--font-heading);font-style:italic;">
+          Ideas that build. Products that move. Fintech with a point of view.
         </p>
       </div>
+
       <div class="photo-container">
-        <img src="https://ipfs.io/ipns/k51qzi5uqu5dhb5s26jn583iw1ce37djw0lqlm0dcv070bvkuiq70xga45m5jn" alt="Allan's Photo">
+        <img
+          src="https://ipfs.io/ipns/k51qzi5uqu5dhb5s26jn583iw1ce37djw0lqlm0dcv070bvkuiq70xga45m5jn"
+          alt="Allan Ng'ang'a"
+          loading="lazy"
+        />
       </div>
     </div>
   </header>
 
-  <section class="about">
+  <section class="about" id="about">
     <h2>About Me</h2>
-    <p>Hey, I'm Ng'ang'a. A vibe coder, product thinker, fintech strategist, and unapologetic believer in the power of tech that it should do more than work. It should matter. I don't just follow trends, I follow needs and create impact. Whether it's vibe coding or AI integration to build products and solutions that make a lasting impact, people can feel.</p>
-    <p>I’ve worn a few hats, from program coordinator to digital innovator, and one thing I’ve learned is that Good products answer questions while great ones reframe the conversation. Currently shaping the future through AI, data, design, and a whole lot of coffee ☕, sparking impactful conversations that push financial inclusion, African innovation, and emerging tech with soul.</p>
-    <p><em>Because innovation is just a word until you give it purpose.</em></p>
+
+    <div class="about-wrap">
+      <p class="lead">
+        I’m Ng'ang'a — a vibe coder, product thinker, fintech strategist, and an unapologetic believer that technology should do more than work.
+        <strong>It should matter.</strong>
+      </p>
+
+      <p>
+        I follow impact. I start from the edges — the marginalised, the excluded, the overlooked — and work inward.
+        Because when you design for people at the margins, you don’t just build fairer systems; you build <strong>better</strong> ones.
+        The kind that hold up under pressure. The kind people can feel.
+      </p>
+
+      <p>
+        My path has been anything but linear: from a sustainability program coordinator in the coffee fields of East Africa to the fintech corridors of the world.
+        That shift taught me how real value is built — through trust, incentives, constraints, and decisions you can defend.
+      </p>
+
+      <p>
+        Along the way, one truth became permanent:
+        <strong>good products answer questions; great ones reframe the conversation.</strong>
+        I think in systems, not features. In trade-offs, not slogans. In outcomes, not outputs.
+      </p>
+
+      <p>
+        I’m drawn to hard problems and quiet infrastructure — payments, credit, identity, and data —
+        the parts most people don’t notice until they fail. I’m focused on what technology should stand for, who it should serve,
+        and how young people across Africa can use it to shape destiny — not inherit someone else’s.
+      </p>
+
+      <p>
+        Most of these ideas get tested with a lot of coffee in hand ☕ — pushing financial inclusion, African-first innovation,
+        and emerging tech with soul.
+      </p>
+
+      <p class="emphasis">
+        Because innovation is just a word until you give it purpose.
+      </p>
+
+      <p class="signline">Make it matter.</p>
+    </div>
   </section>
 
-  <section class="skills">
+  <section class="skills" id="skills">
     <h2>Key Skills</h2>
-    <div class="skills-list">
-      <div class="skill">Product Strategy</div>
-      <div class="skill">User Research</div>
-      <div class="skill">Agile Development</div>
-      <div class="skill">Data Analysis</div>
-      <div class="skill">Market Analysis</div>
-      <div class="skill">Product Roadmap</div>
-      <div class="skill">Cross-functional Leadership</div>
-      <div class="skill">User Experience (UX)</div>
-      <div class="skill">Product Marketing</div>
-      <div class="skill">Stakeholder Management</div>
-      <div class="skill">Project Management</div>
-      <div class="skill">Product Management</div>
-      <div class="skill">AI Integration</div>
-      <div class="skill">Grant Management</div>
-      <div class="skill">Customer Discovery</div>
-      <div class="skill">Prototyping</div>
+    <div class="skills-list" role="list">
+      <div class="skill" role="listitem">Product Strategy</div>
+      <div class="skill" role="listitem">User Research</div>
+      <div class="skill" role="listitem">Agile Delivery</div>
+      <div class="skill" role="listitem">Data Analysis</div>
+      <div class="skill" role="listitem">Market & Competitive Analysis</div>
+      <div class="skill" role="listitem">Roadmapping</div>
+      <div class="skill" role="listitem">Cross-functional Leadership</div>
+      <div class="skill" role="listitem">UX Collaboration</div>
+      <div class="skill" role="listitem">Stakeholder Management</div>
+      <div class="skill" role="listitem">Customer Discovery</div>
+      <div class="skill" role="listitem">Prototyping</div>
+      <div class="skill" role="listitem">AI Integration</div>
+      <div class="skill" role="listitem">Grant Management</div>
     </div>
   </section>
 
-  <section class="projects">
+  <section class="projects" id="projects">
     <h2>Projects</h2>
-    <div class="carousel">
-      <div class="project">
-        <img src="assets/img/mindspring.jpg" alt="MindSpring Preview">
-        <h3>MindSpring</h3>
-        <p>AEmotionally-safe mental wellness companion with gentle check-ins, private reflection, and transparent AI—built for students and early-career life.</p>
-        <a href="mindSpring.html">Visit Project</a>
-      </div>
-      <div class="project">
-        <img src="assets/img/carbonease.jpg" alt="CarbonEase Preview">
-        <h3>CarbonEase</h3>
-        <p>Unlocking carbon market access for smallholder farmers through transparent traceability and simplified participation, designed for trust, not complexity.</p>
-        <a href="https://allanartghub.github.io/CarbonEase/" target="_blank" rel="noopener">Visit Project</a>
-      </div>
-      <div class="project">
-        <img src="assets/img/easypension.jpg" alt="EasyPension Preview">
-        <h3>EasyPension</h3>
-        <p>A pension product designed for gig and informal workers, focused on accessibility, continuity, and long-term financial resilience, not paperwork. </p>
-        <a href="easypension.html">Visit Project</a>
-      </div>
-      <div class="project">
-        <img src="assets/img/kopagrow.jpg" alt="KopaGrow Preview">
-        <h3>KopaGrow</h3>
-        <p>A micro-lending platform built around smallholder farmers’ realities, using flexible credit design instead of one-size-fits-all loans.</p>
-        <a href="kopagrow.html">Visit Project</a>
-      </div>
-      <div class="project">
-        <img src="assets/img/aiproject.jpg" alt="AI-Driven Credit Scoring case study preview" loading="lazy">
-        <h3>AI-Driven Credit Scoring Using Alternative Data</h3>
-        <p>Dissertation case study exploring fair, explainable credit decisions using alternative data and machine learning to expand responsible lending in emerging markets.</p>
-        <a href="ai-project.html">Visit Project</a>
 
+    <!--
+  
+    -->
+    <div class="carousel" aria-label="Projects carousel">
+      <div class="project">
+        <div class="project-top">
+          <img class="project-logo" src="assets/img/logos/mindspring.png" alt="MindSpring logo" loading="lazy" />
+          <h3>MindSpring</h3>
+        </div>
+        <img class="preview" src="assets/img/mindspring.jpg" alt="MindSpring preview" loading="lazy">
+        <p>Emotionally-safe mental wellness companion with gentle check-ins, private reflection, and transparent AI — built for students and early-career life.</p>
+        <a href="mindSpring.html">Visit Project →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <img class="project-logo" src="assets/img/logos/carbonease.png" alt="CarbonEase logo" loading="lazy" />
+          <h3>CarbonEase</h3>
+        </div>
+        <img class="preview" src="assets/img/carbonease.jpg" alt="CarbonEase preview" loading="lazy">
+        <p>Unlocking carbon market access for smallholder farmers through transparent traceability and simplified participation — designed for trust, not complexity.</p>
+        <a href="https://allanartghub.github.io/CarbonEase/" target="_blank" rel="noopener">Visit Project →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <img class="project-logo" src="assets/img/logos/easypension.png" alt="EasyPension logo" loading="lazy" />
+          <h3>EasyPension</h3>
+        </div>
+        <img class="preview" src="assets/img/easypension.jpg" alt="EasyPension preview" loading="lazy">
+        <p>A pension product designed for gig and informal workers — focused on accessibility, continuity, and long-term resilience, not paperwork.</p>
+        <a href="easypension.html">Visit Project →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <img class="project-logo" src="assets/img/logos/kopagrow.png" alt="KopaGrow logo" loading="lazy" />
+          <h3>KopaGrow</h3>
+        </div>
+        <img class="preview" src="assets/img/kopagrow.jpg" alt="KopaGrow preview" loading="lazy">
+        <p>A micro-lending platform built around smallholder farmers’ realities — using flexible credit design instead of one-size-fits-all loans.</p>
+        <a href="kopagrow.html">Visit Project →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <img class="project-logo" src="assets/img/logos/credit-scoring.png" alt="AI credit scoring logo" loading="lazy" />
+          <h3>AI-Driven Credit Scoring</h3>
+        </div>
+        <img class="preview" src="assets/img/aiproject.jpg" alt="AI-Driven Credit Scoring preview" loading="lazy">
+        <p>Case study on fair, explainable credit decisions using alternative data + ML — expanding responsible lending in emerging markets.</p>
+        <a href="ai-project.html">Visit Project →</a>
       </div>
     </div>
-    
   </section>
 
-  <section class="download-cv">
-  <!-- View in browser -->
-  <a href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" target="_blank" rel="noopener">
-    👀 View My CV
-  </a>
-  &nbsp; | &nbsp;
-  <!-- Force download -->
-  <a href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" download="Allan_Nganga_CV.pdf">
-    📄 Download My CV
-  </a>
-</section>
-
-
+  <section class="download-cv" id="cv">
+    <a href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" target="_blank" rel="noopener">
+      👀 View My CV
+    </a>
+    <span class="sep">|</span>
+    <a href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" download="Allan_Nganga_CV.pdf">
+      📄 Download My CV
+    </a>
+  </section>
 
   <div class="signout">
-    <p>“Let’s create the kind of future people remember.”</p>
+    <div class="quote">“Design for the margins. Everyone wins.”</div>
+    <div class="three-words">MAKE IT MATTER</div>
   </div>
 
   <footer>
-    <p>📧 allananganga@gmail.com | 🔗 LinkedIn: @Allananganga | 🌐 GitHub: @Allananganga</p>
+    <p>
+      📧 <a href="mailto:allananganga@gmail.com">allananganga@gmail.com</a>
+      &nbsp;|&nbsp;
+      🔗 <a href="https://linkedin.com/in/allananganga" target="_blank" rel="noopener">LinkedIn</a>
+      &nbsp;|&nbsp;
+      🌐 <a href="https://github.com/allananganga" target="_blank" rel="noopener">GitHub</a>
+    </p>
   </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
