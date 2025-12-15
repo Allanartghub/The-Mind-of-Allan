@@ -6,6 +6,7 @@
   <title>MindSpring | Case Study – Allan Ng'ang'a</title>
   <meta name="description" content="MindSpring case study: emotionally-safe mental wellness companion designed with hypothesis-led MVP decisions and ethical AI." />
 
+  <!-- Fonts aligned with Index vibe -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -148,6 +149,7 @@
       text-decoration:none;
     }
 
+    /* Page layout */
     main.container{
       max-width: var(--maxw);
       margin: 0 auto;
@@ -258,8 +260,6 @@
       justify-content:space-between;
       gap:1rem;
     }
-
-    /* FIX: make horizontal scrolling reliable */
     .subnav{
       display:flex;
       gap:.65rem;
@@ -268,26 +268,23 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       position: relative;
-      padding-right: 52px; /* room for fade */
+      padding-right: 56px; /* room for fade */
+      flex: 1;
       max-width: 100%;
     }
     .subnav::-webkit-scrollbar{display:none;}
 
-    /* fade hint */
+    /* Right-edge fade hint */
     .subnav-fade{
       position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 54px;
+      right: 10px;
+      top: 10px;
+      bottom: 10px;
+      width: 60px;
       pointer-events:none;
       background: linear-gradient(90deg, rgba(249,249,249,0), rgba(249,249,249,.96));
       border-radius: 999px;
-      opacity: 0;
-      transition: opacity .18s var(--ease);
     }
-    .subnav.can-scroll .subnav-fade{ opacity: 1; }
-    .subnav.at-end .subnav-fade{ opacity: 0; }
 
     .subnav a{
       white-space:nowrap;
@@ -323,7 +320,7 @@
       display:flex;
       align-items:center;
       gap:.6rem;
-      min-width: 240px;
+      min-width: 260px;
       justify-content:flex-end;
     }
     .bar{
@@ -345,7 +342,7 @@
       font-weight:950;
       color:#222;
       font-size:.92rem;
-      min-width: 110px;
+      min-width: 120px;
       text-align:right;
       line-height:1.1;
     }
@@ -357,6 +354,7 @@
       margin-top:.15rem;
     }
 
+    /* Dividers */
     .divider{
       height: 1px;
       border: 0;
@@ -369,6 +367,7 @@
       );
     }
 
+    /* Sections */
     section{ margin: 1.6rem 0 2.1rem; }
     .section-title{
       font-family: var(--font-heading);
@@ -415,36 +414,54 @@
       color:#222;
     }
 
-    /* Placeholder tiles */
-    .tile{
-      border-radius: var(--radius);
-      border: 1px solid rgba(0,0,0,.10);
-      background: linear-gradient(135deg, rgba(0,128,128,.08), rgba(200,155,123,.08));
-      min-height: 240px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+    /* Media cards (images/video) */
+    .media-card{
+      padding: 0;
+      overflow: hidden;
+    }
+    .media{
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: rgba(0,0,0,.04);
+    }
+    .media.tall{ aspect-ratio: 9 / 16; }
+    .media-body{
       padding: 1rem;
-      overflow:hidden;
-      position:relative;
     }
-    .tile .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      font-weight:950;
-      font-size:.85rem;
-      padding:.3rem .55rem;
-      border-radius:999px;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(255,255,255,.7);
-      backdrop-filter: blur(6px);
-      width: fit-content;
+    .media-body h3{ margin-bottom:.35rem; }
+    .media-body p{ color: var(--muted); margin:0; }
+
+    /* Chat screenshots gallery (mobile swipe) */
+    .gallery{
+      display:flex;
+      gap: .9rem;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding-bottom: .35rem;
+      scrollbar-width: none;
     }
-    .tile h3{ margin-top:.6rem; }
-    .tile p{ color:#222; margin-top:.35rem; }
-    .tile small{ color: var(--muted); font-weight:800; }
-    .artifacts .tile{ min-height: 180px; }
+    .gallery::-webkit-scrollbar{display:none;}
+    .shot{
+      flex: 0 0 auto;
+      width: min(320px, 78vw);
+      scroll-snap-align: start;
+    }
+    .shot img{
+      width: 100%;
+      height: 520px;
+      max-height: 62vh;
+      object-fit: cover;
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+      display:block;
+      background: rgba(0,0,0,.04);
+    }
+    @media (max-width: 640px){
+      .shot img{ height: 460px; }
+    }
 
     /* Persona layout */
     .persona{
@@ -454,105 +471,83 @@
       align-items:start;
     }
 
-/* Emma Flip Card */
-.emma-flip{
-  border-radius: var(--radius);
-  border: 1px solid rgba(0,0,0,.10);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  background: #fff;
-  position: relative;
-  cursor: pointer;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
+    /* Emma Flip Card */
+    .emma-flip{
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
 
-  height: 300px;
-  width: 100%;
+      height: 300px;
+      width: 100%;
+      perspective: 1200px;
+    }
+    @media (max-width: 980px){ .emma-flip{ height: 280px; } }
+    @media (max-width: 640px){ .emma-flip{ height: 260px; } }
 
-  /* KEY: required for 3D flip */
-  perspective: 1200px;
-}
-
-@media (max-width: 980px){ .emma-flip{ height: 280px; } }
-@media (max-width: 640px){ .emma-flip{ height: 260px; } }
-
-.emma-inner{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform .65s var(--ease);
-}
-
-/* KEY: this is what actually flips */
-.emma-flip.is-flipped .emma-inner{
-  transform: rotateY(180deg);
-}
-
-.emma-face{
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Back side rotated so it appears when container flips */
-.emma-back{
-  transform: rotateY(180deg);
-}
-
-.emma-face img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Overlay text */
-.emma-overlay{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
-  background: linear-gradient(180deg,
-    rgba(0,0,0,0) 40%,
-    rgba(0,0,0,.55) 100%
-  );
-  color: #fff;
-
-  /* Helps prevent mirrored/blur text on some browsers */
-  transform: translateZ(1px);
-}
-
-/* IMPORTANT: prevents mirrored text on flip in Safari/Chrome edge cases */
-.emma-overlay,
-.emma-overlay *{
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.emma-name{ font-weight: 980; font-size: 1.15rem; line-height: 1.2; }
-.emma-sub{ margin-top: .2rem; font-weight: 850; opacity: .95; font-size: .95rem; }
-
-.emma-hint{
-  margin-top: .55rem;
-  display: inline-flex;
-  width: fit-content;
-  padding: .28rem .55rem;
-  border-radius: 999px;
-  font-weight: 950;
-  font-size: .82rem;
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(255,255,255,.25);
-  backdrop-filter: blur(6px);
-}
-
-.emma-flip:focus-visible{
-  box-shadow: 0 0 0 4px rgba(0,128,128,.22), var(--shadow);
-  border-color: rgba(0,128,128,.35);
-}
+    .emma-inner{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .65s var(--ease);
+    }
+    .emma-flip.is-flipped .emma-inner{
+      transform: rotateY(180deg);
+    }
+    .emma-face{
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .emma-back{
+      transform: rotateY(180deg);
+    }
+    .emma-face img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .emma-overlay{
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+      color: #fff;
+      transform: translateZ(1px);
+    }
+    .emma-overlay, .emma-overlay *{
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .emma-name{ font-weight: 980; font-size: 1.15rem; line-height: 1.2; }
+    .emma-sub{ margin-top: .2rem; font-weight: 850; opacity: .95; font-size: .95rem; }
+    .emma-hint{
+      margin-top: .55rem;
+      display: inline-flex;
+      width: fit-content;
+      padding: .28rem .55rem;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: .82rem;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(6px);
+    }
+    .emma-flip:focus-visible{
+      box-shadow: 0 0 0 4px rgba(0,128,128,.22), var(--shadow);
+      border-color: rgba(0,128,128,.35);
+    }
 
     /* Persona expand/collapse */
     .persona-more{
@@ -632,7 +627,7 @@
     .kpi .label{color:#333; font-weight:900;}
     .kpi .note{color: var(--muted); font-size:.92rem; margin-top:.25rem;}
 
-    /* Reveal */
+    /* Scroll-reveal */
     .reveal{
       opacity: 0;
       transform: translateY(14px);
@@ -787,6 +782,7 @@
       border-color: rgba(200,155,123,.20);
     }
 
+    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto;}
       .reveal, .stagger > *, .btn, .card, .chip, .kpi, .subnav a, .step{
@@ -797,6 +793,7 @@
       .emma-inner{ transition:none !important; }
     }
 
+    /* Responsive */
     @media (max-width: 980px){
       .hero{grid-template-columns: 1fr; }
       .subnav-wrap{top: 72px;}
@@ -805,20 +802,23 @@
       .kpis{grid-template-columns: 1fr 1fr;}
     }
     @media (max-width: 640px){
+      main.container{ padding: 1.2rem .95rem 3rem; }
+      .header-wrap{ padding: .85rem .95rem; }
       .grid-2,.grid-3,.kpis{grid-template-columns: 1fr;}
       .progress{display:none;}
       .fab span{display:none;}
       .fab{padding:.75rem; width: 52px; height: 52px; justify-content:center;}
-      .tile{ min-height: 220px; }
     }
   </style>
 </head>
 
 <body>
+  <!-- background accents -->
   <div class="bg-blob blob-teal" aria-hidden="true"></div>
   <div class="bg-blob blob-beige" aria-hidden="true"></div>
   <div class="bg-blob blob-teal-2" aria-hidden="true"></div>
 
+  <!-- Header -->
   <header>
     <div class="header-wrap">
       <a class="brand" href="index.html" aria-label="Back to Home">
@@ -843,9 +843,11 @@
 
   <main class="container">
 
+    <!-- HERO -->
     <section class="hero reveal" id="top" data-title="Intro">
       <div>
         <p class="crumbs"><a href="index.html">Home</a> · <a href="index.html#projects">Projects</a> · <span aria-current="page">MindSpring</span></p>
+
         <h1 class="title">MindSpring</h1>
 
         <p class="thesis">
@@ -859,7 +861,7 @@
 
         <div class="hero-cta">
           <a class="btn primary" href="#summary">Start the case study</a>
-          <a class="btn" href="#screens">View prototype evidence</a>
+          <a class="btn" href="#screens">Screens & video evidence</a>
         </div>
 
         <div class="chips" aria-label="Key signals">
@@ -896,8 +898,9 @@
       </aside>
     </section>
 
+    <!-- Sticky sub-nav + progress -->
     <div class="subnav-wrap reveal" aria-label="Case study navigation">
-      <nav class="subnav" id="subnav">
+      <nav class="subnav" id="subnav" aria-label="Case study sections">
         <a href="#summary">Summary</a>
         <a href="#project-context">Project Context</a>
         <a href="#context">Problem Space</a>
@@ -918,14 +921,15 @@
       <div class="progress" aria-label="Reading progress">
         <div class="bar" aria-hidden="true"><span id="bar"></span></div>
         <div class="pct" id="pct">
-  <span id="pctTitle">Intro</span>
-  <small id="pct2">1/14</small>
-</div>
+          <span id="pctTitle">Intro</span>
+          <small id="pct2">1/14</small>
+        </div>
       </div>
     </div>
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- SUMMARY -->
     <section id="summary" class="reveal" data-title="Summary">
       <h2 class="section-title">Product Summary</h2>
       <p class="hint">
@@ -939,7 +943,7 @@
           <ul>
             <li><strong>Who:</strong> Students → early-career professionals</li>
             <li><strong>Problem:</strong> Support tools feel clinical, noisy, or effort-heavy → disengagement</li>
-            <li><strong>Solution:</strong> Gentle check-ins, optional reflection, empathetic AI, privacy-first choices</li>
+            <li><strong>Solution:</strong> Gentle check-ins inside conversation, optional reflection, empathetic AI, privacy-first choices</li>
             <li><strong>Approach:</strong> Emotional safety before intelligence or scale</li>
           </ul>
         </div>
@@ -959,6 +963,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- PROJECT CONTEXT -->
     <section id="project-context" class="reveal" data-title="Project Context">
       <h2 class="section-title">Project Context</h2>
       <p class="hint">
@@ -1013,6 +1018,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- PROBLEM SPACE -->
     <section id="context" class="reveal" data-title="Problem Space">
       <h2 class="section-title">Problem Space & User Context</h2>
       <p class="hint">
@@ -1044,6 +1050,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- HYPOTHESIS -->
     <section id="hypothesis" class="reveal" data-title="Hypothesis">
       <h2 class="section-title">Product Hypothesis & Assumptions</h2>
       <p class="hint">
@@ -1084,6 +1091,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- TRADE-OFFS -->
     <section id="tradeoffs" class="reveal" data-title="Trade-offs">
       <h2 class="section-title">Constraints & Trade-offs</h2>
       <p class="hint">
@@ -1106,7 +1114,7 @@
             <li>Clinical assessments (risk + misinterpretation).</li>
             <li>Streaks / gamification (pressure and shame).</li>
             <li>Aggressive nudging (emotional boundary violation).</li>
-            <li>Open community by default (safety and moderation risk).</li>
+            <li>Open community by default (safety + moderation risk).</li>
           </ul>
         </div>
       </div>
@@ -1114,6 +1122,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- MVP -->
     <section id="mvp" class="reveal" data-title="MVP">
       <h2 class="section-title">MVP Overview</h2>
       <p class="hint">
@@ -1123,8 +1132,8 @@
 
       <div class="grid-3 stagger">
         <div class="card">
-          <h3>Emoji Mood Check-ins</h3>
-          <p>Low-friction acknowledgment. Habit-forming without demanding explanation.</p>
+          <h3>Conversation + Mood Check-ins</h3>
+          <p>We embedded check-ins inside chat to reduce cognitive load and avoid forcing a separate “assessment mode.”</p>
         </div>
         <div class="card">
           <h3>Journal (Text + Voice)</h3>
@@ -1135,16 +1144,16 @@
           <p>Reflects patterns and validates feelings. Designed to mirror, not prescribe.</p>
         </div>
         <div class="card">
-          <h3>Wellness Exercises</h3>
-          <p>Short grounding tools that are offered contextually, not forced.</p>
+          <h3>Reset (Guided Exercises)</h3>
+          <p>Short, guided exercises to relax, recharge, and reset — offered, never forced.</p>
         </div>
         <div class="card">
-          <h3>Community Corner</h3>
-          <p>Opt-in peer space designed with boundaries, moderation, and anonymity in mind.</p>
+          <h3>Community Compass</h3>
+          <p>Healing together through curated resources and guidance — a compass, not a public forum.</p>
         </div>
         <div class="card">
           <h3>Consent & Privacy</h3>
-          <p>Clear choices that build trust early, control is part of the product.</p>
+          <p>Clear choices that build trust early; control is part of the product.</p>
         </div>
       </div>
 
@@ -1155,114 +1164,111 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- SCREENS / PROTOTYPE EVIDENCE -->
     <section id="screens" class="reveal" data-title="Screens">
       <h2 class="section-title">Screens & Prototype Evidence</h2>
       <p class="hint">
-        These are placeholders for your final exports. Add 2–3 key screens and one flow image, it’s the fastest way to make this case study feel real.
+        Evidence that the product exists beyond slides: a walkthrough video, chat screenshots, and a user flow export.
       </p>
 
-      <div class="grid-3 stagger">
-        <div class="tile">
-          <div class="badge">Screen 1 · Mood Check-in</div>
-          <div>
-            <h3>Low-friction acknowledgement</h3>
-            <p>Replace this block with an image export (PNG) of the mood check-in UI.</p>
-            <small>Suggested file: <strong>assets/img/mindspring-mood.png</strong></small>
-          </div>
+      <!-- Walkthrough video -->
+      <div class="card media-card reveal" style="margin-bottom: var(--gap);">
+        <video class="media" controls playsinline preload="metadata" aria-label="MindSpring walkthrough video">
+          <source src="assets/video/mindspring-walkthrough.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="media-body">
+          <h3>Walkthrough video</h3>
+          <p>Short demo proving the flow and tone (captions can be added later).</p>
         </div>
+      </div>
 
-        <div class="tile">
-          <div class="badge">Screen 2 · AI Companion</div>
-          <div>
-            <h3>Reflective, not prescriptive</h3>
-            <p>Replace with your AI chat screen export showing tone + pattern reflection.</p>
-            <small>Suggested file: <strong>assets/img/mindspring-ai.png</strong></small>
+      <!-- Chat screenshots (swipe gallery) -->
+      <div class="card reveal">
+        <h3 style="margin-bottom:.35rem;">Chat + embedded mood check-in (screenshots)</h3>
+        <p class="hint" style="margin-bottom:.75rem;">
+          Tip: on mobile, swipe sideways. On desktop, scroll sideways with trackpad/mouse wheel.
+        </p>
+
+        <div class="gallery" aria-label="Chat screenshots gallery">
+          <div class="card shot media-card">
+            <img loading="lazy" src="assets/img/mindspring-chat-1.jpeg" alt="MindSpring chat screenshot 1 showing mood check-in embedded in conversation">
+            <div class="media-body">
+              <h3 style="font-size:1.05rem;">Check-in inside conversation</h3>
+              <p>Checking in happens naturally — no separate mode.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="tile">
-          <div class="badge">Screen 3 · Journal</div>
-          <div>
-            <h3>Text + Voice as choice</h3>
-            <p>Replace with your journaling UI export (and optionally voice capture).</p>
-            <small>Suggested file: <strong>assets/img/mindspring-journal.png</strong></small>
+          <div class="card shot media-card">
+            <img loading="lazy" src="assets/img/mindspring-chat-2.jpeg" alt="MindSpring chat screenshot 2 showing journaling and reflection">
+            <div class="media-body">
+              <h3 style="font-size:1.05rem;">Reflection without obligation</h3>
+              <p>Users can write, speak, or skip — valid by design.</p>
+            </div>
+          </div>
+
+          <div class="card shot media-card">
+            <img loading="lazy" src="assets/img/mindspring-chat-3.jpeg" alt="MindSpring chat screenshot 3 showing AI reflection tone">
+            <div class="media-body">
+              <h3 style="font-size:1.05rem;">AI mirrors patterns</h3>
+              <p>Reflective, non-authoritative tone — no prescribing.</p>
+            </div>
           </div>
         </div>
       </div>
 
       <div style="height: var(--gap)"></div>
 
-      <div class="grid-2 stagger">
-        <div class="tile" style="min-height: 220px;">
-          <div class="badge">Flow Evidence</div>
-          <div>
-            <h3>Core user flow</h3>
-            <p>Drop in a single exported flow diagram: check-in → reflection → AI → outcome.</p>
-            <small>Suggested file: <strong>assets/img/mindspring-flow.png</strong></small>
-          </div>
-        </div>
-
-        <div class="tile" style="min-height: 220px;">
-          <div class="badge">Prototype Link</div>
-          <div>
-            <h3>Interactive prototype</h3>
-            <p>Add your Figma/Prototype URL here when ready.</p>
-            <small>Replace the button target in the hero or add it here.</small>
-          </div>
+      <!-- Userflow -->
+      <div class="card media-card reveal">
+        <img class="media" loading="lazy" src="assets/img/mindspring-userflow.png" alt="MindSpring user flow diagram">
+        <div class="media-body">
+          <h3>User flow export</h3>
+          <p>Awareness → check-in → reflection → AI → next step (reset / compass / pause).</p>
         </div>
       </div>
     </section>
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- PROCESS ARTIFACTS -->
     <section id="artifacts" class="reveal" data-title="Artifacts">
       <h2 class="section-title">Process Artifacts</h2>
       <p class="hint">
-        These make your PM thinking undeniable: insight → decision → build. Add exports as you iterate.
+        These make your PM thinking undeniable: insight → decision → build. (You can add more over time.)
       </p>
 
-      <div class="grid-3 stagger artifacts">
-        <div class="tile">
-          <div class="badge">Artifact · JTBD</div>
-          <div>
-            <h3>Jobs-to-be-done</h3>
-            <p>“When I’m overwhelmed, I need a low-effort way to check in…”</p>
-            <small>Add your JTBD snapshot here.</small>
-          </div>
+      <div class="grid-3 stagger">
+        <div class="card">
+          <h3>User Journey (Figma)</h3>
+          <p>Mapped the reality of pressure, low bandwidth, and why most tools fail at the moment of need.</p>
         </div>
 
-        <div class="tile">
-          <div class="badge">Artifact · Assumption Map</div>
-          <div>
-            <h3>Risk-ranked assumptions</h3>
-            <p>Emotional safety, micro-interactions, reflective AI tone.</p>
-            <small>Add your assumption heatmap export.</small>
-          </div>
+        <div class="card">
+          <h3>Assumption Map</h3>
+          <p>Risk-ranked beliefs (emotional safety, micro-actions, reflective AI tone) guided what we tested first.</p>
         </div>
 
-        <div class="tile">
-          <div class="badge">Artifact · Prioritization</div>
-          <div>
-            <h3>MVP decisions</h3>
-            <p>Why we shipped check-ins first and de-scoped risky features.</p>
-            <small>Add your prioritization snapshot.</small>
-          </div>
+        <div class="card">
+          <h3>Prioritization</h3>
+          <p>De-scoped high-risk features and optimized for trust, not forced engagement.</p>
         </div>
       </div>
     </section>
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- ✅ FIX: Persona is now a real SECTION with id="persona" -->
+    <!-- PERSONA -->
     <section id="persona" class="reveal" data-title="Persona">
       <h2 class="section-title">Primary Persona</h2>
       <p class="hint">We grounded the experience in a real pattern we observed repeatedly, represented here as Emma.</p>
 
       <div class="persona">
+        <!-- Emma flip -->
         <div class="emma-flip reveal" id="emmaFlip" role="button" tabindex="0" aria-label="Emma flip card. Click to flip.">
           <div class="emma-inner">
-            <div class="emma-face emma-front" aria-hidden="true">
-              <img src="assets/img/mindspring-emma-happy.png" alt="Emma feeling grounded in a campus café">
+            <div class="emma-face emma-front">
+              <img loading="lazy" src="assets/img/mindspring-emma-happy.png" alt="Emma feeling grounded in a campus café">
               <div class="emma-overlay">
                 <div class="emma-name">Emma · 22</div>
                 <div class="emma-sub">Final-year student → early career transition</div>
@@ -1270,8 +1276,8 @@
               </div>
             </div>
 
-            <div class="emma-face emma-back" aria-hidden="true">
-              <img src="assets/img/mindspring-emma-stressed.png" alt="Emma under pressure in the same café at night">
+            <div class="emma-face emma-back">
+              <img loading="lazy" src="assets/img/mindspring-emma-stressed.png" alt="Emma under pressure in the same café at night">
               <div class="emma-overlay">
                 <div class="emma-name">Same Emma.</div>
                 <div class="emma-sub">Different day. More weight to carry.</div>
@@ -1281,6 +1287,7 @@
           </div>
         </div>
 
+        <!-- Persona bio -->
         <div class="card persona-card reveal">
           <h3 style="margin-bottom:.35rem;">Emma’s Reality</h3>
           <ul>
@@ -1288,8 +1295,9 @@
             <li>Hesitates to seek help unless it feels “serious enough”</li>
             <li>Needs privacy, autonomy, and a non-clinical tone</li>
           </ul>
+
           <p class="insight" style="margin-top:.6rem;">
-            Core tension: Emma doesn’t want to be “fixed.” She wants a place to pause, without having to explain herself.
+            Core tension: Emma doesn’t want to be “fixed.” She wants a place to pause — without having to explain herself.
           </p>
 
           <button class="toggle" type="button" id="personaToggle" aria-expanded="false">
@@ -1327,6 +1335,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- JOURNEY -->
     <section id="journey" class="reveal" data-title="Journey">
       <h2 class="section-title">User Journey</h2>
       <p class="hint">A simple sequence that respects emotional readiness and makes reflection optional.</p>
@@ -1338,15 +1347,15 @@
             <div>
               <h4>1) Before Use</h4>
               <p>Overwhelmed, but not labeling it. Coping quietly. Postponing reflection.</p>
-              <p class="insight">Insight: the hardest step is not journaling, it’s starting.</p>
+              <p class="insight">Insight: the hardest step is not journaling — it’s starting.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="dot" aria-hidden="true"></div>
             <div>
-              <h4>2) Mood Check-in</h4>
-              <p>An emoji lets Emma acknowledge how she feels without explanation or commitment.</p>
+              <h4>2) Check-in (inside chat)</h4>
+              <p>Acknowledge how you feel without explanation or commitment.</p>
             </div>
           </div>
 
@@ -1354,7 +1363,7 @@
             <div class="dot" aria-hidden="true"></div>
             <div>
               <h4>3) Reflection (Optional)</h4>
-              <p>Text or voice. Some days she skips it, and that’s valid by design.</p>
+              <p>Text or voice. Some days she skips it — and that’s valid by design.</p>
             </div>
           </div>
 
@@ -1370,7 +1379,7 @@
             <div class="dot" aria-hidden="true"></div>
             <div>
               <h4>5) Outcome</h4>
-              <p>Not instant relief, but feeling seen, and returning. That return is the win.</p>
+              <p>Not instant relief — but feeling seen, and returning. That return is the win.</p>
             </div>
           </div>
         </div>
@@ -1379,6 +1388,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- METRICS -->
     <section id="metrics" class="reveal" data-title="Metrics">
       <h2 class="section-title">Validation & Metrics</h2>
       <p class="hint">We measured signals that indicate emotional safety and habit formation, not hype.</p>
@@ -1404,6 +1414,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- LEARNINGS -->
     <section id="learnings" class="reveal" data-title="Learnings">
       <h2 class="section-title">Key Learnings</h2>
       <p class="hint">What surprised us, what didn’t work, and what it changed in our product thinking.</p>
@@ -1432,6 +1443,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- NEXT -->
     <section id="next" class="reveal" data-title="Next">
       <h2 class="section-title">What I’d Do Next</h2>
       <p class="hint">Strategic iteration: deepen what works, remove what harms, expand responsibly.</p>
@@ -1458,6 +1470,7 @@
 
     <hr class="divider" aria-hidden="true">
 
+    <!-- REFLECTION -->
     <section id="reflection" class="reveal" data-title="Reflection">
       <h2 class="section-title">Reflection</h2>
       <p class="hint">What this project brought out in me, as a PM, a builder, and a responsible product thinker.</p>
@@ -1485,6 +1498,7 @@
     </footer>
   </main>
 
+  <!-- Decision Log Floating Button -->
   <div class="floating" aria-label="Quick actions">
     <button class="fab" id="openDrawer" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1500,6 +1514,7 @@
     </button>
   </div>
 
+  <!-- Drawer -->
   <div class="drawer-overlay" id="overlay" aria-hidden="true"></div>
 
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Decision log">
@@ -1527,17 +1542,17 @@
       </div>
 
       <div class="decision">
-        <h4>We prioritized micro-actions over deep sessions.</h4>
-        <p>Emoji check-ins and short reflection lowered cognitive load and improved return likelihood.</p>
+        <h4>We embedded check-ins into chat.</h4>
+        <p>Reduced friction by removing a separate mood screen and keeping the user in one calm flow.</p>
         <div class="meta-row">
-          <span class="pill">Goal: habit formation</span>
-          <span class="pill beige">Trade-off: less depth/session</span>
+          <span class="pill">Goal: low friction</span>
+          <span class="pill beige">Trade-off: fewer standalone screens</span>
         </div>
       </div>
 
       <div class="decision">
         <h4>AI mirrors; it doesn’t prescribe.</h4>
-        <p>We intentionally limited “advice-giving” to avoid unsafe authority and over-reliance.</p>
+        <p>We intentionally limited advice-giving to avoid unsafe authority and over-reliance.</p>
         <div class="meta-row">
           <span class="pill">Ethical AI</span>
           <span class="pill beige">Trade-off: fewer “wow” moments</span>
@@ -1554,17 +1569,17 @@
       </div>
 
       <div class="decision">
-        <h4>Privacy is explicit, not buried.</h4>
-        <p>Consent and control were treated as product features, not compliance chores.</p>
+        <h4>Reset tools are offered, never forced.</h4>
+        <p>Guided exercises support recharge and regulation without goals, tracking, or pressure.</p>
         <div class="meta-row">
-          <span class="pill">Trust driver</span>
-          <span class="pill beige">Trade-off: more onboarding steps</span>
+          <span class="pill">User control</span>
+          <span class="pill beige">Trade-off: less gamified retention</span>
         </div>
       </div>
 
       <div class="decision">
-        <h4>Community is opt-in, not default.</h4>
-        <p>We prioritized psychological safety and moderation complexity before scaling social features.</p>
+        <h4>Community is a compass, not a forum.</h4>
+        <p>Healing together through curated resources and guidance — avoiding risky open-post defaults.</p>
         <div class="meta-row">
           <span class="pill">Safety first</span>
           <span class="pill beige">Trade-off: slower network effects</span>
@@ -1578,15 +1593,11 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     // -----------------------------
-    // Reading progress + chapter + step count
+    // Reading progress
     // -----------------------------
     const bar = document.getElementById('bar');
-    const pct = document.getElementById('pct');
     const pct2 = document.getElementById('pct2');
-
-    const sections = Array.from(document.querySelectorAll('main section[id]'));
-    const total = sections.length;
-    const titleFor = (s) => (s.dataset.title || s.id);
+    const pctTitle = document.getElementById('pctTitle');
 
     function updateProgress(){
       const doc = document.documentElement;
@@ -1594,7 +1605,7 @@
       const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
       const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
       const percent = Math.round(progress * 100);
-      bar.style.width = percent + '%';
+      if (bar) bar.style.width = percent + '%';
     }
 
     // -----------------------------
@@ -1611,6 +1622,7 @@
         }
       });
     }, { threshold: 0.15 });
+
     revealEls.forEach(el => io.observe(el));
 
     const ioStagger = new IntersectionObserver((entries) => {
@@ -1623,12 +1635,17 @@
         }
       });
     }, { threshold: 0.18 });
+
     staggerEls.forEach(el => ioStagger.observe(el));
 
     // -----------------------------
-    // Active section highlight in subnav + progress label
+    // Active section highlight in subnav + label
     // -----------------------------
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const total = sections.length;
     const navLinks = Array.from(document.querySelectorAll('#subnav a'));
+    const titleFor = (s) => (s.dataset.title || s.id);
+
     const setActive = (id) => {
       navLinks.forEach(a => {
         const isActive = a.getAttribute('href') === ('#' + id);
@@ -1636,8 +1653,7 @@
       });
 
       const idx = Math.max(1, sections.findIndex(s => s.id === id) + 1);
-const pctTitle = document.getElementById('pctTitle');
-if (pctTitle && sections[idx - 1]) pctTitle.textContent = titleFor(sections[idx - 1]);
+      if (pctTitle && sections[idx - 1]) pctTitle.textContent = titleFor(sections[idx - 1]);
       if (pct2) pct2.textContent = `${idx}/${total}`;
     };
 
@@ -1652,25 +1668,9 @@ if (pctTitle && sections[idx - 1]) pctTitle.textContent = titleFor(sections[idx 
     }, { rootMargin: '-35% 0px -55% 0px', threshold: [0.15, 0.25, 0.4] });
 
     sections.forEach(s => ioSections.observe(s));
+
     document.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
-
-    // -----------------------------
-    // Subnav scroll hint (fade shows if overflow)
-    // -----------------------------
-    const subnav = document.getElementById('subnav');
-    function updateSubnavFade(){
-      if(!subnav) return;
-      const canScroll = subnav.scrollWidth > subnav.clientWidth + 4;
-      subnav.classList.toggle('can-scroll', canScroll);
-      const atEnd = (subnav.scrollLeft + subnav.clientWidth) >= (subnav.scrollWidth - 6);
-      subnav.classList.toggle('at-end', atEnd);
-    }
-    if(subnav){
-      subnav.addEventListener('scroll', updateSubnavFade, { passive: true });
-      window.addEventListener('resize', updateSubnavFade);
-      updateSubnavFade();
-    }
 
     // -----------------------------
     // Journey timeline step animation
@@ -1690,18 +1690,16 @@ if (pctTitle && sections[idx - 1]) pctTitle.textContent = titleFor(sections[idx 
     if(timeline) ioTimeline.observe(timeline);
 
     // -----------------------------
-    // Persona expand/collapse (RESTORED)
+    // Persona expand/collapse
     // -----------------------------
-const personaToggle = document.getElementById('personaToggle');
-const personaCard = document.querySelector('.persona-card');
-
-if (personaToggle && personaCard){
-  personaToggle.addEventListener('click', () => {
-    const expanded = personaCard.classList.toggle('expanded');
-    personaToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-  });
-}
-
+    const personaToggle = document.getElementById('personaToggle');
+    const personaCard = document.querySelector('.persona-card');
+    if(personaToggle && personaCard){
+      personaToggle.addEventListener('click', () => {
+        const expanded = personaCard.classList.toggle('expanded');
+        personaToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    }
 
     // -----------------------------
     // Emma flip card (click + auto flip every 5s)
@@ -1714,20 +1712,24 @@ if (personaToggle && personaCard){
       if(!emmaFlip) return;
       emmaFlip.classList.toggle('is-flipped');
     }
+
     function startEmmaAutoFlip(){
       if(!emmaFlip) return;
       if (emmaInterval) clearInterval(emmaInterval);
+
       emmaInterval = setInterval(() => {
         const now = Date.now();
         if (now - emmaLastUserAction < 1500) return;
         toggleEmmaFlip();
       }, 5000);
     }
+
     if (emmaFlip){
       emmaFlip.addEventListener('click', () => {
         emmaLastUserAction = Date.now();
         toggleEmmaFlip();
       });
+
       emmaFlip.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' '){
           e.preventDefault();
@@ -1735,6 +1737,7 @@ if (personaToggle && personaCard){
           toggleEmmaFlip();
         }
       });
+
       startEmmaAutoFlip();
     }
 
@@ -1770,4 +1773,3 @@ if (personaToggle && personaCard){
 
 </body>
 </html>
-
