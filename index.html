@@ -33,6 +33,27 @@
       line-height: 1.6;
     }
 
+    /* A11y: skip link */
+    .skip-link{
+      position:absolute;
+      left:-999px;
+      top:0;
+      background:#fff;
+      color:#111;
+      padding:.6rem .9rem;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.12);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      z-index:999;
+    }
+    .skip-link:focus{ left: .75rem; top: .75rem; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid rgba(0,128,128,0.35);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -141,13 +162,6 @@
       text-align: center;
     }
 
-    .about .signline {
-      margin-top: 1.2rem;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
     .skills {
       padding: 2rem 3rem 1rem;
     }
@@ -173,13 +187,16 @@
       padding: 0.55rem 1rem;
       border-radius: 999px;
       font-weight: 700;
-      transition: all 0.25s ease-in-out;
+      transition: transform 0.25s ease, background-color 0.25s ease;
       border: 1px solid rgba(255,255,255,0.25);
     }
 
-    .skill:hover {
-      background-color: var(--beige);
-      transform: translateY(-2px);
+    /* Hover only on real hover devices */
+    @media (hover: hover) and (pointer: fine){
+      .skill:hover {
+        background-color: var(--beige);
+        transform: translateY(-2px);
+      }
     }
 
     .projects {
@@ -200,6 +217,8 @@
       gap: 1rem;
       scroll-snap-type: x mandatory;
       padding-bottom: 0.5rem;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
     }
 
     .carousel::-webkit-scrollbar { height: 10px; }
@@ -221,9 +240,12 @@
       position: relative;
     }
 
-    .project:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 26px rgba(0,0,0,0.12);
+    /* Hover only on real hover devices */
+    @media (hover: hover) and (pointer: fine){
+      .project:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 26px rgba(0,0,0,0.12);
+      }
     }
 
     .project-top {
@@ -241,6 +263,7 @@
       border: 1px solid rgba(0,0,0,0.06);
       background: #fff;
       padding: 4px;
+      flex: 0 0 auto;
     }
 
     .project h3 {
@@ -250,6 +273,7 @@
       line-height: 1.2;
     }
 
+    /* Premium tweak: Preview as "poster" frame (not the logo) */
     .project .preview {
       width: 100%;
       height: 150px;
@@ -258,6 +282,7 @@
       margin: 0.6rem 0 0.7rem 0;
       border: 1px solid rgba(0,0,0,0.06);
       display: block;
+      background: #fff;
     }
 
     .project p {
@@ -266,14 +291,19 @@
       margin-bottom: 0.8rem;
     }
 
+    /* Make Visit Project a proper tap target */
     .project a {
+      display: inline-block;
       color: var(--teal);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.92rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,128,128,0.22);
+      background: rgba(0,128,128,0.06);
     }
-
-    .project a:hover { text-decoration: underline; }
+    .project a:hover { text-decoration: none; }
 
     .download-cv {
       text-align: center;
@@ -292,9 +322,11 @@
       border: 1px solid rgba(255,255,255,0.22);
     }
 
-    .download-cv a:hover {
-      background-color: var(--beige);
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine){
+      .download-cv a:hover {
+        background-color: var(--beige);
+        transform: translateY(-2px);
+      }
     }
 
     .download-cv .sep {
@@ -346,16 +378,16 @@
     }
 
     @media (max-width: 700px) {
-      header { flex-direction: column; padding: 1.2rem 0.5rem; }
-      .intro { flex-direction: column; gap: 1.2rem; align-items: stretch; }
+      header { flex-direction: column; padding: 1.1rem 0.75rem; }
+      .intro { flex-direction: column; gap: 1.1rem; align-items: stretch; }
       .intro-text { text-align: center; }
       .photo-container { width: 120px; height: 120px; }
-      .about, .skills, .projects, .download-cv, .signout { padding: 1.2rem 0.5rem 0.5rem 0.5rem; }
+      .about, .skills, .projects, .download-cv, .signout { padding: 1.2rem 0.75rem 0.6rem; }
       .skills-list { gap: 0.55rem; }
-      .project { width: 90vw; min-width: 220px; max-width: 98vw; padding: 0.9rem; }
-      .project .preview { height: 110px; }
+      .project { width: 90vw; min-width: 220px; max-width: 98vw; padding: 0.95rem; }
+      .project .preview { height: 120px; }
       .carousel { gap: 0.6rem; }
-      .download-cv { padding: 1.2rem 0.5rem; }
+      .download-cv { padding: 1.2rem 0.75rem; }
       .contact { text-align: center; }
     }
 
@@ -364,15 +396,23 @@
       .intro-text p { font-size: 1rem; }
       .about h2, .skills h2, .projects h2 { font-size: 1.2rem; }
       .project h3 { font-size: 1rem; }
-      .project { width: 96vw; min-width: 170px; padding: 0.75rem; }
+      .project { width: 96vw; min-width: 170px; padding: 0.8rem; }
       .photo-container { width: 86px; height: 86px; }
       .skill { font-size: 0.92rem; padding: 0.35rem 0.75rem; }
       .download-cv a { font-size: 0.95rem; padding: 0.6rem 0.95rem; }
+      .signout .quote { font-size: 1.1rem; }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      * { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
 </head>
 
 <body>
+  <a class="skip-link" href="#projects">Skip to projects</a>
+
   <header>
     <div class="intro">
       <div class="contact" aria-label="Contact links">
@@ -390,11 +430,7 @@
       </div>
 
       <div class="photo-container">
-        <img
-          src="https://ipfs.io/ipns/k51qzi5uqu5dhb5s26jn583iw1ce37djw0lqlm0dcv070bvkuiq70xga45m5jn"
-          alt="Allan Ng'ang'a"
-          loading="lazy"
-        />
+        <img src="assets/img/allan.jpeg" alt="Allan Ng'ang'a portrait" loading="lazy" />
       </div>
     </div>
   </header>
@@ -439,7 +475,6 @@
       <p class="emphasis">
         Because innovation is just a word until you give it purpose.
       </p>
-
     </div>
   </section>
 
@@ -466,7 +501,10 @@
     <h2>Projects</h2>
 
     <!--
-  
+      Premium tweak applied:
+      - project-logo uses small logo files (e.g., mindspring.png)
+      - preview uses separate "poster" images (e.g., mindspring-preview.jpg)
+      ✅ If you don't have the preview files yet, create them OR temporarily point preview to your existing screenshots.
     -->
     <div class="carousel" aria-label="Projects carousel">
       <div class="project">
@@ -474,7 +512,7 @@
           <img class="project-logo" src="assets/img/mindspring.png" alt="MindSpring logo" loading="lazy" />
           <h3>MindSpring</h3>
         </div>
-        <img class="preview" src="assets/img/mindspring.png" alt="MindSpring preview" loading="lazy">
+        <img class="preview" src="assets/img/mindspring-preview.jpg" alt="MindSpring preview" loading="lazy" />
         <p>Emotionally-safe mental wellness companion with gentle check-ins, private reflection, and transparent AI, built for students and early-career life.</p>
         <a href="mindSpring.html">Visit Project →</a>
       </div>
@@ -484,7 +522,7 @@
           <img class="project-logo" src="assets/img/carbonease.png" alt="CarbonEase logo" loading="lazy" />
           <h3>CarbonEase</h3>
         </div>
-        <img class="preview" src="assets/img/carbonease.png" alt="CarbonEase preview" loading="lazy">
+        <img class="preview" src="assets/img/carbonease-preview.jpg" alt="CarbonEase preview" loading="lazy" />
         <p>Unlocking carbon market access for smallholder farmers through transparent traceability and simplified participation, designed for trust, not complexity.</p>
         <a href="https://allanartghub.github.io/CarbonEase/" target="_blank" rel="noopener">Visit Project →</a>
       </div>
@@ -494,7 +532,7 @@
           <img class="project-logo" src="assets/img/easypension.png" alt="EasyPension logo" loading="lazy" />
           <h3>EasyPension</h3>
         </div>
-        <img class="preview" src="assets/img/easypension.png" alt="EasyPension preview" loading="lazy">
+        <img class="preview" src="assets/img/easypension-preview.jpg" alt="EasyPension preview" loading="lazy" />
         <p>A pension product designed for gig and informal workers, focused on accessibility, continuity, and long-term resilience, not paperwork.</p>
         <a href="easypension.html">Visit Project →</a>
       </div>
@@ -504,7 +542,7 @@
           <img class="project-logo" src="assets/img/kopagrow.png" alt="KopaGrow logo" loading="lazy" />
           <h3>KopaGrow</h3>
         </div>
-        <img class="preview" src="assets/img/kopagrow.png" alt="KopaGrow preview" loading="lazy">
+        <img class="preview" src="assets/img/kopagrow-preview.jpg" alt="KopaGrow preview" loading="lazy" />
         <p>A micro-lending platform built around smallholder farmers’ realities, using flexible credit design instead of one-size-fits-all loans.</p>
         <a href="kopagrow.html">Visit Project →</a>
       </div>
@@ -514,7 +552,7 @@
           <img class="project-logo" src="assets/img/credit-scoring.png" alt="AI credit scoring logo" loading="lazy" />
           <h3>AI-Driven Credit Scoring</h3>
         </div>
-        <img class="preview" src="assets/img/aiproject.png" alt="AI-Driven Credit Scoring preview" loading="lazy">
+        <img class="preview" src="assets/img/aiproject-preview.jpg" alt="AI-Driven Credit Scoring preview" loading="lazy" />
         <p>Case study on fair, explainable credit decisions using alternative data + ML, expanding responsible lending in emerging markets.</p>
         <a href="ai-project.html">Visit Project →</a>
       </div>
@@ -532,8 +570,8 @@
   </section>
 
   <div class="signout">
-    <div class="quote">“Good Products Don't shout. They Choose.”</div>
-    <div class="Sign out">BUILD WITH INTENT</div>
+    <div class="quote">“Good products don’t shout. They choose.”</div>
+    <div class="three-words">BUILD WITH INTENT</div>
   </div>
 
   <footer>
@@ -547,5 +585,3 @@
   </footer>
 </body>
 </html>
-
-
