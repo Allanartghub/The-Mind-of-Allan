@@ -6,7 +6,6 @@
   <title>MindSpring | Case Study – Allan Ng'ang'a</title>
   <meta name="description" content="MindSpring case study: emotionally-safe mental wellness companion designed with hypothesis-led MVP decisions and ethical AI." />
 
-  <!-- Fonts aligned with Index vibe -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -46,9 +45,7 @@
     a{color: var(--teal); text-decoration: none;}
     a:hover{opacity:.92; text-decoration: underline;}
 
-    /* ---------------------------
-       Background accents (soft)
-    --------------------------- */
+    /* Background accents */
     .bg-blob{
       position: fixed;
       width: 520px;
@@ -138,7 +135,7 @@
       text-decoration:none;
       box-shadow: 0 6px 18px rgba(0,0,0,.05);
       transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
-      min-height: 42px; /* mobile tap target */
+      min-height: 42px;
     }
     .btn.primary{
       background: var(--teal);
@@ -151,7 +148,6 @@
       text-decoration:none;
     }
 
-    /* Page layout */
     main.container{
       max-width: var(--maxw);
       margin: 0 auto;
@@ -262,28 +258,36 @@
       justify-content:space-between;
       gap:1rem;
     }
+
+    /* FIX: make horizontal scrolling reliable */
     .subnav{
       display:flex;
       gap:.65rem;
-      overflow:auto;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       position: relative;
-      padding-right: 8px;
+      padding-right: 52px; /* room for fade */
+      max-width: 100%;
     }
     .subnav::-webkit-scrollbar{display:none;}
 
-    /* Right-edge fade hint (mobile UX cue) */
+    /* fade hint */
     .subnav-fade{
       position: absolute;
       right: 0;
       top: 0;
       bottom: 0;
-      width: 44px;
+      width: 54px;
       pointer-events:none;
       background: linear-gradient(90deg, rgba(249,249,249,0), rgba(249,249,249,.96));
       border-radius: 999px;
-      display:none;
+      opacity: 0;
+      transition: opacity .18s var(--ease);
     }
+    .subnav.can-scroll .subnav-fade{ opacity: 1; }
+    .subnav.at-end .subnav-fade{ opacity: 0; }
 
     .subnav a{
       white-space:nowrap;
@@ -299,6 +303,7 @@
       min-height: 36px;
       display:inline-flex;
       align-items:center;
+      flex: 0 0 auto;
     }
     .subnav a:hover{
       transform: translateY(-1px);
@@ -352,7 +357,6 @@
       margin-top:.15rem;
     }
 
-    /* Dividers */
     .divider{
       height: 1px;
       border: 0;
@@ -365,7 +369,6 @@
       );
     }
 
-    /* Sections */
     section{ margin: 1.6rem 0 2.1rem; }
     .section-title{
       font-family: var(--font-heading);
@@ -398,8 +401,6 @@
       padding: 1.1rem;
       transition: transform .18s var(--ease), box-shadow .18s var(--ease);
     }
-
-    /* Hover effects only on hover-capable devices (mobile tweak) */
     @media (hover: hover) and (pointer: fine){
       .card:hover{ transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.12); }
     }
@@ -414,7 +415,7 @@
       color:#222;
     }
 
-    /* Placeholder tiles (Screens + Artifacts) */
+    /* Placeholder tiles */
     .tile{
       border-radius: var(--radius);
       border: 1px solid rgba(0,0,0,.10);
@@ -443,133 +444,102 @@
     .tile h3{ margin-top:.6rem; }
     .tile p{ color:#222; margin-top:.35rem; }
     .tile small{ color: var(--muted); font-weight:800; }
-
     .artifacts .tile{ min-height: 180px; }
 
-    /* Persona */
+    /* Persona layout */
     .persona{
       display:grid;
       grid-template-columns: .9fr 1.1fr;
       gap: var(--gap);
       align-items:start;
     }
-    .avatar{
+
+    /* ✅ FIXED Flip Card CSS (all missing pieces added) */
+    .emma-flip{
       border-radius: var(--radius);
       border: 1px solid rgba(0,0,0,.10);
-      background: linear-gradient(135deg, rgba(0,128,128,.10), rgba(200,155,123,.10));
-      min-height: 240px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: #fff;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      height: 300px;
+      width: 100%;
+    }
+    @media (max-width: 980px){ .emma-flip{ height: 280px; } }
+    @media (max-width: 640px){ .emma-flip{ height: 260px; } }
+
+    .emma-inner{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .65s var(--ease);
+    }
+    .emma-flip.is-flipped .emma-inner{
+      transform: rotateY(180deg);
+    }
+
+    .emma-face{
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .emma-back{
+      transform: rotateY(180deg);
+    }
+
+    .emma-face img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .emma-overlay{
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       padding: 1rem;
-      font-weight:950;
-      color:#144;
+      background: linear-gradient(180deg,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,.55) 100%
+      );
+      color: #fff;
     }
-    .avatar small{
-      display:block;
-      font-weight:850;
-      color:#2b2b2b;
-      opacity:.9;
-      margin-top:.25rem;
+    .emma-name{
+      font-weight: 980;
+      font-size: 1.15rem;
+      line-height: 1.2;
     }
-
-/* Emma Flip Card (sized to fit nicely beside the Persona bio card) */
-.emma-flip{
-  border-radius: var(--radius);
-  border: 1px solid rgba(0,0,0,.10);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  background: #fff;
-  position: relative;
-  cursor: pointer;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-
-  /* Key fix: consistent height */
-  height: 300px;
-  width: 100%;
-}
-
-@media (max-width: 980px){
-  .emma-flip{ height: 280px; }
-}
-@media (max-width: 640px){
-  .emma-flip{ height: 260px; }
-}
-
-.emma-inner{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform .65s var(--ease);
-}
-
-.emma-face img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* Overlay text for readability */
-.emma-overlay{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
-  background: linear-gradient(180deg,
-    rgba(0,0,0,0) 40%,
-    rgba(0,0,0,.55) 100%
-  );
-  color: #fff;
-}
-
-.emma-name{
-  font-weight: 980;
-  font-size: 1.15rem;
-  line-height: 1.2;
-}
-
-.emma-sub{
-  margin-top: .2rem;
-  font-weight: 850;
-  opacity: .95;
-  font-size: .95rem;
-}
-
-.emma-hint{
-  margin-top: .55rem;
-  display: inline-flex;
-  width: fit-content;
-  padding: .28rem .55rem;
-  border-radius: 999px;
-  font-weight: 950;
-  font-size: .82rem;
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(255,255,255,.25);
-  backdrop-filter: blur(6px);
-}
-
-/* Focus ring for keyboard users */
-.emma-flip:focus-visible{
-  box-shadow: 0 0 0 4px rgba(0,128,128,.22), var(--shadow);
-  border-color: rgba(0,128,128,.35);
-}
-
-/* Optional: a tiny "wiggle" cue on first view (only hover-capable devices) */
-@media (hover: hover) and (pointer: fine){
-  .emma-flip:hover .emma-inner{
-    transform: rotateY(8deg);
-  }
-  .emma-flip.is-flipped:hover .emma-inner{
-    transform: rotateY(172deg);
-  }
-}
-
+    .emma-sub{
+      margin-top: .2rem;
+      font-weight: 850;
+      opacity: .95;
+      font-size: .95rem;
+    }
+    .emma-hint{
+      margin-top: .55rem;
+      display: inline-flex;
+      width: fit-content;
+      padding: .28rem .55rem;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: .82rem;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(6px);
+    }
+    .emma-flip:focus-visible{
+      box-shadow: 0 0 0 4px rgba(0,128,128,.22), var(--shadow);
+      border-color: rgba(0,128,128,.35);
+    }
 
     /* Persona expand/collapse */
     .persona-more{
@@ -592,7 +562,7 @@
       font-weight:950;
       cursor:pointer;
       transition: transform .18s var(--ease), box-shadow .18s var(--ease);
-      min-height: 42px; /* tap target */
+      min-height: 42px;
     }
     .persona-card .toggle:hover{
       transform: translateY(-1px);
@@ -649,9 +619,7 @@
     .kpi .label{color:#333; font-weight:900;}
     .kpi .note{color: var(--muted); font-size:.92rem; margin-top:.25rem;}
 
-    /* ---------------------------
-       Scroll-reveal (sections + cards)
-    --------------------------- */
+    /* Reveal */
     .reveal{
       opacity: 0;
       transform: translateY(14px);
@@ -670,7 +638,6 @@
       transform: translateY(0);
     }
 
-    /* Footer */
     footer{
       margin-top: 2.2rem;
       padding-top: 1.4rem;
@@ -679,9 +646,7 @@
       text-align:center;
     }
 
-    /* ---------------------------
-       Decision Log Drawer
-    --------------------------- */
+    /* Decision Log Drawer */
     .floating{
       position: fixed;
       right: 18px;
@@ -809,7 +774,6 @@
       border-color: rgba(200,155,123,.20);
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto;}
       .reveal, .stagger > *, .btn, .card, .chip, .kpi, .subnav a, .step{
@@ -817,20 +781,15 @@
         transform:none !important;
       }
       .drawer, .drawer-overlay, .bar > span{ transition:none !important; }
+      .emma-inner{ transition:none !important; }
     }
 
-    /* Responsive */
     @media (max-width: 980px){
       .hero{grid-template-columns: 1fr; }
       .subnav-wrap{top: 72px;}
       .grid-3{grid-template-columns: 1fr 1fr;}
       .persona{grid-template-columns: 1fr;}
       .kpis{grid-template-columns: 1fr 1fr;}
-    }
-    @media (max-width: 700px){
-      main.container{ padding: 1.2rem .95rem 3rem; }
-      .header-wrap{ padding: .85rem .95rem; }
-      .subnav-fade{ display:block; }
     }
     @media (max-width: 640px){
       .grid-2,.grid-3,.kpis{grid-template-columns: 1fr;}
@@ -843,12 +802,10 @@
 </head>
 
 <body>
-  <!-- background accents -->
   <div class="bg-blob blob-teal" aria-hidden="true"></div>
   <div class="bg-blob blob-beige" aria-hidden="true"></div>
   <div class="bg-blob blob-teal-2" aria-hidden="true"></div>
 
-  <!-- Header -->
   <header>
     <div class="header-wrap">
       <a class="brand" href="index.html" aria-label="Back to Home">
@@ -873,11 +830,9 @@
 
   <main class="container">
 
-    <!-- HERO -->
     <section class="hero reveal" id="top" data-title="Intro">
       <div>
         <p class="crumbs"><a href="index.html">Home</a> · <a href="index.html#projects">Projects</a> · <span aria-current="page">MindSpring</span></p>
-
         <h1 class="title">MindSpring</h1>
 
         <p class="thesis">
@@ -886,12 +841,11 @@
         </p>
 
         <div class="one-liner">
-          We’ve built a generation that is constantly connected, yet increasingly overwhelmed and emotionally isolated, and asking for help still feels heavier than staying silent.
+          We’ve built a generation that is constantly connected, yet increasingly overwhelmed and emotionally isolated — and asking for help still feels heavier than staying silent.
         </div>
 
         <div class="hero-cta">
           <a class="btn primary" href="#summary">Start the case study</a>
-          <!-- Replace with your actual prototype URL when ready -->
           <a class="btn" href="#screens">View prototype evidence</a>
         </div>
 
@@ -929,7 +883,6 @@
       </aside>
     </section>
 
-    <!-- Sticky sub-nav + progress -->
     <div class="subnav-wrap reveal" aria-label="Case study navigation">
       <nav class="subnav" id="subnav">
         <a href="#summary">Summary</a>
@@ -960,7 +913,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- SUMMARY -->
     <section id="summary" class="reveal" data-title="Summary">
       <h2 class="section-title">Product Summary</h2>
       <p class="hint">
@@ -994,7 +946,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- PROJECT CONTEXT -->
     <section id="project-context" class="reveal" data-title="Project Context">
       <h2 class="section-title">Project Context</h2>
       <p class="hint">
@@ -1049,7 +1000,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- PROBLEM SPACE -->
     <section id="context" class="reveal" data-title="Problem Space">
       <h2 class="section-title">Problem Space & User Context</h2>
       <p class="hint">
@@ -1081,7 +1031,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- HYPOTHESIS -->
     <section id="hypothesis" class="reveal" data-title="Hypothesis">
       <h2 class="section-title">Product Hypothesis & Assumptions</h2>
       <p class="hint">
@@ -1122,7 +1071,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- TRADE-OFFS -->
     <section id="tradeoffs" class="reveal" data-title="Trade-offs">
       <h2 class="section-title">Constraints & Trade-offs</h2>
       <p class="hint">
@@ -1153,7 +1101,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- MVP -->
     <section id="mvp" class="reveal" data-title="MVP">
       <h2 class="section-title">MVP Overview</h2>
       <p class="hint">
@@ -1195,7 +1142,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- SCREENS / PROTOTYPE EVIDENCE -->
     <section id="screens" class="reveal" data-title="Screens">
       <h2 class="section-title">Screens & Prototype Evidence</h2>
       <p class="hint">
@@ -1256,7 +1202,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- PROCESS ARTIFACTS -->
     <section id="artifacts" class="reveal" data-title="Artifacts">
       <h2 class="section-title">Process Artifacts</h2>
       <p class="hint">
@@ -1295,76 +1240,80 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <div class="persona">
-  <div class="emma-flip reveal" id="emmaFlip" role="button" tabindex="0" aria-label="Emma flip card. Click to flip.">
-    <div class="emma-inner">
-      <!-- Front: Happy -->
-      <div class="emma-face emma-front" aria-hidden="true">
-        <img src="assets/img/mindspring-emma-happy.png" alt="Emma feeling grounded in a campus café">
-        <div class="emma-overlay">
-          <div class="emma-name">Emma · 22</div>
-          <div class="emma-sub">Final-year student → early career transition</div>
-          <div class="emma-hint">Tap to flip</div>
+    <!-- ✅ FIX: Persona is now a real SECTION with id="persona" -->
+    <section id="persona" class="reveal" data-title="Persona">
+      <h2 class="section-title">Primary Persona</h2>
+      <p class="hint">We grounded the experience in a real pattern we observed repeatedly, represented here as Emma.</p>
+
+      <div class="persona">
+        <div class="emma-flip reveal" id="emmaFlip" role="button" tabindex="0" aria-label="Emma flip card. Click to flip.">
+          <div class="emma-inner">
+            <div class="emma-face emma-front" aria-hidden="true">
+              <img src="assets/img/mindspring-emma-happy.png" alt="Emma feeling grounded in a campus café">
+              <div class="emma-overlay">
+                <div class="emma-name">Emma · 22</div>
+                <div class="emma-sub">Final-year student → early career transition</div>
+                <div class="emma-hint">Tap to flip</div>
+              </div>
+            </div>
+
+            <div class="emma-face emma-back" aria-hidden="true">
+              <img src="assets/img/mindspring-emma-stressed.png" alt="Emma under pressure in the same café at night">
+              <div class="emma-overlay">
+                <div class="emma-name">Same Emma.</div>
+                <div class="emma-sub">Different day. More weight to carry.</div>
+                <div class="emma-hint">Tap to flip</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card persona-card reveal">
+          <h3 style="margin-bottom:.35rem;">Emma’s Reality</h3>
+          <ul>
+            <li>High expectations, low emotional bandwidth</li>
+            <li>Hesitates to seek help unless it feels “serious enough”</li>
+            <li>Needs privacy, autonomy, and a non-clinical tone</li>
+          </ul>
+          <p class="insight" style="margin-top:.6rem;">
+            Core tension: Emma doesn’t want to be “fixed.” She wants a place to pause, without having to explain herself.
+          </p>
+
+          <button class="toggle" type="button" id="personaToggle" aria-expanded="false">
+            <span>Read the deeper persona</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </button>
+
+          <div class="persona-more" id="personaMore">
+            <h4 style="margin-bottom:.35rem;">Goals</h4>
+            <ul>
+              <li>Feel more in control of emotional patterns</li>
+              <li>Find relief without “performing vulnerability”</li>
+              <li>Build a habit that survives busy weeks</li>
+            </ul>
+
+            <h4 style="margin:.75rem 0 .35rem;">Fears</h4>
+            <ul>
+              <li>Being judged or “diagnosed” by a tool</li>
+              <li>Data used in ways she didn’t consent to</li>
+              <li>Shame from streaks or missed days</li>
+            </ul>
+
+            <h4 style="margin:.75rem 0 .35rem;">Moments of Truth</h4>
+            <ul>
+              <li>Can she check in without explaining?</li>
+              <li>Does the AI feel human, not clever?</li>
+              <li>Can she skip days without penalty?</li>
+            </ul>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Back: Stressed -->
-      <div class="emma-face emma-back" aria-hidden="true">
-        <img src="assets/img/mindspring-emma-stressed.png" alt="Emma under pressure in the same café at night">
-        <div class="emma-overlay">
-          <div class="emma-name">Same Emma.</div>
-          <div class="emma-sub">Different day. More weight to carry.</div>
-          <div class="emma-hint">Tap to flip</div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <hr class="divider" aria-hidden="true">
 
-  <div class="card persona-card reveal">
-    <h3 style="margin-bottom:.35rem;">Emma’s Reality</h3>
-    <ul>
-      <li>High expectations, low emotional bandwidth</li>
-      <li>Hesitates to seek help unless it feels “serious enough”</li>
-      <li>Needs privacy, autonomy, and a non-clinical tone</li>
-    </ul>
-    <p class="insight" style="margin-top:.6rem;">
-      Core tension: Emma doesn’t want to be “fixed.” She wants a place to pause, without having to explain herself.
-    </p>
-
-    <button class="toggle" type="button" id="personaToggle" aria-expanded="false">
-      <span>Read the deeper persona</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M6 9l6 6 6-6"></path>
-      </svg>
-    </button>
-
-    <div class="persona-more" id="personaMore">
-      <h4 style="margin-bottom:.35rem;">Goals</h4>
-      <ul>
-        <li>Feel more in control of emotional patterns</li>
-        <li>Find relief without “performing vulnerability”</li>
-        <li>Build a habit that survives busy weeks</li>
-      </ul>
-
-      <h4 style="margin:.75rem 0 .35rem;">Fears</h4>
-      <ul>
-        <li>Being judged or “diagnosed” by a tool</li>
-        <li>Data used in ways she didn’t consent to</li>
-        <li>Shame from streaks or missed days</li>
-      </ul>
-
-      <h4 style="margin:.75rem 0 .35rem;">Moments of Truth</h4>
-      <ul>
-        <li>Can she check in without explaining?</li>
-        <li>Does the AI feel human, not clever?</li>
-        <li>Can she skip days without penalty?</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-    <!-- JOURNEY -->
     <section id="journey" class="reveal" data-title="Journey">
       <h2 class="section-title">User Journey</h2>
       <p class="hint">A simple sequence that respects emotional readiness and makes reflection optional.</p>
@@ -1417,7 +1366,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- METRICS -->
     <section id="metrics" class="reveal" data-title="Metrics">
       <h2 class="section-title">Validation & Metrics</h2>
       <p class="hint">We measured signals that indicate emotional safety and habit formation, not hype.</p>
@@ -1443,7 +1391,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- LEARNINGS -->
     <section id="learnings" class="reveal" data-title="Learnings">
       <h2 class="section-title">Key Learnings</h2>
       <p class="hint">What surprised us, what didn’t work, and what it changed in our product thinking.</p>
@@ -1472,7 +1419,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- NEXT -->
     <section id="next" class="reveal" data-title="Next">
       <h2 class="section-title">What I’d Do Next</h2>
       <p class="hint">Strategic iteration: deepen what works, remove what harms, expand responsibly.</p>
@@ -1499,7 +1445,6 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- REFLECTION -->
     <section id="reflection" class="reveal" data-title="Reflection">
       <h2 class="section-title">Reflection</h2>
       <p class="hint">What this project brought out in me, as a PM, a builder, and a responsible product thinker.</p>
@@ -1527,7 +1472,6 @@
     </footer>
   </main>
 
-  <!-- Decision Log Floating Button -->
   <div class="floating" aria-label="Quick actions">
     <button class="fab" id="openDrawer" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1543,7 +1487,6 @@
     </button>
   </div>
 
-  <!-- Drawer -->
   <div class="drawer-overlay" id="overlay" aria-hidden="true"></div>
 
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Decision log">
@@ -1630,7 +1573,6 @@
 
     const sections = Array.from(document.querySelectorAll('main section[id]'));
     const total = sections.length;
-
     const titleFor = (s) => (s.dataset.title || s.id);
 
     function updateProgress(){
@@ -1656,7 +1598,6 @@
         }
       });
     }, { threshold: 0.15 });
-
     revealEls.forEach(el => io.observe(el));
 
     const ioStagger = new IntersectionObserver((entries) => {
@@ -1669,14 +1610,12 @@
         }
       });
     }, { threshold: 0.18 });
-
     staggerEls.forEach(el => ioStagger.observe(el));
 
     // -----------------------------
     // Active section highlight in subnav + progress label
     // -----------------------------
     const navLinks = Array.from(document.querySelectorAll('#subnav a'));
-
     const setActive = (id) => {
       navLinks.forEach(a => {
         const isActive = a.getAttribute('href') === ('#' + id);
@@ -1684,10 +1623,7 @@
       });
 
       const idx = Math.max(1, sections.findIndex(s => s.id === id) + 1);
-
-      if (pct) {
-        pct.firstChild.nodeValue = titleFor(sections[idx - 1]) + " ";
-      }
+      if (pct && sections[idx - 1]) pct.firstChild.nodeValue = titleFor(sections[idx - 1]) + " ";
       if (pct2) pct2.textContent = `${idx}/${total}`;
     };
 
@@ -1702,9 +1638,25 @@
     }, { rootMargin: '-35% 0px -55% 0px', threshold: [0.15, 0.25, 0.4] });
 
     sections.forEach(s => ioSections.observe(s));
-
     document.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
+
+    // -----------------------------
+    // Subnav scroll hint (fade shows if overflow)
+    // -----------------------------
+    const subnav = document.getElementById('subnav');
+    function updateSubnavFade(){
+      if(!subnav) return;
+      const canScroll = subnav.scrollWidth > subnav.clientWidth + 4;
+      subnav.classList.toggle('can-scroll', canScroll);
+      const atEnd = (subnav.scrollLeft + subnav.clientWidth) >= (subnav.scrollWidth - 6);
+      subnav.classList.toggle('at-end', atEnd);
+    }
+    if(subnav){
+      subnav.addEventListener('scroll', updateSubnavFade, { passive: true });
+      window.addEventListener('resize', updateSubnavFade);
+      updateSubnavFade();
+    }
 
     // -----------------------------
     // Journey timeline step animation
@@ -1724,51 +1676,51 @@
     if(timeline) ioTimeline.observe(timeline);
 
     // -----------------------------
-    // Persona expand/collapse
+    // Persona expand/collapse (RESTORED)
     // -----------------------------
-// -----------------------------
-// Emma flip card (click + auto flip every 5s)
-// -----------------------------
-const emmaFlip = document.getElementById('emmaFlip');
-
-let emmaInterval = null;
-let emmaLastUserAction = Date.now();
-
-function toggleEmmaFlip(){
-  if(!emmaFlip) return;
-  emmaFlip.classList.toggle('is-flipped');
-}
-
-function startEmmaAutoFlip(){
-  if(!emmaFlip) return;
-
-  if (emmaInterval) clearInterval(emmaInterval);
-
-  emmaInterval = setInterval(() => {
-    const now = Date.now();
-    // don't fight the user right after interaction
-    if (now - emmaLastUserAction < 1500) return;
-    toggleEmmaFlip();
-  }, 5000);
-}
-
-if (emmaFlip){
-  emmaFlip.addEventListener('click', () => {
-    emmaLastUserAction = Date.now();
-    toggleEmmaFlip();
-  });
-
-  emmaFlip.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      emmaLastUserAction = Date.now();
-      toggleEmmaFlip();
+    const personaToggle = document.getElementById('personaToggle');
+    const personaCard = document.querySelector('.persona-card');
+    if(personaToggle && personaCard){
+      personaToggle.addEventListener('click', () => {
+        const expanded = personaCard.classList.toggle('expanded');
+        personaToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
     }
-  });
 
-  startEmmaAutoFlip();
-}
+    // -----------------------------
+    // Emma flip card (click + auto flip every 5s)
+    // -----------------------------
+    const emmaFlip = document.getElementById('emmaFlip');
+    let emmaInterval = null;
+    let emmaLastUserAction = Date.now();
 
+    function toggleEmmaFlip(){
+      if(!emmaFlip) return;
+      emmaFlip.classList.toggle('is-flipped');
+    }
+    function startEmmaAutoFlip(){
+      if(!emmaFlip) return;
+      if (emmaInterval) clearInterval(emmaInterval);
+      emmaInterval = setInterval(() => {
+        const now = Date.now();
+        if (now - emmaLastUserAction < 1500) return;
+        toggleEmmaFlip();
+      }, 5000);
+    }
+    if (emmaFlip){
+      emmaFlip.addEventListener('click', () => {
+        emmaLastUserAction = Date.now();
+        toggleEmmaFlip();
+      });
+      emmaFlip.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          emmaLastUserAction = Date.now();
+          toggleEmmaFlip();
+        }
+      });
+      startEmmaAutoFlip();
+    }
 
     // -----------------------------
     // Decision log drawer
