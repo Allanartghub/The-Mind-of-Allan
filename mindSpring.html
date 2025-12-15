@@ -445,23 +445,29 @@
     .tile p{ color:#222; margin-top:.35rem; }
     .tile small{ color: var(--muted); font-weight:800; }
 
+    /* ✅ CHANGE 1: show full images (no cropping) */
     .tile img{
       width: 100%;
-      height: 220px;
-      object-fit: cover;
+      height: 260px;              /* gives a consistent frame */
+      object-fit: contain;         /* shows whole image */
+      background: rgba(255,255,255,.75);
       border-radius: 14px;
       border: 1px solid rgba(0,0,0,.10);
       margin-top: .8rem;
+      display:block;
     }
     @media (min-width: 980px){
-      .tile img{ height: 260px; }
+      .tile img{ height: 300px; }
     }
-    /* userflow image should not crop */
+    /* userflow image can be taller */
     .tile img.userflow{
-      height: auto;
+      height: 360px;
       max-height: 520px;
       object-fit: contain;
       background: rgba(255,255,255,.75);
+    }
+    @media (min-width: 980px){
+      .tile img.userflow{ height: 420px; }
     }
 
     /* Persona layout */
@@ -819,6 +825,8 @@
       .fab span{display:none;}
       .fab{padding:.75rem; width: 52px; height: 52px; justify-content:center;}
       .tile{ min-height: 220px; }
+      .tile img{ height: 240px; }
+      .tile img.userflow{ height: 320px; }
     }
   </style>
 </head>
@@ -881,9 +889,7 @@
 
       <aside class="panel" aria-label="Project metadata">
         <h3 style="font-family:var(--font-heading); margin-bottom:.35rem;">Project Snapshot</h3>
-        <p style="color:var(--muted); margin-bottom:.8rem;">
-          A PM-first case study showing discovery, decisions, trade-offs, and iteration.
-        </p>
+        <p style="color:var(--muted); margin-bottom:.8rem;">A PM-first case study showing discovery, decisions, trade-offs, and iteration.</p>
 
         <div class="meta-grid stagger">
           <div class="meta"><h4>Role</h4><p>Product Lead & Innovation Strategist</p></div>
@@ -1126,7 +1132,7 @@
 
     <hr class="divider" aria-hidden="true">
 
-    <!-- ✅ FIXED SCREENS SECTION -->
+    <!-- SCREENS -->
     <section id="screens" class="reveal" data-title="Screens">
       <h2 class="section-title">Screens & Prototype Evidence</h2>
       <p class="hint">Fast proof that the product is real: check-in → conversation → reflection. Plus the user flow.</p>
@@ -1163,7 +1169,7 @@
             <p>Reset / journal / pause — options, not pressure.</p>
           </div>
         </div>
-      </div><!-- ✅ IMPORTANT: closes grid-3 -->
+      </div><!-- closes grid-3 -->
 
       <div style="height: var(--gap)"></div>
 
@@ -1177,14 +1183,7 @@
           </div>
         </div>
 
-        <div class="tile" style="min-height: 220px;">
-          <div class="badge">Prototype Evidence</div>
-          <div>
-            <h3>Walkthrough + artifacts</h3>
-            <p>Use the walkthrough button above + add future artifacts as you iterate.</p>
-            <small>Clean portfolio proof beats bloated sections.</small>
-          </div>
-        </div>
+        <!-- ✅ CHANGE 2: removed the entire "Walkthrough + artifacts" tile -->
       </div>
     </section>
 
