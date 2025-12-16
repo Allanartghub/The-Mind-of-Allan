@@ -1,799 +1,889 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KopaGrow | Project Journey</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KopaGrow | Project Journey</title>
+
+  <!-- Optional external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts (MindSpring-aligned + your Pacifico for the floating labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Open+Sans:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
     :root {
-        --teal: #008080;
-        --light-teal: #66b2b2;
-        --dark: #1a1a1a;
-        --light: #f9f9f9;
-        --Beige: #C89B7B;
-        --font-heading: 'Playfair Display', serif;
-        --font-body: 'Open Sans', sans-serif;
+      --teal: #008080;
+      --light-teal: #66b2b2;
+      --dark: #1a1a1a;
+      --light: #f9f9f9;
+      --Beige: #C89B7B;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
+
     body {
-        font-family: var(--font-body);
-        background: var(--light);
-        color: var(--dark);
-        margin: 0;
+      font-family: var(--font-body);
+      background: var(--light);
+      color: var(--dark);
+      margin: 0;
     }
+
+    /* ===== MindSpring-style sticky header (KopaGrow) ===== */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(249,249,249,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,.10);
+    }
+    .header-wrap{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: .95rem 1.2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      color: var(--dark);
+      font-weight:900;
+      text-decoration:none;
+    }
+    .brand .dot{
+      width:12px; height:12px;
+      border-radius:999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 6px rgba(0,128,128,.10);
+    }
+    .nav-actions{
+      display:flex;
+      gap:.6rem;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .icon-btn{
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1),
+                  box-shadow .18s cubic-bezier(.2,.8,.2,1),
+                  border-color .18s cubic-bezier(.2,.8,.2,1);
+      text-decoration:none;
+    }
+    .icon-btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,128,128,.28);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      text-decoration:none;
+    }
+    .icon-btn svg{ width:20px; height:20px; stroke: var(--teal); }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.55rem .95rem;
+      border-radius:999px;
+      border:1px solid rgba(0,128,128,.28);
+      background:#fff;
+      color: var(--teal);
+      font-weight:900;
+      font-size:.95rem;
+      text-decoration:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.05);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1),
+                  box-shadow .18s cubic-bezier(.2,.8,.2,1),
+                  background .18s cubic-bezier(.2,.8,.2,1);
+      min-height:42px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--teal);
+      border-color: var(--teal);
+      color:#fff;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      text-decoration:none;
+    }
+
     .project-header {
-        display: flex;
-        align-items: center;
-        min-height: 220px;
-        background: linear-gradient(rgba(0,128,128,0.7), rgba(0,128,128,0.5)), url('assets/img/kopagrow.jpg') center/cover no-repeat;
-        color: #fff;
-        padding: 2rem 3rem;
-        border-radius: 0 0 24px 24px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        margin-bottom: 2rem;
-        position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 220px;
+      background: linear-gradient(rgba(0,128,128,0.7), rgba(0,128,128,0.5)), url('assets/img/kopagrow.jpg') center/cover no-repeat;
+      color: #fff;
+      padding: 2rem 3rem;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      position: relative;
     }
     .project-header-title {
-        font-family: var(--font-heading);
-        font-size: 2.2rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-        z-index: 2;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
+
     main {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem 1rem 3rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem 1rem;
     }
     section {
-        margin-bottom: 2.5rem;
+      margin-bottom: 2.5rem;
     }
     h2 {
-        font-family: var(--font-heading);
-        color: var(--teal);
-        font-size: 1.7rem;
-        margin-bottom: 0.7rem;
+      font-family: var(--font-heading);
+      color: var(--teal);
+      font-size: 1.7rem;
+      margin-bottom: 0.7rem;
     }
     .presentation-images {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-        justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      justify-content: center;
     }
     .presentation-images img {
-        max-width: 320px;
-        border-radius: 10px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        background: #fff;
+      max-width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      background: #fff;
     }
+
     .website-link {
-        text-align: center;
-        margin: 2rem 0;
+      text-align: center;
+      margin: 2rem 0;
     }
     .website-link a {
-        background: var(--teal);
-        color: #fff;
-        padding: 0.8rem 2rem;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.1rem;
-        transition: background 0.2s;
-        animation: pulseBtn 1.5s infinite;
-        box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
+      background: var(--teal);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+      animation: pulseBtn 1.5s infinite;
+      box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
+      display:inline-block;
     }
     @keyframes pulseBtn {
-        0% {
-            box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
-            background: var(--teal);
-        }
-        70% {
-            box-shadow: 0 0 0 12px rgba(0,128,128,0.08);
-            background: var(--light-teal);
-        }
-        100% {
-            box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
-            background: var(--teal);
-        }
+      0% {
+        box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
+        background: var(--teal);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(0,128,128,0.08);
+        background: var(--light-teal);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0,128,128,0.18);
+        background: var(--teal);
+      }
     }
+
     .problem-visual {
-        position: absolute;
-        right: -170px;
-        top: 1.5rem;
-        border: none;
-        background: none;
-        font-family: 'Pacifico', cursive;
-        font-size: 2.1rem;
-        color: var(--Beige);
-        box-shadow: none;
-        z-index: 10;
-        pointer-events: none;
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: floatProblem 2.5s ease-in-out infinite alternate;
-        transition: right 0.3s;
-        padding: 0;
+      position: absolute;
+      right: -170px;
+      top: 1.5rem;
+      border: none;
+      background: none;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.1rem;
+      color: var(--Beige);
+      box-shadow: none;
+      z-index: 10;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatProblem 2.5s ease-in-out infinite alternate;
+      transition: right 0.3s;
+      padding: 0;
     }
     .our-approach-visual {
-        position: absolute;
-        right: -180px;
-        top: 1.5rem;
-        border: none;
-        background: none;
-        font-family: 'Pacifico', cursive;
-        font-size: 2.1rem;
-        color: var(--Beige);
-        box-shadow: none;
-        z-index: 10;
-        pointer-events: none;
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: floatProblem 2.5s ease-in-out infinite alternate;
-        transition: right 0.3s;
-        padding: 0;
+      position: absolute;
+      right: -180px;
+      top: 1.5rem;
+      border: none;
+      background: none;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.1rem;
+      color: var(--Beige);
+      box-shadow: none;
+      z-index: 10;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatProblem 2.5s ease-in-out infinite alternate;
+      transition: right 0.3s;
+      padding: 0;
     }
     @keyframes floatProblem {
-        0% {
-            transform: rotate(-18deg) translateY(0px) scale(1);
-        }
-        40% {
-            transform: rotate(-10deg) translateY(-12px) scale(1.08);
-        }
-        60% {
-            transform: rotate(-22deg) translateY(-18px) scale(1.1);
-        }
-        100% {
-            transform: rotate(-18deg) translateY(-8px) scale(1.05);
-        }
+      0% { transform: rotate(-18deg) translateY(0px) scale(1); }
+      40% { transform: rotate(-10deg) translateY(-12px) scale(1.08); }
+      60% { transform: rotate(-22deg) translateY(-18px) scale(1.1); }
+      100% { transform: rotate(-18deg) translateY(-8px) scale(1.05); }
     }
+
     @media (max-width: 900px) {
-        .project-header {
-            padding: 1.2rem 1rem;
-        }
-        main {
-            padding: 1.2rem 0.5rem 2rem 0.5rem;
-        }
+      .project-header { padding: 1.2rem 1rem; }
+      main { padding: 1.2rem 0.5rem 2rem 0.5rem; }
     }
     @media (max-width: 700px) {
-        .project-header {
-            flex-direction: column;
-            min-height: 120px;
-            padding: 1.2rem 0.5rem;
-        }
-        .project-header-title {
-            font-size: 1.3rem;
-            text-align: center;
-        }
-        .problem-visual,
-        .our-approach-visual {
-            position: static;
-            margin: 1.2rem auto 0 auto;
-            display: block;
-            right: 0;
-            transform: rotate(-10deg);
-            font-size: 1.3rem;
-            padding: 0.7rem 1.2rem;
-            animation: floatProblemMobile 2.5s ease-in-out infinite alternate;
-        }
-        @keyframes floatProblemMobile {
-            0% { transform: rotate(-10deg) translateY(0px) scale(1);}
-            50% { transform: rotate(-12deg) translateY(-8px) scale(1.07);}
-            100% { transform: rotate(-10deg) translateY(-4px) scale(1.03);}
-        }
-        .problem-id-wrap {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .presentation-images {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .presentation-images img {
-            max-width: 98vw;
-        }
-        .website-link a {
-            font-size: 1rem;
-            padding: 0.7rem 1.2rem;
-        }
-        section {
-            margin-bottom: 1.5rem;
-        }
+      .project-header {
+        flex-direction: column;
+        min-height: 120px;
+        padding: 1.2rem 0.5rem;
+      }
+      .project-header-title {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+      .problem-visual,
+      .our-approach-visual {
+        position: static;
+        margin: 1.2rem auto 0 auto;
+        display: block;
+        right: 0;
+        transform: rotate(-10deg);
+        font-size: 1.3rem;
+        padding: 0.7rem 1.2rem;
+        animation: floatProblemMobile 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes floatProblemMobile {
+        0% { transform: rotate(-10deg) translateY(0px) scale(1);}
+        50% { transform: rotate(-12deg) translateY(-8px) scale(1.07);}
+        100% { transform: rotate(-10deg) translateY(-4px) scale(1.03);}
+      }
+      .problem-id-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .presentation-images {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .presentation-images img { max-width: 98vw; }
+      .website-link a {
+        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+      }
+      section { margin-bottom: 1.5rem; }
     }
     @media (max-width: 480px) {
-        .project-header-title {
-            font-size: 1.05rem;
-            padding: 0.2rem 0.5rem;
-        }
-        main {
-            padding: 0.7rem 0.2rem 1.2rem 0.2rem;
-        }
-        h2 {
-            font-size: 1.1rem;
-        }
-        .website-link a {
-            font-size: 0.95rem;
-            padding: 0.5rem 0.7rem;
-        }
-        .presentation-images img {
-            max-width: 99vw;
-        }
-        .persona-flip-card {
-            max-width: 99vw !important;
-        }
+      .project-header-title { font-size: 1.05rem; padding: 0.2rem 0.5rem; }
+      main { padding: 0.7rem 0.2rem 1.2rem 0.2rem; }
+      h2 { font-size: 1.1rem; }
+      .website-link a { font-size: 0.95rem; padding: 0.5rem 0.7rem; }
+      .presentation-images img { max-width: 99vw; }
+      .persona-flip-card { max-width: 99vw !important; }
     }
+
     .problem-id-wrap {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      position: relative;
     }
-    .problem-id-main {
-        flex: 1;
-        min-width: 0;
+    .problem-id-main { flex: 1; min-width: 0; }
+
+    /* Persona flip styles (kept as you had them) */
+    .persona-flip-card {
+      background: none;
+      border: none;
+      perspective: 900px;
+      cursor: pointer;
+      outline: none;
+      min-height: 420px;
     }
-    </style>
+    .persona-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+      transform-style: preserve-3d;
+    }
+    .persona-flip-card.flipped .persona-flip-inner {
+      transform: rotateY(180deg);
+    }
+    .persona-flip-front, .persona-flip-back {
+      position: absolute;
+      width: 100%;
+      min-height: 420px;
+      backface-visibility: hidden;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,128,128,0.06);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .persona-flip-back {
+      transform: rotateY(180deg);
+    }
+  </style>
 </head>
+
 <body>
-    <div class="project-header">
-        <div class="project-header-title">KopaGrow</div>
-        <a href="index.html" 
-           style="position:absolute;top:18px;right:32px;display:flex;align-items:center;gap:0.4rem;background:var(--light);color:var(--teal);padding:0.5rem 1.1rem;border-radius:8px;font-weight:bold;text-decoration:none;box-shadow:0 2px 8px rgba(0,128,128,0.08);font-size:1.08rem;transition:background 0.2s;"
-           title="Go to Home">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="vertical-align:middle;">
-                <path d="M3 10.5L11 4L19 10.5" stroke="#008080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <rect x="6.5" y="12" width="9" height="6" rx="1.5" stroke="#008080" stroke-width="2"/>
-            </svg>
-            Home
+  <!-- ✅ Sticky header (MindSpring-style) -->
+  <header>
+    <div class="header-wrap">
+      <a class="brand" href="index.html" aria-label="Back to Home">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Allan Ng'ang'a</span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="icon-btn" href="index.html" aria-label="Back to index">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5"></path>
+            <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"></path>
+          </svg>
         </a>
+
+        <a class="btn" href="index.html#projects">Projects</a>
+        <a class="btn" href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" target="_blank" rel="noopener">View CV</a>
+        <a class="btn" href="assets/docs/Allan%20Ng%27ang%27a%20Associate%20Product%20Manager%20CV%20.pdf" download>Download CV</a>
+        <a class="btn primary" href="mailto:allananganga@gmail.com">Email me</a>
+      </div>
     </div>
-    <main>
-        <!-- =======================
-             PROBLEM IDENTIFICATION
-        ======================== -->
-        <section id="Problem Identification" style="padding-top:2rem; border-top: 4px solid var(--teal); margin-top:2.5rem;">
-            <h2 style="font-size:2rem; border-left:6px solid var(--teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--teal) 0%, #e0f7fa 100%); color:var(--dark);">The Challenge</h2>
-            <div class="problem-id-wrap">
-                <div class="problem-id-main">
-                    <div style="margin-bottom:1.5rem;">
-                        <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.25rem;"></h3>
-                        <p style="font-size:1.15rem;font-weight:bold;">
-                            "Financial Exclusion Stifles Growth for Millions of Small Businesses in Emerging Markets."
-                        </p>
-                        <p>
-                            Traditional lenders often have rigid requirements, demand collateral, and require a formal credit history, barriers that most smallholder farmers and micro-entrepreneurs cannot overcome. As a result, many are locked out of the financial system, unable to access the credit they need to grow, invest, or weather tough seasons. This stifles business growth, limits job creation, and perpetuates cycles of poverty.
-                        </p>
-                        <p style="font-style:italic; color:#555;">
-                            <strong>Did you know?</strong> An estimated <span style="color:var(--teal);font-weight:bold;">$330 billion</span> SME financing gap exists in Sub-Saharan Africa alone.
-                        </p>
-                    </div>
-                </div>
-                <div class="problem-visual">Problem</div>
+  </header>
+
+  <!-- Hero banner (kept) -->
+  <div class="project-header">
+    <div class="project-header-title">KopaGrow</div>
+  </div>
+
+  <main>
+    <!-- =======================
+         PROBLEM IDENTIFICATION
+    ======================== -->
+    <section id="Problem Identification" style="padding-top:2rem; border-top: 4px solid var(--teal); margin-top:2.5rem;">
+      <h2 style="font-size:2rem; border-left:6px solid var(--teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--teal) 0%, #e0f7fa 100%); color:var(--dark);">The Challenge</h2>
+      <div class="problem-id-wrap">
+        <div class="problem-id-main">
+          <div style="margin-bottom:1.5rem;">
+            <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.25rem;"></h3>
+            <p style="font-size:1.15rem;font-weight:bold;">
+              "Financial Exclusion Stifles Growth for Millions of Small Businesses in Emerging Markets."
+            </p>
+            <p>
+              Traditional lenders often have rigid requirements, demand collateral, and require a formal credit history, barriers that most smallholder farmers and micro-entrepreneurs cannot overcome. As a result, many are locked out of the financial system, unable to access the credit they need to grow, invest, or weather tough seasons. This stifles business growth, limits job creation, and perpetuates cycles of poverty.
+            </p>
+            <p style="font-style:italic; color:#555;">
+              <strong>Did you know?</strong> An estimated <span style="color:var(--teal);font-weight:bold;">$330 billion</span> SME financing gap exists in Sub-Saharan Africa alone.
+            </p>
+          </div>
+        </div>
+        <div class="problem-visual">Problem</div>
+      </div>
+    </section>
+
+    <!-- =======================
+         IDEA VALIDATION
+    ======================== -->
+    <section id="Idea Validation" style="padding-top:2rem; border-top: 4px solid var(--Beige); margin-top:2.5rem;">
+      <h2 style="font-size:2rem; border-left:6px solid var(--Beige); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--Beige) 0%, #fff8f1 100%); color:var(--dark);">Problem Discovery Through Market Research</h2>
+      <div style="position:relative;margin-bottom:2.5rem;">
+        <span class="our-approach-visual">Our Approach</span>
+
+        <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; margin-bottom:2rem;">
+          <div style="flex:1; min-width:260px;">
+            <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:0.7rem;">
+              <span style="font-size:1.5rem;vertical-align:middle;">🔎</span> Research Methodology Overview
+            </h3>
+            <ol style="list-style:none;padding:0;margin:0;">
+              <li style="margin-bottom:1.1rem;">
+                <span style="font-size:1.2rem;">💬</span>
+                <strong>Phase 1: Qualitative Insights</strong>
+                <ul style="margin:0.3rem 0 0 1.2rem;">
+                  <li>User Interviews (Small Business Owners, Micro-Entrepreneurs)</li>
+                  <li>Expert Interviews (Microfinance Leaders, Economic Development Agencies)</li>
+                  <li>SME Case Studies (Detailed analysis of growth barriers)</li>
+                </ul>
+              </li>
+              <li style="margin-bottom:1.1rem;">
+                <span style="font-size:1.2rem;">📊</span>
+                <strong>Phase 2: Quantitative Validation</strong>
+                <ul style="margin:0.3rem 0 0 1.2rem;">
+                  <li>Surveys (Targeted questionnaire on financing challenges)</li>
+                  <li>Secondary Data Analysis (World Bank, IMF, Local Central Bank Reports)</li>
+                  <li>Competitive Landscape Analysis (Existing formal and informal lenders)</li>
+                </ul>
+              </li>
+              <li>
+                <span style="font-size:1.2rem;">🧩</span>
+                <strong>Phase 3: Synthesis &amp; Definition</strong>
+                <ul style="margin:0.3rem 0 0 1.2rem;">
+                  <li>Affinity Mapping &amp; Thematic Analysis</li>
+                  <li>Persona &amp; Empathy Map Development</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+          <div style="flex:1; min-width:260px;">
+            <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:0.7rem;">
+              <span style="font-size:1.5rem;vertical-align:middle;">🗣️</span> Qualitative Research Deep Dive
+            </h3>
+            <div style="background:#f9f9f9;border-left:4px solid var(--teal);padding:1rem 1.2rem;margin-bottom:1rem;">
+              <strong>Hearing Their Struggles:</strong> Key Insights from Over 25 User &amp; Expert Interviews
             </div>
-            <!-- ...next segments will go here... -->
-        </section>
+            <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
+              "I needed 50,000 shillings to buy more stock, but the bank said my shop isn't 'collateral' enough. How can I grow if I can't even get a small loan?"<br>
+              <span style="font-size:0.98rem;color:#888;">– Mary, Fabric Seller, Lagos</span>
+            </blockquote>
+            <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
+              "My business has reliable daily sales through mobile money, but traditional banks only look at my 'paper' history, which isn't much. They don't see my real cash flow."<br>
+              <span style="font-size:0.98rem;color:#888;">– David, Small Grocer, Accra</span>
+            </blockquote>
+            <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
+              "The informal lenders are fast, but their interest rates eat up all my profit. It's a trap if my daily sales aren't perfect."<br>
+              <span style="font-size:0.98rem;color:#888;">– Sofia, Artisan Craftsman, Jakarta</span>
+            </blockquote>
+            <ul style="margin:1rem 0 0 1.2rem;">
+              <li><strong>Rigid Collateral Demands:</strong> Overwhelming inability to provide property or traditional assets.</li>
+              <li><strong>Lack of Formal Credit History:</strong> Many operate largely in cash or mobile money, leaving no traditional paper trail.</li>
+              <li><strong>Loan Size Mismatch:</strong> Traditional banks offer large loans, but SMEs often need smaller, more frequent capital injections.</li>
+              <li><strong>Slow &amp; Opaque Processes:</strong> Lengthy application times and unclear criteria contrast with urgent business needs.</li>
+              <li><strong>High Costs of Informal Lending:</strong> Predatory interest rates and lack of protections from unofficial sources.</li>
+              <li><strong>Untapped Potential:</strong> Demonstrated business viability and growth aspirations stifled by funding gaps.</li>
+            </ul>
+          </div>
+        </div>
 
-        <!-- =======================
-             IDEA VALIDATION
-        ======================== -->
-        <section id="Idea Validation" style="padding-top:2rem; border-top: 4px solid var(--Beige); margin-top:2.5rem;">
-            <h2 style="font-size:2rem; border-left:6px solid var(--Beige); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--Beige) 0%, #fff8f1 100%); color:var(--dark);">Problem Discovery Through Market Research</h2>
-            <div style="position:relative;margin-bottom:2.5rem;">
-                <span class="our-approach-visual">Our Approach</span>
-                <!-- Visual 1: Research Methodology Overview -->
-                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; margin-bottom:2rem;">
-                    <div style="flex:1; min-width:260px;">
-                        <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:0.7rem;">
-                            <span style="font-size:1.5rem;vertical-align:middle;">🔎</span> Research Methodology Overview
-                        </h3>
-                        <ol style="list-style:none;padding:0;margin:0;">
-                            <li style="margin-bottom:1.1rem;">
-                                <span style="font-size:1.2rem;">💬</span>
-                                <strong>Phase 1: Qualitative Insights</strong>
-                                <ul style="margin:0.3rem 0 0 1.2rem;">
-                                    <li>User Interviews (Small Business Owners, Micro-Entrepreneurs)</li>
-                                    <li>Expert Interviews (Microfinance Leaders, Economic Development Agencies)</li>
-                                    <li>SME Case Studies (Detailed analysis of growth barriers)</li>
-                                </ul>
-                            </li>
-                            <li style="margin-bottom:1.1rem;">
-                                <span style="font-size:1.2rem;">📊</span>
-                                <strong>Phase 2: Quantitative Validation</strong>
-                                <ul style="margin:0.3rem 0 0 1.2rem;">
-                                    <li>Surveys (Targeted questionnaire on financing challenges)</li>
-                                    <li>Secondary Data Analysis (World Bank, IMF, Local Central Bank Reports)</li>
-                                    <li>Competitive Landscape Analysis (Existing formal and informal lenders)</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span style="font-size:1.2rem;">🧩</span>
-                                <strong>Phase 3: Synthesis &amp; Definition</strong>
-                                <ul style="margin:0.3rem 0 0 1.2rem;">
-                                    <li>Affinity Mapping &amp; Thematic Analysis</li>
-                                    <li>Persona &amp; Empathy Map Development</li>
-                                </ul>
-                            </li>
-                        </ol>
-                    </div>
-                    <div style="flex:1; min-width:260px;">
-                        <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:0.7rem;">
-                            <span style="font-size:1.5rem;vertical-align:middle;">🗣️</span> Qualitative Research Deep Dive
-                        </h3>
-                        <div style="background:#f9f9f9;border-left:4px solid var(--teal);padding:1rem 1.2rem;margin-bottom:1rem;">
-                            <strong>Hearing Their Struggles:</strong> Key Insights from Over 25 User &amp; Expert Interviews
-                        </div>
-                        <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
-                            "I needed 50,000 shillings to buy more stock, but the bank said my shop isn't 'collateral' enough. How can I grow if I can't even get a small loan?"<br>
-                            <span style="font-size:0.98rem;color:#888;">– Mary, Fabric Seller, Lagos</span>
-                        </blockquote>
-                        <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
-                            "My business has reliable daily sales through mobile money, but traditional banks only look at my 'paper' history, which isn't much. They don't see my real cash flow."<br>
-                            <span style="font-size:0.98rem;color:#888;">– David, Small Grocer, Accra</span>
-                        </blockquote>
-                        <blockquote style="margin:0 0 0.7rem 0;border-left:3px solid var(--Beige);padding-left:1rem;font-style:italic;color:#444;">
-                            "The informal lenders are fast, but their interest rates eat up all my profit. It's a trap if my daily sales aren't perfect."<br>
-                            <span style="font-size:0.98rem;color:#888;">– Sofia, Artisan Craftsman, Jakarta</span>
-                        </blockquote>
-                        <ul style="margin:1rem 0 0 1.2rem;">
-                            <li><strong>Rigid Collateral Demands:</strong> Overwhelming inability to provide property or traditional assets.</li>
-                            <li><strong>Lack of Formal Credit History:</strong> Many operate largely in cash or mobile money, leaving no traditional paper trail.</li>
-                            <li><strong>Loan Size Mismatch:</strong> Traditional banks offer large loans, but SMEs often need smaller, more frequent capital injections.</li>
-                            <li><strong>Slow &amp; Opaque Processes:</strong> Lengthy application times and unclear criteria contrast with urgent business needs.</li>
-                            <li><strong>High Costs of Informal Lending:</strong> Predatory interest rates and lack of protections from unofficial sources.</li>
-                            <li><strong>Untapped Potential:</strong> Demonstrated business viability and growth aspirations stifled by funding gaps.</li>
-                        </ul>
-                    </div>
+        <div style="background:#f9f9f9;border-radius:10px;padding:1.5rem 1.2rem;box-shadow:0 2px 12px rgba(0,128,128,0.04);margin-bottom:1.5rem;">
+          <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:1rem;">
+            <span style="font-size:1.5rem;vertical-align:middle;">📈</span> Quantitative Research Validation
+          </h3>
+          <div style="display:flex;flex-wrap:wrap;gap:2rem;">
+            <div style="flex:1;min-width:220px;">
+              <strong>Primary Reasons Small Businesses Were Denied Loans<br>(N=300 Survey Respondents)</strong>
+              <div style="margin:0.7rem 0;">
+                <div style="margin-bottom:0.3rem;">Lack of Collateral <span style="float:right;">65%</span>
+                  <div style="background:var(--light-teal);height:10px;width:65%;border-radius:5px;"></div>
                 </div>
-                <!-- Visual 3: Quantitative Research Validation -->
-                <div style="background:#f9f9f9;border-radius:10px;padding:1.5rem 1.2rem;box-shadow:0 2px 12px rgba(0,128,128,0.04);margin-bottom:1.5rem;">
-                    <h3 style="color:var(--teal);font-family:var(--font-heading);font-size:1.15rem;margin-bottom:1rem;">
-                        <span style="font-size:1.5rem;vertical-align:middle;">📈</span> Quantitative Research Validation
-                    </h3>
-                    <div style="display:flex;flex-wrap:wrap;gap:2rem;">
-                        <div style="flex:1;min-width:220px;">
-                            <strong>Primary Reasons Small Businesses Were Denied Loans<br>(N=300 Survey Respondents)</strong>
-                            <div style="margin:0.7rem 0;">
-                                <div style="margin-bottom:0.3rem;">Lack of Collateral <span style="float:right;">65%</span>
-                                    <div style="background:var(--light-teal);height:10px;width:65%;border-radius:5px;"></div>
-                                </div>
-                                <div style="margin-bottom:0.3rem;">Insufficient Credit History <span style="float:right;">40%</span>
-                                    <div style="background:var(--light-teal);height:10px;width:40%;border-radius:5px;"></div>
-                                </div>
-                                <div style="margin-bottom:0.3rem;">Loan Amount Too Small for Bank <span style="float:right;">25%</span>
-                                    <div style="background:var(--light-teal);height:10px;width:25%;border-radius:5px;"></div>
-                                </div>
-                                <div>Complex Application Process <span style="float:right;">20%</span>
-                                    <div style="background:var(--light-teal);height:10px;width:20%;border-radius:5px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="flex:1;min-width:220px;margin:0.7rem 0 0 12rem;">
-                            <strong>Global SME Funding Gap</strong>
-                            <div style="margin:0.7rem 0 0 5rem;">
-                                <svg width="110" height="110" viewBox="0 0 110 110">
-                                    <circle cx="55" cy="55" r="50" fill="#eee"/>
-                                    <path d="M55,55 L55,5 A50,50 0 1,1 13.2,81.6 Z" fill="var(--light-teal)"/>
-                                    <text x="50%" y="54%" text-anchor="middle" fill="var(--teal)" font-size="1.1em" font-family="Arial" dy=".3em">45%</text>
-                                </svg>
-                                <div style="text-align:center;font-size:0.98rem;">Formal Finance Needs Unmet</div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul style="margin:1.2rem 0 0 1.2rem;">
-                        <li><strong>Key Stat:</strong> 75% of small businesses surveyed in target markets primarily use mobile money for business transactions, generating rich alternative data.</li>
-                        <li><strong>Economic Impact:</strong> SMEs account for ~90% of businesses and 50%+ of employment in emerging economies (UN/World Bank).</li>
-                        <li><strong>Funding Gap:</strong> This segment represents between $330 billion and $1.5 trillion globally, depending on the source and scope.</li>
-                    </ul>
+                <div style="margin-bottom:0.3rem;">Insufficient Credit History <span style="float:right;">40%</span>
+                  <div style="background:var(--light-teal);height:10px;width:40%;border-radius:5px;"></div>
                 </div>
+                <div style="margin-bottom:0.3rem;">Loan Amount Too Small for Bank <span style="float:right;">25%</span>
+                  <div style="background:var(--light-teal);height:10px;width:25%;border-radius:5px;"></div>
+                </div>
+                <div>Complex Application Process <span style="float:right;">20%</span>
+                  <div style="background:var(--light-teal);height:10px;width:20%;border-radius:5px;"></div>
+                </div>
+              </div>
             </div>
-        </section>
 
-        <!-- =======================
-             DEFINE SCOPE & MVP
-        ======================== -->
-        <section id="Define Scope & MVP" style="padding-top:2rem; border-top: 4px solid var(--light-teal); margin-top:2.5rem;">
-            <h2 style="font-size:2rem; border-left:6px solid var(--light-teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--light-teal) 0%, #e0f7fa 100%); color:var(--dark);">Understanding Our Users: The "Who" Behind the Problem</h2>
-            <div style="margin-bottom:2.5rem;">
-                <p style="font-size:1.08rem; color:#333; max-width:700px;">
-                    To effectively solve a problem, we first immersed ourselves in the lives of those experiencing it. Our research led us to define our primary user segment and deeply understand their struggles and aspirations.
-                </p>
-                <div style="display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-start;">
-                    <!-- Persona Card (interactive flip) -->
-                    <div class="persona-flip-card" tabindex="0" style="max-width:340px;flex:1;min-width:260px;">
-                        <div class="persona-flip-inner">
-                            <div class="persona-flip-front">
-                                <img src="https://ipfs.io/ipfs/QmY6BSh6ZKN5GChiWcjj9DdwYfsJ84pW9fenXiVw6P5a8Z?filename=Aisha's%20Delights%20in%20the%20Kitchen.png" alt="Aisha Aden" style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1rem;border:3px solid var(--light-teal);">
-                                <h3 style="font-family:var(--font-heading);color:var(--teal);font-size:1.25rem;margin-bottom:0.2rem;">Aisha Aden</h3>
-                                <div style="font-size:0.98rem;color:#444;text-align:center;margin-bottom:0.7rem;">
-                                    Nairobi, Kenya<br>
-                                    Owner &amp; Head Cook, "Aisha's Delights"
-                                </div>
-                                <div style="font-size:1rem;color:#222;margin-bottom:0.8rem;text-align:center;">
-                                    <strong>Bio:</strong> Aisha is a driven entrepreneur relying on her restaurant as the sole income for her family. She has a loyal customer base and consistently sees demand, but traditional financing barriers prevent her from expanding.
-                                </div>
-                                <div style="width:100%;margin-bottom:0.7rem;">
-                                    <strong>Goals:</strong>
-                                    <ul style="margin:0.3rem 0 0 1.2rem;">
-                                        <li>Grow her business (expand seating, buy larger equipment)</li>
-                                        <li>Achieve financial stability for her family</li>
-                                    </ul>
-                                </div>
-                                <div style="font-style:italic;color:var(--teal);margin-top:0.7rem;text-align:center;">
-                                    <span style="font-size:1.1rem;">"My customers fill my M-Pesa till every day, but the banks still ask for my grandmother's title deed. I just need a fair chance to grow my business."</span>
-                                </div>
-                                <div style="margin-top:1.2rem;text-align:center;">
-                                    <span style="font-size:0.97rem;color:var(--Beige);font-family:'Pacifico',cursive;">Click or tap to see more</span>
-                                </div>
-                            </div>
-                            <div class="persona-flip-back">
-                                <div style="width:100%;margin-bottom:0.7rem;">
-                                    <strong>Frustrations/Pain Points:</strong>
-                                    <ul style="margin:0.3rem 0 0 1.2rem;">
-                                        <li>No Collateral: Lacks traditional assets for bank loans.</li>
-                                        <li>Invisible Cash Flow: M-Pesa transactions aren't recognized by banks.</li>
-                                        <li>Slow &amp; Complex Processes: Bank applications are lengthy and often rejected.</li>
-                                        <li>Missed Opportunities: Can't seize bulk deals or large orders.</li>
-                                        <li>High Informal Costs: Forced to use expensive, unreliable informal lenders.</li>
-                                    </ul>
-                                </div>
-                                <div style="width:100%;margin-bottom:0.7rem;">
-                                    <strong>Needs/Wants:</strong>
-                                    <ul style="margin:0.3rem 0 0 1.2rem;">
-                                        <li>Fast, Unsecured Loans: Quick access to capital without collateral.</li>
-                                        <li>Fair &amp; Transparent Terms: Clear repayment, no hidden fees.</li>
-                                        <li>M-Pesa Driven Assessment: Lending model using her transaction history.</li>
-                                    </ul>
-                                </div>
-                                <div style="margin-top:1.2rem;text-align:center;">
-                                    <span style="font-size:0.97rem;color:var(--Beige);font-family:'Pacifico',cursive;">Click or tap to return</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Empathy Map Snapshot -->
-                    <div style="flex:1;min-width:260px;max-width:420px;">
-                        <div style="background:#f9f9f9;border-radius:12px;padding:1.2rem 1.2rem 1.5rem 1.2rem;box-shadow:0 2px 12px rgba(0,128,128,0.04);">
-                            <h4 style="font-family:var(--font-heading);color:var(--teal);font-size:1.1rem;margin-bottom:0.7rem;">Empathy Map Snapshot: The Entrepreneur's Daily Reality</h4>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;">
-                                <div>
-                                    <strong>SAYS</strong>
-                                    <div style="font-size:0.97rem;color:#444;">"Banks always say no."</div>
-                                    <div style="font-size:0.97rem;color:#444;">"My M-Pesa statements should count."</div>
-                                    <div style="font-size:0.97rem;color:#444;">"Informal lenders are too expensive."</div>
-                                </div>
-                                <div>
-                                    <strong>THINKS</strong>
-                                    <div style="font-size:0.97rem;color:#444;">"I feel stuck, despite my hard work."</div>
-                                    <div style="font-size:0.97rem;color:#444;">"How can I expand with no capital?"</div>
-                                    <div style="font-size:0.97rem;color:#444;">"Why won't banks see my actual business?"</div>
-                                </div>
-                                <div>
-                                    <strong>DOES</strong>
-                                    <div style="font-size:0.97rem;color:#444;">Uses M-Pesa for most transactions.</div>
-                                    <div style="font-size:0.97rem;color:#444;">Borrows from family/chamas.</div>
-                                    <div style="font-size:0.97rem;color:#444;">Manages daily cash for stock.</div>
-                                </div>
-                                <div>
-                                    <strong>FEELS</strong>
-                                    <div style="font-size:0.97rem;color:#444;">Frustrated by system barriers.</div>
-                                    <div style="font-size:0.97rem;color:#444;">Anxious about growth and cash flow.</div>
-                                    <div style="font-size:0.97rem;color:#444;">Determined to succeed.</div>
-                                </div>
-                            </div>
-                            <div style="display:flex;gap:1.5rem;margin-top:1.2rem;">
-                                <div style="flex:1;">
-                                    <strong>PAINS</strong>
-                                    <ul style="margin:0.3rem 0 0 1.2rem;">
-                                        <li>Financial Exclusion: Cannot access formal loans.</li>
-                                        <li>Stifled Growth: Business potential unfulfilled.</li>
-                                        <li>Stress: High costs and uncertainty from informal borrowing.</li>
-                                    </ul>
-                                </div>
-                                <div style="flex:1;">
-                                    <strong>GAINS</strong>
-                                    <ul style="margin:0.3rem 0 0 1.2rem;">
-                                        <li>Accessible Capital: Loans enabling expansion.</li>
-                                        <li>Fair Terms: Transparent and manageable repayments.</li>
-                                        <li>Empowerment: Recognition of real business activity.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div style="flex:1;min-width:220px;margin:0.7rem 0 0 12rem;">
+              <strong>Global SME Funding Gap</strong>
+              <div style="margin:0.7rem 0 0 5rem;">
+                <svg width="110" height="110" viewBox="0 0 110 110">
+                  <circle cx="55" cy="55" r="50" fill="#eee"/>
+                  <path d="M55,55 L55,5 A50,50 0 1,1 13.2,81.6 Z" fill="var(--light-teal)"/>
+                  <text x="50%" y="54%" text-anchor="middle" fill="var(--teal)" font-size="1.1em" font-family="Arial" dy=".3em">45%</text>
+                </svg>
+                <div style="text-align:center;font-size:0.98rem;">Formal Finance Needs Unmet</div>
+              </div>
             </div>
-            <style>
-            .persona-flip-card {
-                background: none;
-                border: none;
-                perspective: 900px;
-                cursor: pointer;
-                outline: none;
-                min-height: 420px;
-            }
-            .persona-flip-inner {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                transition: transform 0.7s cubic-bezier(.4,2,.6,1);
-                transform-style: preserve-3d;
-            }
-            .persona-flip-card.flipped .persona-flip-inner {
-                transform: rotateY(180deg);
-            }
-            /* Remove hover/keyboard focus flipping */
-            .persona-flip-front, .persona-flip-back {
-                position: absolute;
-                width: 100%;
-                min-height: 420px;
-                backface-visibility: hidden;
-                background: #fff;
-                border-radius: 14px;
-                box-shadow: 0 2px 16px rgba(0,128,128,0.06);
-                padding: 2rem 1.5rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-            }
-            .persona-flip-back {
-                transform: rotateY(180deg);
-            }
-            </style>
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var flipCard = document.querySelector('.persona-flip-card');
-                if (flipCard) {
-                    flipCard.addEventListener('click', function() {
-                        flipCard.classList.toggle('flipped');
-                    });
-                    flipCard.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            flipCard.classList.toggle('flipped');
-                        }
-                    });
-                }
-            });
-            </script>
-        </section>
+          </div>
 
-        <!-- =======================
-             DESIGN & BUILD
-        ======================== -->
-        <section id="Design & Build" style="padding-top:2rem; border-top: 4px solid var(--teal); margin-top:2.5rem;">
-            <h2 style="font-size:2rem; border-left:6px solid var(--teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--teal) 0%, #e0f7fa 100%); color:var(--dark);">Design &amp; Build: Our Minimum Viable Product (MVP)</h2>
-            <div style="margin-bottom:2.5rem;">
-                <p style="font-size:1.08rem; color:#333; max-width:700px;">
-                    We translated our problem insights into a functional MVP, prioritizing core features that directly address our users' critical needs for accessible and transparent finance.
-                </p>
-                <!-- MVP Screens -->
-                <div style="display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-start;margin-bottom:2.5rem;">
-                    <div style="flex:1;min-width:220px;max-width:300px;">
-                        <img 
-                            id="homepage-img"
-                            src="https://ipfs.io/ipfs/QmXNTtt77nTXmyNi6PgZHDQEN5LScVpxGrvK4ikgi9hynM?filename=Home%20page%20Kopa.png" 
-                            alt="KopaGrow Homepage" 
-                            style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
-                            onclick="showEnhancedImage(this.src)"
-                        >
-                        <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Homepage</div>
-                        <div style="font-size:0.97rem;color:#444;">Welcomes users and highlights KopaGrow's mission and value.</div>
-                    </div>
-                    <div style="flex:1;min-width:220px;max-width:300px;">
-                        <img 
-                            src="https://ipfs.io/ipfs/QmSqPYMkZZRkykBcmUFJX9UkgKhuHnVxyBDTFDUfA2Zieq?filename=Picture%205.PNG" 
-                            alt="KopaGrow Impact Page" 
-                            style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
-                            onclick="showEnhancedImage(this.src)"
-                        >
-                        <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Our Impact</div>
-                        <div style="font-size:0.97rem;color:#444;">Showcases real stories, stats, and the positive change KopaGrow brings.</div>
-                    </div>
-                    <div style="flex:1;min-width:220px;max-width:300px;">
-                        <img 
-                            src="https://ipfs.io/ipfs/QmZtN9mzHT3ZAaXVgZ3DHmRY9c2jmew6xLmRWabWafkT3X?filename=Loan%20application.PNG" 
-                            alt="KopaGrow Loan Application" 
-                            style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
-                            onclick="showEnhancedImage(this.src)"
-                        >
-                        <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Loan Application</div>
-                        <div style="font-size:0.97rem;color:#444;">Mobile-first, step-by-step loan application process.</div>
-                    </div>
+          <ul style="margin:1.2rem 0 0 1.2rem;">
+            <li><strong>Key Stat:</strong> 75% of small businesses surveyed in target markets primarily use mobile money for business transactions, generating rich alternative data.</li>
+            <li><strong>Economic Impact:</strong> SMEs account for ~90% of businesses and 50%+ of employment in emerging economies (UN/World Bank).</li>
+            <li><strong>Funding Gap:</strong> This segment represents between $330 billion and $1.5 trillion globally, depending on the source and scope.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================
+         DEFINE SCOPE & MVP
+    ======================== -->
+    <section id="Define Scope & MVP" style="padding-top:2rem; border-top: 4px solid var(--light-teal); margin-top:2.5rem;">
+      <h2 style="font-size:2rem; border-left:6px solid var(--light-teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--light-teal) 0%, #e0f7fa 100%); color:var(--dark);">Understanding Our Users: The "Who" Behind the Problem</h2>
+      <div style="margin-bottom:2.5rem;">
+        <p style="font-size:1.08rem; color:#333; max-width:700px;">
+          To effectively solve a problem, we first immersed ourselves in the lives of those experiencing it. Our research led us to define our primary user segment and deeply understand their struggles and aspirations.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-start;">
+          <!-- Persona Card (interactive flip) -->
+          <div class="persona-flip-card" tabindex="0" style="max-width:340px;flex:1;min-width:260px;">
+            <div class="persona-flip-inner">
+              <div class="persona-flip-front">
+                <!-- ✅ Updated to local JPG -->
+                <img src="assets/img/aisha.png" alt="Aisha Aden"
+                     style="width:140px;height:140px;border-radius:50%;object-fit:cover;margin-bottom:1rem;border:3px solid var(--light-teal);">
+                <h3 style="font-family:var(--font-heading);color:var(--teal);font-size:1.25rem;margin-bottom:0.2rem;">Aisha Aden</h3>
+                <div style="font-size:0.98rem;color:#444;text-align:center;margin-bottom:0.7rem;">
+                  Nairobi, Kenya<br>
+                  Owner &amp; Head Cook, "Aisha's Delights"
                 </div>
-                <!-- Wireframe Placeholder -->
-                <div style="margin:2rem 0 1.5rem 0;">
-                    <h3 style="font-family:var(--font-heading);color:var(--teal);font-size:1.15rem;margin-bottom:0.7rem;">Design Principles &amp; Approach</h3>
-                    <ul style="font-size:1.05rem;color:#444;margin-left:1.2rem;">
-                        <li><strong>User-Centric Design:</strong> Prioritized ease of use for entrepreneurs with varying digital literacy.</li>
-                        <li><strong>Trust Building:</strong> Clear UI, prominent M-Pesa integration, and upfront transparency.</li>
-                        <li><strong>Speed &amp; Efficiency:</strong> Designed for rapid loan disbursement and management.</li>
-                        <li><strong>AI-Powered Assessment:</strong> Leveraging M-Pesa data for collateral-free credit.</li>
-                    </ul>
-                    <div style="margin-top:1.2rem;font-size:0.97rem;color:#666;">  
-                    </div>
+                <div style="font-size:1rem;color:#222;margin-bottom:0.8rem;text-align:center;">
+                  <strong>Bio:</strong> Aisha is a driven entrepreneur relying on her restaurant as the sole income for her family. She has a loyal customer base and consistently sees demand, but traditional financing barriers prevent her from expanding.
                 </div>
+                <div style="width:100%;margin-bottom:0.7rem;">
+                  <strong>Goals:</strong>
+                  <ul style="margin:0.3rem 0 0 1.2rem;">
+                    <li>Grow her business (expand seating, buy larger equipment)</li>
+                    <li>Achieve financial stability for her family</li>
+                  </ul>
+                </div>
+                <div style="font-style:italic;color:var(--teal);margin-top:0.7rem;text-align:center;">
+                  <span style="font-size:1.1rem;">"My customers fill my M-Pesa till every day, but the banks still ask for my grandmother's title deed. I just need a fair chance to grow my business."</span>
+                </div>
+                <div style="margin-top:1.2rem;text-align:center;">
+                  <span style="font-size:0.97rem;color:var(--Beige);font-family:'Pacifico',cursive;">Click or tap to see more</span>
+                </div>
+              </div>
+
+              <div class="persona-flip-back">
+                <div style="width:100%;margin-bottom:0.7rem;">
+                  <strong>Frustrations/Pain Points:</strong>
+                  <ul style="margin:0.3rem 0 0 1.2rem;">
+                    <li>No Collateral: Lacks traditional assets for bank loans.</li>
+                    <li>Invisible Cash Flow: M-Pesa transactions aren't recognized by banks.</li>
+                    <li>Slow &amp; Complex Processes: Bank applications are lengthy and often rejected.</li>
+                    <li>Missed Opportunities: Can't seize bulk deals or large orders.</li>
+                    <li>High Informal Costs: Forced to use expensive, unreliable informal lenders.</li>
+                  </ul>
+                </div>
+                <div style="width:100%;margin-bottom:0.7rem;">
+                  <strong>Needs/Wants:</strong>
+                  <ul style="margin:0.3rem 0 0 1.2rem;">
+                    <li>Fast, Unsecured Loans: Quick access to capital without collateral.</li>
+                    <li>Fair &amp; Transparent Terms: Clear repayment, no hidden fees.</li>
+                    <li>M-Pesa Driven Assessment: Lending model using her transaction history.</li>
+                  </ul>
+                </div>
+                <div style="margin-top:1.2rem;text-align:center;">
+                  <span style="font-size:0.97rem;color:var(--Beige);font-family:'Pacifico',cursive;">Click or tap to return</span>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <!-- =======================
-             TEST & LAUNCH
-        ======================== -->
-        <section id="Test & Launch" style="padding-top:2rem; border-top: 4px solid var(--Beige); margin-top:2.5rem;">
-            <h2 style="font-size:2rem; border-left:6px solid var(--Beige); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--Beige) 0%, #fff8f1 100%); color:var(--dark);">Test & Launch</h2>  
-            <p><!-- Share with users and collect feedback. --></p>
-        </section>
+          <!-- Empathy Map Snapshot -->
+          <div style="flex:1;min-width:260px;max-width:420px;">
+            <div style="background:#f9f9f9;border-radius:12px;padding:1.2rem 1.2rem 1.5rem 1.2rem;box-shadow:0 2px 12px rgba(0,128,128,0.04);">
+              <h4 style="font-family:var(--font-heading);color:var(--teal);font-size:1.1rem;margin-bottom:0.7rem;">Empathy Map Snapshot: The Entrepreneur's Daily Reality</h4>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;">
+                <div>
+                  <strong>SAYS</strong>
+                  <div style="font-size:0.97rem;color:#444;">"Banks always say no."</div>
+                  <div style="font-size:0.97rem;color:#444;">"My M-Pesa statements should count."</div>
+                  <div style="font-size:0.97rem;color:#444;">"Informal lenders are too expensive."</div>
+                </div>
+                <div>
+                  <strong>THINKS</strong>
+                  <div style="font-size:0.97rem;color:#444;">"I feel stuck, despite my hard work."</div>
+                  <div style="font-size:0.97rem;color:#444;">"How can I expand with no capital?"</div>
+                  <div style="font-size:0.97rem;color:#444;">"Why won't banks see my actual business?"</div>
+                </div>
+                <div>
+                  <strong>DOES</strong>
+                  <div style="font-size:0.97rem;color:#444;">Uses M-Pesa for most transactions.</div>
+                  <div style="font-size:0.97rem;color:#444;">Borrows from family/chamas.</div>
+                  <div style="font-size:0.97rem;color:#444;">Manages daily cash for stock.</div>
+                </div>
+                <div>
+                  <strong>FEELS</strong>
+                  <div style="font-size:0.97rem;color:#444;">Frustrated by system barriers.</div>
+                  <div style="font-size:0.97rem;color:#444;">Anxious about growth and cash flow.</div>
+                  <div style="font-size:0.97rem;color:#444;">Determined to succeed.</div>
+                </div>
+              </div>
 
-        <!-- =======================
-             WEBSITE LINK & DIVE
-        ======================== -->
-        <section class="website-link" style="position:relative;">
-            <div id="diving-board-container" style="position:relative;display:inline-block;">
-                <!-- Diving board -->
-                <div id="diving-board" style="width:120px;height:18px;background:#b0b0b0;border-radius:8px 8px 12px 12px;position:absolute;left:50%;transform:translateX(-50%);top:-38px;box-shadow:0 2px 8px rgba(0,0,0,0.13);z-index:2;">
-                    <div style="width:30px;height:8px;background:#888;border-radius:4px;position:absolute;left:45px;top:-8px;"></div>
+              <div style="display:flex;gap:1.5rem;margin-top:1.2rem;">
+                <div style="flex:1;">
+                  <strong>PAINS</strong>
+                  <ul style="margin:0.3rem 0 0 1.2rem;">
+                    <li>Financial Exclusion: Cannot access formal loans.</li>
+                    <li>Stifled Growth: Business potential unfulfilled.</li>
+                    <li>Stress: High costs and uncertainty from informal borrowing.</li>
+                  </ul>
                 </div>
-                <!-- Diver -->
-                <div id="diver" style="position:absolute;left:50%;top:-70px;transform:translateX(-50%);z-index:3;cursor:pointer;transition:filter 0.2s;">
-                    <svg width="38" height="48" viewBox="0 0 38 48" style="display:block;">
-                        <!-- Head -->
-                        <circle cx="19" cy="10" r="7" fill="#ffe0b2" />
-                        <!-- Body -->
-                        <rect x="14" y="17" width="10" height="18" rx="5" fill="#2196f3"/>
-                        <!-- Arms -->
-                        <rect x="5" y="18" width="8" height="6" rx="3" fill="#ffe0b2" transform="rotate(-20 9 21)"/>
-                        <rect x="25" y="18" width="8" height="6" rx="3" fill="#ffe0b2" transform="rotate(20 29 21)"/>
-                        <!-- Legs -->
-                        <rect x="13" y="35" width="5" height="12" rx="2.5" fill="#ffe0b2" transform="rotate(-10 15.5 41)"/>
-                        <rect x="20" y="35" width="5" height="12" rx="2.5" fill="#ffe0b2" transform="rotate(10 22.5 41)"/>
-                    </svg>
+                <div style="flex:1;">
+                  <strong>GAINS</strong>
+                  <ul style="margin:0.3rem 0 0 1.2rem;">
+                    <li>Accessible Capital: Loans enabling expansion.</li>
+                    <li>Fair Terms: Transparent and manageable repayments.</li>
+                    <li>Empowerment: Recognition of real business activity.</li>
+                  </ul>
                 </div>
-                <!-- Splash (hidden by default, now around the button) -->
-                <div id="splash" style="display:none;position:absolute;left:50%;top:auto;bottom:-18px;transform:translateX(-50%);z-index:1;pointer-events:none;">
-                    <svg width="180" height="48" viewBox="0 0 180 48">
-                        <ellipse cx="90" cy="24" rx="80" ry="16" fill="#b2ebf2" opacity="0.7"/>
-                        <ellipse cx="90" cy="32" rx="60" ry="10" fill="#4dd0e1" opacity="0.5"/>
-                    </svg>
-                </div>
-                <div style="margin-top:70px;text-align:center;font-size:1.08rem;color:var(--teal);font-family:var(--font-heading);letter-spacing:0.5px;">
-                    Dive into the solution
-                </div>
-                <a id="kopagrow-link" href="https://allanartghub.github.io/KopaGrow/" target="_blank" rel="noopener" style="position:relative;z-index:2;display:inline-block;margin-top:2.5rem;">
-                    Visit KopaGrow Website
-                </a>
+              </div>
             </div>
-            <!-- Replace # with the actual website URL when available -->
-        </section>
-    </main>
-    <script>
-        // Diving animation logic
-        (function() {
-            var diver = document.getElementById('diver');
-            var splash = document.getElementById('splash');
-            var board = document.getElementById('diving-board');
-            var link = document.getElementById('kopagrow-link');
-            var container = document.getElementById('diving-board-container');
-            var animating = false;
-            var divedOnce = false;
+          </div>
+        </div>
+      </div>
 
-            function dive() {
-                if (animating) return;
-                animating = true;
-                diver.style.transition = "transform 0.4s cubic-bezier(.7,1.7,.7,1), top 0.4s cubic-bezier(.7,1.7,.7,1)";
-                // Board bounce
-                board.animate([
-                    { transform: "translateX(-50%)" },
-                    { transform: "translateX(-50%) rotate(-10deg)" },
-                    { transform: "translateX(-50%)" }
-                ], { duration: 300, easing: "ease-in-out" });
-
-                // Diver jump up
-                diver.style.transform = "translateX(-50%) translateY(-30px) rotate(-20deg)";
-                setTimeout(function() {
-                    // Dive down
-                    diver.style.transition = "transform 0.7s cubic-bezier(.2,1.2,.7,1), top 0.7s cubic-bezier(.2,1.2,.7,1)";
-                    diver.style.transform = "translateX(-50%) translateY(110px) rotate(60deg)";
-                    diver.style.top = "38px";
-                    setTimeout(function() {
-                        diver.style.visibility = "hidden";
-                        splash.style.display = "block";
-                        // Optional: ripple effect
-                        splash.animate([
-                            { opacity: 0.7, transform: "scale(1)" },
-                            { opacity: 1, transform: "scale(1.15)" },
-                            { opacity: 0.7, transform: "scale(1)" }
-                        ], { duration: 600 });
-                        setTimeout(function() {
-                            diver.style.transition = "none";
-                            diver.style.transform = "translateX(-50%)";
-                            diver.style.top = "-70px";
-                            diver.style.visibility = "visible";
-                            splash.style.display = "none";
-                            animating = false;
-                        }, 900);
-                    }, 700);
-                }, 400);
-            }
-
-            diver.addEventListener('click', function(e) {
-                dive();
-                setTimeout(function() {
-                    link.focus();
-                }, 1100);
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var flipCard = document.querySelector('.persona-flip-card');
+          if (flipCard) {
+            flipCard.addEventListener('click', function() {
+              flipCard.classList.toggle('flipped');
             });
-
-            // Accessibility: allow keyboard activation
-            diver.setAttribute('tabindex', '0');
-            diver.setAttribute('aria-label', 'Dive to visit KopaGrow Website');
-            diver.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    dive();
-                }
+            flipCard.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                flipCard.classList.toggle('flipped');
+              }
             });
+          }
+        });
+      </script>
+    </section>
 
-            diver.addEventListener('mouseenter', function() {
-                if (!animating) diver.style.filter = "brightness(1.15)";
-            });
-            diver.addEventListener('mouseleave', function() {
-                diver.style.filter = "";
-            });
+    <!-- =======================
+         DESIGN & BUILD
+    ======================== -->
+    <section id="Design & Build" style="padding-top:2rem; border-top: 4px solid var(--teal); margin-top:2.5rem;">
+      <h2 style="font-size:2rem; border-left:6px solid var(--teal); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--teal) 0%, #e0f7fa 100%); color:var(--dark);">Design &amp; Build: Our Minimum Viable Product (MVP)</h2>
+      <div style="margin-bottom:2.5rem;">
+        <p style="font-size:1.08rem; color:#333; max-width:700px;">
+          We translated our problem insights into a functional MVP, prioritizing core features that directly address our users' critical needs for accessible and transparent finance.
+        </p>
 
-            // Auto-trigger dive when in viewport (once)
-            function isInViewport(el) {
-                var rect = el.getBoundingClientRect();
-                return (
-                    rect.top < window.innerHeight &&
-                    rect.bottom > 0
-                );
-            }
+        <div style="display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-start;margin-bottom:2.5rem;">
+          <div style="flex:1;min-width:220px;max-width:300px;">
+            <img
+              id="homepage-img"
+              src="https://ipfs.io/ipfs/QmXNTtt77nTXmyNi6PgZHDQEN5LScVpxGrvK4ikgi9hynM?filename=Home%20page%20Kopa.png"
+              alt="KopaGrow Homepage"
+              style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
+              onclick="showEnhancedImage(this.src)"
+            >
+            <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Homepage</div>
+            <div style="font-size:0.97rem;color:#444;">Welcomes users and highlights KopaGrow's mission and value.</div>
+          </div>
 
-            function onScrollOrLoad() {
-                if (!divedOnce && isInViewport(container)) {
-                    divedOnce = true;
-                    setTimeout(dive, 300); // slight delay for smoothness
-                }
-            }
+          <div style="flex:1;min-width:220px;max-width:300px;">
+            <img
+              src="https://ipfs.io/ipfs/QmSqPYMkZZRkykBcmUFJX9UkgKhuHnVxyBDTFDUfA2Zieq?filename=Picture%205.PNG"
+              alt="KopaGrow Impact Page"
+              style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
+              onclick="showEnhancedImage(this.src)"
+            >
+            <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Our Impact</div>
+            <div style="font-size:0.97rem;color:#444;">Showcases real stories, stats, and the positive change KopaGrow brings.</div>
+          </div>
 
-            window.addEventListener('scroll', onScrollOrLoad, { passive: true });
-            window.addEventListener('resize', onScrollOrLoad, { passive: true });
-            window.addEventListener('DOMContentLoaded', onScrollOrLoad);
+          <div style="flex:1;min-width:220px;max-width:300px;">
+            <img
+              src="https://ipfs.io/ipfs/QmZtN9mzHT3ZAaXVgZ3DHmRY9c2jmew6xLmRWabWafkT3X?filename=Loan%20application.PNG"
+              alt="KopaGrow Loan Application"
+              style="width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,128,128,0.08);margin-bottom:1rem;cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;"
+              onclick="showEnhancedImage(this.src)"
+            >
+            <div style="font-weight:bold;color:var(--teal);margin-bottom:0.3rem;">Loan Application</div>
+            <div style="font-size:0.97rem;color:#444;">Mobile-first, step-by-step loan application process.</div>
+          </div>
+        </div>
 
-        })();
+        <div style="margin:2rem 0 1.5rem 0;">
+          <h3 style="font-family:var(--font-heading);color:var(--teal);font-size:1.15rem;margin-bottom:0.7rem;">Design Principles &amp; Approach</h3>
+          <ul style="font-size:1.05rem;color:#444;margin-left:1.2rem;">
+            <li><strong>User-Centric Design:</strong> Prioritized ease of use for entrepreneurs with varying digital literacy.</li>
+            <li><strong>Trust Building:</strong> Clear UI, prominent M-Pesa integration, and upfront transparency.</li>
+            <li><strong>Speed &amp; Efficiency:</strong> Designed for rapid loan disbursement and management.</li>
+            <li><strong>AI-Powered Assessment:</strong> Leveraging M-Pesa data for collateral-free credit.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-        function showEnhancedImage(src) {
-            // Create overlay
-            var overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = 0;
-            overlay.style.left = 0;
-            overlay.style.width = '100vw';
-            overlay.style.height = '100vh';
-            overlay.style.background = 'rgba(0,0,0,0.85)';
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.zIndex = 9999;
-            overlay.onclick = function() { document.body.removeChild(overlay); };
+    <!-- =======================
+         TEST & LAUNCH
+    ======================== -->
+    <section id="Test & Launch" style="padding-top:2rem; border-top: 4px solid var(--Beige); margin-top:2.5rem;">
+      <h2 style="font-size:2rem; border-left:6px solid var(--Beige); padding-left:1rem; margin-bottom:1.5rem; background:linear-gradient(90deg, var(--Beige) 0%, #fff8f1 100%); color:var(--dark);">Test & Launch</h2>
+      <p><!-- Share with users and collect feedback. --></p>
+    </section>
 
-            // Create enhanced image
-            var img = document.createElement('img');
-            img.src = src;
-            img.style.maxWidth = '90vw';
-            img.style.maxHeight = '90vh';
-            img.style.borderRadius = '18px';
-            img.style.boxShadow = '0 8px 40px rgba(0,128,128,0.25)';
-            img.alt = "Enhanced Homepage";
-            img.onclick = function(e) { e.stopPropagation(); }; // Prevent closing when clicking image
+    <!-- =======================
+         WEBSITE LINK & DIVE
+    ======================== -->
+    <section class="website-link" style="position:relative;">
+      <div id="diving-board-container" style="position:relative;display:inline-block;">
+        <div id="diving-board" style="width:120px;height:18px;background:#b0b0b0;border-radius:8px 8px 12px 12px;position:absolute;left:50%;transform:translateX(-50%);top:-38px;box-shadow:0 2px 8px rgba(0,0,0,0.13);z-index:2;">
+          <div style="width:30px;height:8px;background:#888;border-radius:4px;position:absolute;left:45px;top:-8px;"></div>
+        </div>
 
-            overlay.appendChild(img);
-            document.body.appendChild(overlay);
+        <div id="diver" style="position:absolute;left:50%;top:-70px;transform:translateX(-50%);z-index:3;cursor:pointer;transition:filter 0.2s;">
+          <svg width="38" height="48" viewBox="0 0 38 48" style="display:block;">
+            <circle cx="19" cy="10" r="7" fill="#ffe0b2" />
+            <rect x="14" y="17" width="10" height="18" rx="5" fill="#2196f3"/>
+            <rect x="5" y="18" width="8" height="6" rx="3" fill="#ffe0b2" transform="rotate(-20 9 21)"/>
+            <rect x="25" y="18" width="8" height="6" rx="3" fill="#ffe0b2" transform="rotate(20 29 21)"/>
+            <rect x="13" y="35" width="5" height="12" rx="2.5" fill="#ffe0b2" transform="rotate(-10 15.5 41)"/>
+            <rect x="20" y="35" width="5" height="12" rx="2.5" fill="#ffe0b2" transform="rotate(10 22.5 41)"/>
+          </svg>
+        </div>
+
+        <div id="splash" style="display:none;position:absolute;left:50%;top:auto;bottom:-18px;transform:translateX(-50%);z-index:1;pointer-events:none;">
+          <svg width="180" height="48" viewBox="0 0 180 48">
+            <ellipse cx="90" cy="24" rx="80" ry="16" fill="#b2ebf2" opacity="0.7"/>
+            <ellipse cx="90" cy="32" rx="60" ry="10" fill="#4dd0e1" opacity="0.5"/>
+          </svg>
+        </div>
+
+        <div style="margin-top:70px;text-align:center;font-size:1.08rem;color:var(--teal);font-family:var(--font-heading);letter-spacing:0.5px;">
+          Dive into the solution
+        </div>
+
+        <a id="kopagrow-link" href="https://allanartghub.github.io/KopaGrow/" target="_blank" rel="noopener" style="position:relative;z-index:2;display:inline-block;margin-top:2.5rem;">
+          Visit KopaGrow Website
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Diving animation logic
+    (function() {
+      var diver = document.getElementById('diver');
+      var splash = document.getElementById('splash');
+      var board = document.getElementById('diving-board');
+      var link = document.getElementById('kopagrow-link');
+      var container = document.getElementById('diving-board-container');
+      var animating = false;
+      var divedOnce = false;
+
+      function dive() {
+        if (animating) return;
+        animating = true;
+
+        diver.style.transition = "transform 0.4s cubic-bezier(.7,1.7,.7,1), top 0.4s cubic-bezier(.7,1.7,.7,1)";
+
+        board.animate([
+          { transform: "translateX(-50%)" },
+          { transform: "translateX(-50%) rotate(-10deg)" },
+          { transform: "translateX(-50%)" }
+        ], { duration: 300, easing: "ease-in-out" });
+
+        diver.style.transform = "translateX(-50%) translateY(-30px) rotate(-20deg)";
+
+        setTimeout(function() {
+          diver.style.transition = "transform 0.7s cubic-bezier(.2,1.2,.7,1), top 0.7s cubic-bezier(.2,1.2,.7,1)";
+          diver.style.transform = "translateX(-50%) translateY(110px) rotate(60deg)";
+          diver.style.top = "38px";
+
+          setTimeout(function() {
+            diver.style.visibility = "hidden";
+            splash.style.display = "block";
+
+            splash.animate([
+              { opacity: 0.7, transform: "scale(1)" },
+              { opacity: 1, transform: "scale(1.15)" },
+              { opacity: 0.7, transform: "scale(1)" }
+            ], { duration: 600 });
+
+            setTimeout(function() {
+              diver.style.transition = "none";
+              diver.style.transform = "translateX(-50%)";
+              diver.style.top = "-70px";
+              diver.style.visibility = "visible";
+              splash.style.display = "none";
+              animating = false;
+            }, 900);
+
+          }, 700);
+        }, 400);
+      }
+
+      diver.addEventListener('click', function() {
+        dive();
+        setTimeout(function() { link.focus(); }, 1100);
+      });
+
+      diver.setAttribute('tabindex', '0');
+      diver.setAttribute('aria-label', 'Dive to visit KopaGrow Website');
+      diver.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          dive();
         }
-    </script>
+      });
+
+      diver.addEventListener('mouseenter', function() {
+        if (!animating) diver.style.filter = "brightness(1.15)";
+      });
+      diver.addEventListener('mouseleave', function() {
+        diver.style.filter = "";
+      });
+
+      function isInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (rect.top < window.innerHeight && rect.bottom > 0);
+      }
+
+      function onScrollOrLoad() {
+        if (!divedOnce && isInViewport(container)) {
+          divedOnce = true;
+          setTimeout(dive, 300);
+        }
+      }
+
+      window.addEventListener('scroll', onScrollOrLoad, { passive: true });
+      window.addEventListener('resize', onScrollOrLoad, { passive: true });
+      window.addEventListener('DOMContentLoaded', onScrollOrLoad);
+
+    })();
+
+    function showEnhancedImage(src) {
+      var overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = 0;
+      overlay.style.left = 0;
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = 'rgba(0,0,0,0.85)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = 9999;
+      overlay.onclick = function() { document.body.removeChild(overlay); };
+
+      var img = document.createElement('img');
+      img.src = src;
+      img.style.maxWidth = '90vw';
+      img.style.maxHeight = '90vh';
+      img.style.borderRadius = '18px';
+      img.style.boxShadow = '0 8px 40px rgba(0,128,128,0.25)';
+      img.alt = "Enhanced Image";
+      img.onclick = function(e) { e.stopPropagation(); };
+
+      overlay.appendChild(img);
+      document.body.appendChild(overlay);
+    }
+  </script>
 </body>
 </html>
-
