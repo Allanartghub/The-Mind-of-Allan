@@ -22,6 +22,9 @@
       --beige: #C89B7B;
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Open Sans', sans-serif;
+
+      /* layout tuning */
+      --page-max: 1180px; /* “15-inch-ish” feel */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,6 +55,13 @@
       outline: 3px solid rgba(0,128,128,0.35);
       outline-offset: 3px;
       border-radius: 10px;
+    }
+
+    /* Center content on larger screens (feels “premium” on 15-inch/desktop) */
+    header, section, footer {
+      max-width: var(--page-max);
+      margin-left: auto;
+      margin-right: auto;
     }
 
     header {
@@ -116,6 +126,7 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.10);
       border: 1px solid rgba(0,0,0,0.06);
       background: #fff;
+      flex: 0 0 auto;
     }
 
     .photo-container img {
@@ -361,11 +372,50 @@
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
+
+      /* Keep footer full bleed while content is centered */
+      max-width: none;
+    }
+
+    footer p{
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 1rem;
     }
 
     footer a { color: #fff; font-weight: 800; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    /* ==========================================
+       Viewport-width “device tiers”
+       - 15-inch-ish: >= 1200px
+       - 13-inch-ish: 900px–1199px
+       - Mobile: <= 700px (plus smaller tweaks)
+    ========================================== */
+
+    /* 15-inch-ish / wide desktop */
+    @media (min-width: 1200px){
+      :root{ --page-max: 1220px; }
+      header{ padding: 2.3rem 3.2rem; }
+      .intro-text h1{ font-size: 2.2rem; }
+      .intro-text p{ font-size: 1.18rem; }
+      .photo-container{ width: 210px; height: 210px; }
+      .projects{ padding: 2.8rem 3.6rem; }
+      .project{ width: 290px; }
+      .project .preview{ height: 160px; }
+    }
+
+    /* 13-inch-ish laptop */
+    @media (min-width: 900px) and (max-width: 1199px){
+      :root{ --page-max: 1080px; }
+      header{ padding: 2rem 2.2rem; }
+      .about, .skills{ padding-left: 2.2rem; padding-right: 2.2rem; }
+      .projects{ padding: 2.4rem 2.2rem; }
+      .photo-container{ width: 190px; height: 190px; }
+      .project{ width: 270px; }
+    }
+
+    /* General tablet & down */
     @media (max-width: 900px) {
       header, .about, .skills, .projects, .download-cv, .signout {
         padding-left: 1rem;
@@ -373,20 +423,25 @@
       }
       .projects { padding-left: 1rem; padding-right: 1rem; }
       .contact { min-width: unset; }
+      header, section { max-width: 100%; }
     }
 
+    /* Mobile: reorder intro -> Name + Photo first, then Contact */
     @media (max-width: 700px) {
       header { flex-direction: column; padding: 1.1rem 0.75rem; }
       .intro { flex-direction: column; gap: 1.1rem; align-items: stretch; }
-      .intro-text { text-align: center; }
-      .photo-container { width: 120px; height: 120px; }
+
+      /* ✅ Order change for mobile */
+      .intro-text { order: 1; text-align: center; }
+      .photo-container { order: 2; width: 120px; height: 120px; }
+      .contact { order: 3; text-align: center; }
+
       .about, .skills, .projects, .download-cv, .signout { padding: 1.2rem 0.75rem 0.6rem; }
       .skills-list { gap: 0.55rem; }
       .project { width: 90vw; min-width: 220px; max-width: 98vw; padding: 0.95rem; }
       .project .preview { height: 110px; }
       .carousel { gap: 0.6rem; }
       .download-cv { padding: 1.2rem 0.75rem; }
-      .contact { text-align: center; }
     }
 
     @media (max-width: 480px) {
@@ -438,8 +493,8 @@
 
     <div class="about-wrap">
       <p class="lead">
-        I’m Ng'ang'a, a vibe coder, product thinker, fintech strategist, and an unapologetic believer that technology should do more than work.
-        <strong>It should matter.</strong>
+        I’m Ng'ang'a, a product thinker, fintech strategist, and a vibe coder by instinct and an unapologetic believer that technology should do more than work.
+        <strong><i>It should matter.</i>i></strong>
       </p>
 
       <p>
